@@ -1,0 +1,22 @@
+minimum_cumulusci_version: '3.47.0'
+project:
+    name: healthplanEngage-SFDC
+    package:
+        name: healthplanEngage-SFDC
+        api_version: '52.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/healthplanEngage-SFDC/tests
+            options:
+                outputdir: robot/healthplanEngage-SFDC/results
+
+    robot_testdoc:
+        options:
+            path: robot/healthplanEngage-SFDC/tests
+            output: robot/healthplanEngage-SFDC/doc/healthplanEngage-SFDC_tests.html
+
