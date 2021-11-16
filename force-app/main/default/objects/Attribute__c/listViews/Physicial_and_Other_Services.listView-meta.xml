@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Physicial_and_Other_Services</fullName>
+    <columns>NAME</columns>
+    <columns>Attribute_Long_Code__c</columns>
+    <columns>Attribute_Name__c</columns>
+    <columns>Attribute_Display_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Attribute_Category__c</field>
+        <operation>equals</operation>
+        <value>Physician and Other Services</value>
+    </filters>
+    <label>Physicial and Other Services</label>
+</ListView>

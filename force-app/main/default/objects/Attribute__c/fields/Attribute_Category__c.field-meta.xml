@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attribute_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Attribute Category</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>General Information</fullName>
+                <default>false</default>
+                <label>General Information</label>
+            </value>
+            <value>
+                <fullName>Rating Method</fullName>
+                <default>false</default>
+                <label>Rating Method</label>
+            </value>
+            <value>
+                <fullName>Dependent Coverage</fullName>
+                <default>false</default>
+                <label>Dependent Coverage</label>
+            </value>
+            <value>
+                <fullName>Preventive Services</fullName>
+                <default>false</default>
+                <label>Preventive Services</label>
+            </value>
+            <value>
+                <fullName>Physician and Other Services</fullName>
+                <default>false</default>
+                <label>Physician and Other Services</label>
+            </value>
+            <value>
+                <fullName>Emergency &amp; Urgent Care Services</fullName>
+                <default>false</default>
+                <label>Emergency &amp; Urgent Care Services</label>
+            </value>
+            <value>
+                <fullName>Hospital and Other Facility Services</fullName>
+                <default>false</default>
+                <label>Hospital and Other Facility Services</label>
+            </value>
+            <value>
+                <fullName>Diagnostic Testing Services</fullName>
+                <default>false</default>
+                <label>Diagnostic Testing Services</label>
+            </value>
+            <value>
+                <fullName>Maternity Services</fullName>
+                <default>false</default>
+                <label>Maternity Services</label>
+            </value>
+            <value>
+                <fullName>Mental Health &amp; Substance Abuse</fullName>
+                <default>false</default>
+                <label>Mental Health &amp; Substance Abuse</label>
+            </value>
+            <value>
+                <fullName>Diabetic Supplies and Services</fullName>
+                <default>false</default>
+                <label>Diabetic Supplies and Services</label>
+            </value>
+            <value>
+                <fullName>Rehabilitation Services</fullName>
+                <default>false</default>
+                <label>Rehabilitation Services</label>
+            </value>
+            <value>
+                <fullName>Additional Services</fullName>
+                <default>false</default>
+                <label>Additional Services</label>
+            </value>
+            <value>
+                <fullName>Prescription Drug Coverage</fullName>
+                <default>false</default>
+                <label>Prescription Drug Coverage</label>
+            </value>
+            <value>
+                <fullName>Pediatric Vision Services</fullName>
+                <default>false</default>
+                <label>Pediatric Vision Services</label>
+            </value>
+            <value>
+                <fullName>Adult Vision Services</fullName>
+                <default>false</default>
+                <label>Adult Vision Services</label>
+            </value>
+            <value>
+                <fullName>Dental Services</fullName>
+                <default>false</default>
+                <label>Dental Services</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
