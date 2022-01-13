@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes" controller="be_standardComponentController" access="global">
+    <!-- REQUIRED RESOURCES -->
+    <aura:dependency resource="markup://force:navigateToComponent" type="EVENT"/>
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="strike_evt_linkclicked" event="c:strike_evt" action="{!c.launchtaskflow}" />
+    <!-- PUBLIC METHODS -->
+    <aura:attribute name="sObjectName" type="String"  access="global" />
+    <aura:attribute name="recordId" type="String"  access="global" />
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="attlistjson" type="Object" description="Attribute List Object which holds all the flow attributes for use across child components" access="private"/>
+    <aura:attribute name="querymap" type="Map" default="{object : '', queryfields: '', searchField: '', searchTerm: '' }" access="private" />
+    <aura:attribute name="showspinner" type="Boolean" default="false" access="private"/>
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-card slds-card--center slds-m-around_xx-small">
+        <div class="slds-card__body slds-card__body_inner" aura:id="flowlstcontainer">
+            {!v.body}
+        </div>
+    </div>
+    <!--  SPINNER COMPONENT -->
+    <aura:if isTrue="{!v.showspinner}">
+        <lightning:spinner variant="brand" size="large" alternativeText="Page Loading..." />
+    </aura:if>
+</aura:component>

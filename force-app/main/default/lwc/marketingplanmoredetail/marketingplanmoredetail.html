@@ -1,0 +1,54 @@
+<template>
+    <div class="comparison">
+        <div class="icon-bar">
+            <img src={emailIcon} class="icon-dimentions"/>
+            <img src={downloadIcon} class="icon-dimentions"/>
+            <img src={printIcon} class="icon-dimentions"/>
+        </div>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th class="table-header-total table-header-total-bg">
+                        <div class="text-align-center">
+                            <span class="total-plan-count">{totalMKTPlans} plans </span><br/>
+                            selected for comparison
+                        </div>
+                    </th>
+                    <template if:true={marketingPlans} for:each={marketingPlans} for:item="marketingPlan">
+                        <th class="table-header" key={marketingPlan.Id}>
+                            <div class="text-align-center">
+                                <!--<img src={indHealthLogoUrl} class="icon-dimentions"/><br/>-->
+                                {marketingPlan.Name}
+                            </div>
+                        </th>
+                    </template>
+                </tr>
+                </thead>
+                <tbody>
+                <template if:true={attrCatToAttrDispName} for:each={attrCatToAttrDispName} for:item="attributeCategory">
+                    <tr class="table-header-total-bg" key={attributeCategory.key}>
+                        <td colspan={tableSectionColSpan} key={attributeCategory.key}>{attributeCategory.key}</td>
+                    </tr>
+
+                    <template for:each={attributeCategory.value} for:item="attributeDisplayName">
+                        <tr key={attributeDisplayName} class="table-row">
+                            <td key={attributeDisplayName}>{attributeDisplayName}</td>
+                            <template for:each={marketingPlans} for:item="marketingPlan">
+                                <td key={marketingPlan.Id}>
+                                    <c-i-H-A_-Marketing-Plan-Benefit key={marketingPlan.Id}
+                                                                     mktplanname={marketingPlan.Name}
+                                                                     attributecategory={attributeCategory.key}
+                                                                     attributedisplayname={attributeDisplayName}
+                                                                     attrcattomktplanbenmap={marketingPlanBenefits}>
+                                    </c-i-H-A_-Marketing-Plan-Benefit>
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,61 @@
+<!--
+ - Created by varun on 2/22/2021.
+ -->
+
+<aura:component description="Quote_Claim_Summary_Page_Wrapper"  implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes" controller="be_standardComponentController" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="medicalClaimSummary" type="Quote_Request_Claim_Summary__c" description="Object which holds current quote medical claims summary" access="global"/>
+    <aura:attribute name="rxClaimSummary" type="Quote_Request_Claim_Summary__c" description="Object which holds current quote RX claims summary" access="global"/>
+
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="recordId" type="String"  access="global" />
+    <aura:attribute name="quoteClaimHistory" type="Quote_Request_Claim_History__c[]" description="Census Object which holds current quote claims information" access="public"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="showspinner" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="rowsinitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="claimsrows" type="Object"  access="private" />
+    <aura:attribute name="claimscolumns" type="Object" description="Claims Rows" access="private"/>
+    <aura:attribute name="claimsdatagrid" type="Object" description="Datagrid representation of Claims "/>
+    <aura:attribute name="medicalclaimsChartData" type="Object" description="Claims Chart Data" access="private"/>
+    <aura:attribute name="rxClaimsChartData" type="Object" description="Rx Claims Chart Data" access="private"/>
+    <aura:attribute name="medicalClaimsDonutData" type="Object" description="Claims Donut Data" access="private"/>
+    <aura:attribute name="rxClaimsDonutData" type="Object" description="Claims Donut Data" access="private"/>
+    <aura:attribute name="initializeCharts" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="averageMedicalMonthlyPremium" type="Integer"  access="private" default="0" />
+    <aura:attribute name="averageRXMonthlyPremium" type="Integer"  access="private" default="0" />
+    <aura:attribute name="Experience_Period_From__c" type="Date"  access="private" />
+    <aura:attribute name="Experience_Period_To__c" type="Date"  access="private" />
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+        <aura:if isTrue="{!v.showspinner}">
+            <lightning:spinner variant="brand" size="large" alternativeText="Page Loading..." />
+            <aura:set attribute="else">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_2-of-2 slds-large-size_2-of-2">
+                    <lightning:button label="Download Claims" iconName="utility:download" onclick="{! c.downloadCSV }"/>
+                </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <c:strike_chart type="bar" data="{!v.medicalclaimsChartData}" title="Medical Claims Payout By Month" leftSubtitle="" rightSubtitle="" orientation="vertical" xAxisLabel="Month" yAxisLabel="Claim Payout($)" thresholdLabel="Average Monthly Premium" thresholdValue="{!v.averageMedicalMonthlyPremium}" />
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <c:strike_chart type="donut" data="{!v.medicalClaimsDonutData}" title="Medical Loss Ratio" leftSubtitle="" rightSubtitle=""/>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-4 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <c:strike_chart type="bar" data="{!v.rxClaimsChartData}" title="Rx Claims Payout By Month" leftSubtitle="" rightSubtitle="" orientation="vertical" xAxisLabel="Month" yAxisLabel="Claim Payout($)" thresholdLabel="Average Monthly Premium" thresholdValue="{!v.averageRXMonthlyPremium}" />
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <c:strike_chart type="donut" data="{!v.rxClaimsDonutData}" title="Rx Loss Ratio" leftSubtitle="" rightSubtitle=""/>
+                    </div>
+            </aura:set>
+        </aura:if>
+
+        <aura:if isTrue="{!v.initializeCharts}">
+
+        </aura:if>
+    </div>
+</aura:component>

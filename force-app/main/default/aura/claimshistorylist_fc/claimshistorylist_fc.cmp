@@ -1,0 +1,122 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+
+<aura:component description="claimshistorylist_fc" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <aura:attribute name="quoteClaimHistory" type="Quote_Request_Claim_History__c[]" description="Object which holds current quote claims history information" access="global"/>
+    <aura:attribute name="medicalClaimSummary" type="Quote_Request_Claim_Summary__c" description="Object which holds current quote medical claims summary" access="global"/>
+    <aura:attribute name="rxClaimSummary" type="Quote_Request_Claim_Summary__c" description="Object which holds current quote RX claims summary" access="global"/>
+    <aura:attribute name="quote" type="Quote" access="global"/>
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.quoteClaimHistory}" action="{!c.quoteClaimHistoryChngd}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="rowsinitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="claimsrows" type="Object"  access="private" />
+    <aura:attribute name="claimscolumns" type="Object" description="Claims Rows" access="private"/>
+    <aura:attribute name="claimsdatagrid" type="Object" description="Datagrid representation of Claims "/>
+    <aura:attribute name="medicalclaimsChartData" type="Object" description="Claims Chart Data" access="private"/>
+    <aura:attribute name="rxClaimsChartData" type="Object" description="Rx Claims Chart Data" access="private"/>
+    <aura:attribute name="medicalClaimsDonutData" type="Object" description="Claims Donut Data" access="private"/>
+    <aura:attribute name="rxClaimsDonutData" type="Object" description="Claims Donut Data" access="private"/>
+    <aura:attribute name="initializeCharts" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="averageMedicalMonthlyPremium" type="Integer"  access="private" default="0" />
+    <aura:attribute name="averageRXMonthlyPremium" type="Integer"  access="private" default="0" />
+    <aura:attribute name="Experience_Period_From__c" type="Date"  access="private" />
+    <aura:attribute name="Experience_Period_To__c" type="Date"  access="private" />
+    <!--  COMPONENT BODY -->
+    <aura:if isTrue="{! v.disableFields}">
+        <!-- Donot Render if in read only mode-->
+        <aura:set attribute="else">
+            <div class="slds-container slds-container--medium slds-container--center">
+                <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.readCSV }"/>
+                    </div>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+    <lightning:tabset>
+        <lightning:tab label="Claims Detail">
+            <div class="slds-container--center">
+                <aura:if isTrue="{!v.rowsinitialized}">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <c:censustblwrapper title="Claims History" icon="standard:partner_fund_claim" rows="{!v.claimsrows}" columns="{!v.claimscolumns}"  />
+                    </div>
+                </aura:if>
+            </div>
+        </lightning:tab>
+        <lightning:tab label="Claims Summary">
+            <div class="slds-container slds-container--center">
+                <aura:if isTrue="{! v.disableFields}">
+                    <!-- Donot Render if in read only mode-->
+                    <div class="slds-container slds-container--medium slds-container--center">
+                        <lightning:button label="View MLR Ratio" variant="brand" onclick="{! c.calculateMLRRatio }"/>
+                    </div>
+                    <aura:set attribute="else">
+                        <div class="slds-container slds-container--medium slds-container--center">
+                            <lightning:button label="Calculate MLR" variant="brand" onclick="{! c.calculateMLRRatio }"/>
+                        </div>
+                    </aura:set>
+                </aura:if>
+                <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning:recordEditForm  objectApiName="Quote_Request_Claim_Summary__c">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                            <lightning:inputField fieldName="Type__c" value="{!v.medicalClaimSummary.Type__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Experience_Period_From__c" value="{!v.Experience_Period_From__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Experience_Period_Through__c" value="{!v.Experience_Period_To__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Claims__c" value="{!v.medicalClaimSummary.Claims__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Capitation__c" value="{!v.medicalClaimSummary.Capitation__c}" disabled="{!v.disableFields}" />
+                            <lightning:inputField fieldName="Average_Enrolled_Subscribers__c" value="{!v.medicalClaimSummary.Average_Enrolled_Subscribers__c}" disabled="{!v.disableFields}"  />
+                            <lightning:inputField fieldName="Average_Enrolled_Members__c" value="{!v.medicalClaimSummary.Average_Enrolled_Members__c}" disabled="{!v.disableFields}"   />
+                            <lightning:inputField fieldName="High_Level_Claims__c" value="{!v.medicalClaimSummary.High_Level_Claims__c}" disabled="true"/>
+                            <lightning:inputField fieldName="Billed_Premium__c" value="{!v.medicalClaimSummary.Billed_Premium__c}" disabled="{!v.disableFields}"  />
+                            <lightning:inputField fieldName="Medical_Loss_Ratio__c" value="{!v.medicalClaimSummary.Medical_Loss_Ratio__c}" disabled="{!v.disableFields}"  />
+                        </lightning:recordEditForm>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning:recordEditForm  objectApiName="Quote_Request_Claim_Summary__c">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                            <lightning:inputField fieldName="Type__c" value="{!v.rxClaimSummary.Type__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Experience_Period_From__c" value="{!v.Experience_Period_From__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Experience_Period_Through__c" value="{!v.Experience_Period_To__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Claims__c" value="{!v.rxClaimSummary.Claims__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Capitation__c" value="{!v.rxClaimSummary.Capitation__c}" disabled="{!v.disableFields}" />
+                            <lightning:inputField fieldName="Average_Enrolled_Subscribers__c" value="{!v.rxClaimSummary.Average_Enrolled_Subscribers__c}" disabled="{!v.disableFields}"  />
+                            <lightning:inputField fieldName="Average_Enrolled_Members__c" value="{!v.rxClaimSummary.Average_Enrolled_Members__c}" disabled="{!v.disableFields}" />
+                            <lightning:inputField fieldName="High_Level_Claims__c" value="{!v.rxClaimSummary.High_Level_Claims__c}" disabled="true"/>
+                            <lightning:inputField fieldName="Billed_Premium__c" value="{!v.rxClaimSummary.Billed_Premium__c}" disabled="{!v.disableFields}" />
+                            <lightning:inputField fieldName="Medical_Loss_Ratio__c" value="{!v.rxClaimSummary.Medical_Loss_Ratio__c}" disabled="{!v.disableFields}" />
+                        </lightning:recordEditForm>
+                    </div>
+                    <aura:if isTrue="{!v.initializeCharts}">
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                            <c:strike_chart type="bar" data="{!v.medicalclaimsChartData}" title="Medical Claims Payout By Month" leftSubtitle="" rightSubtitle="" orientation="vertical" xAxisLabel="Month" yAxisLabel="Claim Payout($)" thresholdLabel="Average Monthly Premium" thresholdValue="{!v.averageMedicalMonthlyPremium}" />
+                        </div>
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                            <c:strike_chart type="donut" data="{!v.medicalClaimsDonutData}" title="Medical Loss Ratio" leftSubtitle="" rightSubtitle=""/>
+                        </div>
+                        <div class="slds-col slds-small-size_1-of-4 slds-medium-size_1-of-2 slds-large-size_1-of-4">
+                            <c:strike_chart type="bar" data="{!v.rxClaimsChartData}" title="Rx Claims Payout By Month" leftSubtitle="" rightSubtitle="" orientation="vertical" xAxisLabel="Month" yAxisLabel="Claim Payout($)" thresholdLabel="Average Monthly Premium" thresholdValue="{!v.averageRXMonthlyPremium}" />
+                        </div>
+                        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+                            <c:strike_chart type="donut" data="{!v.rxClaimsDonutData}" title="Rx Loss Ratio" leftSubtitle="" rightSubtitle=""/>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:tab>
+    </lightning:tabset>
+
+</aura:component>

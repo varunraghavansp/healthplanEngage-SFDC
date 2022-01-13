@@ -1,0 +1,66 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+
+<aura:component description="accountquotecensuslist_fc" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <aura:attribute name="quotecensus" type="Quote_Census__c[]" description="Census Object which holds current quote census information" access="global"/>
+    <aura:attribute name="numberofsubscribers" type="Integer" description="Counts the Number of Subscribers" default="0" access="global"/>
+    <aura:attribute name="numberofmembers" type="Integer" description="Counts the Number of Members - Subscribers and Dependents" default="0" access="global"/>
+    <aura:attribute name="quote" type="Quote" access="global"/>
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.quotecensus}" action="{!c.quotecensuschngd}" />
+    <aura:handler name="change" value="{!v.selectedsubscriberid}" action="{!c.selectdependents}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="rowsinitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="selectedsubscriberid" type="String" access="private" default=""/>
+    <aura:attribute name="quotecensusdatacols" type="Object"  access="private" />
+    <aura:attribute name="quotecensussubscriber" type="Object" description="Subscriber Census Rows" access="private"/>
+    <aura:attribute name="quotecensusdependent" type="Object" description="Dependent Census Rows" access="private"/>
+    <aura:attribute name="selectedsubdependents" type="Object" description="Dependent Census Rows" access="private"/>
+    <aura:attribute name="quotecensusdatagrid" type="Object" description="Datagrid representation of census "/>
+    <!--  COMPONENT BODY -->
+    <aura:if isTrue="{! v.disableFields}">
+        <!-- Donot Render if in read only mode-->
+        <aura:set attribute="else">
+            <div class="slds-container slds-container--medium slds-container--center">
+
+                <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.readCSV }"/>
+                    </div>
+                </div>
+                <div style="padding-bottom:20px;width:75%" class="slds-col slds-size--1-of-1 slds-medium-size--3-of-6 slds-large-size--2-of-6">
+                    <lightning:buttonGroup>
+                        <lightning:button iconName="utility:adduser" label="Add Census" onclick="{!c.placeholder}" />
+                    </lightning:buttonGroup>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+    <lightning:tabset>
+        <lightning:tab label="Census Detail">
+            <div class="slds-container--center">
+                <aura:if isTrue="{!v.rowsinitialized}">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <c:censustblwrapper title="Subscribers" icon="utility:people" rows="{!v.quotecensussubscriber}" columns="{!v.quotecensusdatacols}" onselectionchange="{!c.handlesubselectionchange}" />
+                    </div>
+                    <aura:if isTrue="{!v.selectedsubscriber != ''}">
+                        <c:censustblwrapper title="Dependents" icon="utility:people" rows="{!v.selectedsubdependents}" columns="{!v.quotecensusdatacols}" />
+                    </aura:if>
+                </aura:if>
+            </div>
+        </lightning:tab>
+        <lightning:tab label="Census Summary">
+            <c:accountquotecensusdetailchart_fc quotecensus = "{! v.quotecensus}"/>
+        </lightning:tab>
+    </lightning:tabset>
+
+</aura:component>

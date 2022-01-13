@@ -1,0 +1,65 @@
+<!--
+ - Created by varun on 11/7/2019.
+ -->
+
+<aura:component description="be_largeGroupCustomPlanFC" implements="lightning:availableForFlowScreens" controller="tooling_controller" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="createpredefinedplan" description="User Selection for whether to create or edit an existing Product Component" type="Boolean" default="true" access="global" />
+    <aura:attribute name="copyfrompplanfamilyid" description="Id of plan family for copying product component from" type="String" default="" access="global" />
+    <aura:attribute name="copyfrompredefinedpackageid" description="Id of product component selected for copying" type="String" default="" access="global" />
+    <aura:attribute name="ProductLine__c" description="Context Product Line Record" type="Plan_Family__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="PredefinedPackages__c" description="Context Product Component Record" type="Marketing_Plan__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="editpredefinedpackageid" description="Id of product component selected for editing" type="String" default="" access="global" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.createpredefinedplan}" action="{!c.createorrevisechanged}" />
+    <aura:handler name="change" value="{!v.editpredefinedpackageid}" action="{!c.resetpredefinedplan}" />
+    <aura:handler name="change" value="{!v.copyfrompredefinedpackageid}" action="{!c.resetpredefinedplan}" />
+    <aura:handler name="change" value="{!v.PredefinedPackages__c.Plan_Template__c}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="picklistinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="disablecreationfields" type="Boolean" default="false" access="private" />
+    <aura:attribute name="picklists"  type="Object" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Plan Family" object="ProductLine__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" disabled="{!v.disablecreationfields}" value="{!v.ProductLine__c.Id}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Plan Template" object="PackageFramework__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" disabled="{!v.disablecreationfields}" filter="{!'Product_Line__c=\'' + v.ProductLine__c.Id + '\''}" showRecentRecords="true" value="{!v.PredefinedPackages__c.Plan_Template__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Name" name="Name" label="Marketing Plan Name" helpText="Unique Name for the Plan" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input" required="true" value="{!v.PredefinedPackages__c.Name}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Effective Date" aura:id="Effective_Date__c" value="{!v.PredefinedPackages__c.Effective_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Termination Date" aura:id="Termination_Date__c" value="{!v.PredefinedPackages__c.Termination_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Version__c" type="text" name="Version__c" label="Version" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.PredefinedPackages__c.Version__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Status__c" type="text" name="Status__c" label="Status" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.PredefinedPackages__c.Status__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Exchange_Value__c" name="Exchange_Value__c" label="Exchange Value"  maxlength="80" errorMessage="Invalid input" value="{!v.PredefinedPackages__c.Exchange_Value__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Product_Component_Code__c" name="Product_Component_Code__c" label="Plan Component Code" maxlength="255" disabled="true" errorMessage="Invalid input" value="{!v.PredefinedPackages__c.Plan_Component_Code__c}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

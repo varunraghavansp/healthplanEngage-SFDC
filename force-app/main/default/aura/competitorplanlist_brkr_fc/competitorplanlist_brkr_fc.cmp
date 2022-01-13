@@ -1,0 +1,59 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+
+<aura:component description="competitorplanlist_fc"  implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" type="Account" access="global"/>
+    <aura:attribute name="quote" type="Quote" access="global"/>
+    <aura:attribute name="competitorPlanInformation" type="Competitor_Plan_Information__c[]" description="Object which holds current plan information" access="global"/>
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+
+    <aura:attribute name="stages" type="String[]" description="Sales Stages"  access="global"/>
+    <aura:attribute name="currentstage" type="String" description="Current Stage" access="global"/>
+    <aura:attribute name="currentstagetext" type="String" description="Current Stage Text" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.competitorPlanInformation}" action="{!c.competitorPlanInformationChanged}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="planRows" type="Object" description="Competitor Plan Columns"  access="private" />
+    <aura:attribute name="planColumns" type="Object" description="Competitor Plan Rows" access="private"/>
+    <aura:attribute name="rowsInitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="competitorSelected" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="selectedCompetitor" type="Competitor_Plan_Information__c" access="private" default="{}"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+    <aura:if isTrue="{! v.disableFields}">
+        <!--Donot Render if disabled-->
+        <aura:set attribute="else">
+            <div class="slds-container slds-container--medium slds-container--center">
+                <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.readCSV }"/>
+                    </div>
+                </div>
+                <div style="padding-bottom:20px;width:75%" class="slds-col slds-size--1-of-1 slds-medium-size--3-of-6 slds-large-size--2-of-6">
+                    <lightning:buttonGroup>
+                        <lightning:button iconName="utility:add" label="Add Plan" onclick="{!c.placeholder}" />
+                    </lightning:buttonGroup>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+
+    <div class="slds-container--center">
+        <aura:if isTrue="{!v.rowsInitialized}">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <c:censustblwrapper title="Current Plan Information" icon="standard:product" rows="{!v.planRows}" columns="{!v.planColumns}"  onselectionchange="{!c.handleRowSelectionChange}"  />
+            </div>
+        </aura:if>
+    </div>
+    <aura:if isTrue="{!v.competitorSelected}">
+        <c:competitorplandetail_fc currentCompetitorPlanInfo = "{# v.selectedCompetitor}" disableFields="{!v.disableFields}"/>
+    </aura:if>
+        </div>
+</aura:component>

@@ -1,0 +1,9 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Plan_Family__c" label="Plan Family Record" description="Context Plan Family Record" />
+    <design:attribute name="createplanfamily" label="Create Plan Family" description="User Selection of whether to create or revise a planfamily" />
+    <design:attribute name="selectedplanfamily" label="Selected Plan Family Id" description="Id of plan family selected for revision" />
+</design:component>

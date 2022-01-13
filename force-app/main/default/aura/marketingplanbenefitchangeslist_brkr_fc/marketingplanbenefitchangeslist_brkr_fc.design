@@ -1,0 +1,17 @@
+<!--
+ - Created by varun on 8/26/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Marketing_Plan_Benefit__c" label="Plan Benefits" description="List Object which holds the plan benefit pairs for a given plan" />
+    <design:attribute name="Marketing_Plan__c" label="Predefined Plan" description="Context Product Line Record" />
+    <design:attribute name="createPlanBenefits" label="New Plan Benefits" description="List Object which holds the new plan benefit pairs" />
+    <design:attribute name="updatePlanBenefits" label="Updated Plan Benefits" description="List Object which holds the updated plan benefit pairs" />
+    <design:attribute name="deletePlanBenefits" label="Deleted Plan Benefits" description="List Object which holds the deleted plan benefit pairs" />
+    <design:attribute name="deleteRecords" label="Delete Records" description="Sets to True if records to be deleted are present" />
+
+
+    <design:attribute name="stages" label="stages" description="stages" />
+    <design:attribute name="currentstage" label="currentstage" description="currentstage" />
+    <design:attribute name="currentstagetext" label="currentstagetext" description="currentstagetext" />
+</design:component>

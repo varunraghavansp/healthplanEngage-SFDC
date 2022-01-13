@@ -1,0 +1,10 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Attribute_Value__c" label="Attribute Values" description="List Object which holds the attribute value pairs for a given product line" />
+    <design:attribute name="Attribute__c" label="Attributes" description="List Object which holds the attribute master list for a crossreferencing attribute name" />
+    <design:attribute name="Plan_Component__c" label="Product Component" description="Context Product Component Record" />
+    <design:attribute name="Component_Attribute__c" label="Product Component Attributes" description="List Object which holds the copied component attributes" />
+</design:component>

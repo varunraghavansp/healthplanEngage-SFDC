@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+    <design:attribute name="createplantemplate" label="Create Plan Template" description="User Selection for whether to create or edit an existing Plan Template" />
+    <design:attribute name="copyfrompplanfamilyid" label="Copied Plan Family Id" description="Id of plan family for copying plan template from" />
+    <design:attribute name="copyfromplantemplateid" label="Copied Plan Template Id" description="CId of plan template selected for copying" />
+    <design:attribute name="Plan_Family__c" label="Plan Family" description="Context Plan Family Record" />
+    <design:attribute name="Plan_Template__c" label="Plan Template" description="Context Plan Template Record" />
+    <design:attribute name="editplantemplateid" label="Edited Plan Template Id" description="Id of plan template selected for editing" />
+</design:component>

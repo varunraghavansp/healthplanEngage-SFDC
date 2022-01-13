@@ -1,0 +1,102 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+
+<aura:component description="accountcontactlist_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <aura:attribute name="account" description="Context Employer Group Record" type="Account" access="global" required="true" default="{}"/>
+    <aura:attribute name="primaryContactId" description="Primary Contact Id For the Customer Account" type="String" access="global" />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <aura:attribute name="stages" type="String[]" description="Sales Stages"  access="global"/>
+    <aura:attribute name="currentstage" type="String" description="Current Stage" access="global"/>
+    <aura:attribute name="currentstagetext" type="String" description="Current Stage Text" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="strike_evt_addNewRecord" event="c:strike_evt" action="{!c.addNewContact}" />
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="accountContactColumns" type="Object" access="private" />
+    <aura:attribute name="accountContactData" type="Object" access="private" />
+    <aura:attribute name="selectedContact" description="Selected Contact" type="AccountContactRelation" access="private" />
+    <aura:attribute name="newContact" description="New Contact" type="Contact" access="private" />
+    <aura:attribute name="selectedRecordId" description="Selected Contact Relation record id" type="String" default="" access="private" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" access="private" />
+    <aura:attribute name="showAddPopupModal" type="Boolean" default="false" access="private" />
+    <aura:attribute name="addNewContact" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+    <div>
+    </div>
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+
+        <div class="slds-col slds-small-size_3-of-4 slds-medium-size_3-of-4 slds-large-size_3-of-4">
+            <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" aura:id="agencygridcontainer">
+                        <div class="slds-form-element slds-m-bottom--small">
+                            <lightning:button disabled="{!v.disableFields}" label="New" variant="brand" onclick="{! c.newContactRelationRecord }"/>
+                        </div>
+                        <lightning:datatable columns="{! v.accountContactColumns }" data="{! v.accountContactData }" keyField="Id" onrowaction="{! c.handleContactRowAction }" hideCheckboxColumn="true"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  MODAL POPUP FOR ADD OR EDIT RELATIONSHIP -->
+    <aura:if isTrue="{!v.showAddPopupModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-create-agency" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-create-contact" class="slds-text-heading_medium slds-hyphenate">Add Contact</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <aura:if isTrue="{!v.addNewContact}">
+                        <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}"  objectApiName="Contact">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+
+                            <lightning:inputField fieldName="AccountId" value="{!v.newContact.AccountId}"  disabled="true" />
+                            <lightning:inputField fieldName="Name"  value="{!v.newContact.Name}"  />
+                            <lightning:inputField fieldName="Title" value="{!v.newContact.Title}" />
+                            <lightning:inputField fieldName="Birthdate" value="{!v.newContact.Birthdate}"  />
+                            <lightning:inputField fieldName="Email" value="{!v.newContact.Email}" />
+                            <lightning:inputField fieldName="Phone" value="{!v.newContact.Phone}" />
+                            <lightning:inputField fieldName="MobilePhone" value="{!v.newContact.MobilePhone}" />
+                            <lightning:inputField fieldName="MailingAddress" value="{!v.newContact.MailingAddress}" />
+                            <div class="slds-m-top_medium">
+                                <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                            </div>
+                        </lightning:recordEditForm>
+                        <aura:set attribute="else">
+                            <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}"  objectApiName="AccountContactRelation">
+                                <!-- the messages component is for error messages -->
+                                <lightning:messages />
+
+                                <lightning:inputField fieldName="AccountId" value="{!v.selectedContact.AccountId}"  disabled="true" />
+                                <c:strike_lookup label="Contact" object="Contact" searchField="Name" placeholder="Type to search..." iconName="standard:contact" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" allowNewRecords="true" overrideNewEvent="true"  value="{!v.selectedContact.ContactId}"/>
+                                <lightning:inputField fieldName="ContactId"  value="{!v.selectedContact.ContactId}" disabled="true"  />
+                                <lightning:inputField fieldName="Is_Primary__c" value="{!v.selectedContact.Is_Primary__c}"  />
+                                <lightning:inputField fieldName="StartDate" value="{!v.selectedContact.StartDate}"  />
+                                <lightning:inputField fieldName="Roles" value="{!v.selectedContact.Roles}" />
+
+                                <div class="slds-m-top_medium">
+                                    <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                                </div>
+                            </lightning:recordEditForm>
+                        </aura:set>
+                    </aura:if>
+
+                </div>
+            </div>
+        </section>
+    </aura:if>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+</aura:component>

@@ -1,0 +1,9 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+   <design:attribute name="Attribute_Value__c" label="Attribute Values" description="List Object which holds the attribute value pairs for a given product line" />
+    <design:attribute name="Attribute__c" label="Attributes" description="List Object which holds the attribute master list for a crossreferencing attribute name" />
+    <design:attribute name="Plan_Family__c" label="Plan Family" description="Context Plan Family Record" />
+</design:component>

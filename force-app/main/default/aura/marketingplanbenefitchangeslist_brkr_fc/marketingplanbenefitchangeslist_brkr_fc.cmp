@@ -1,0 +1,59 @@
+<!--
+ - Created by varun on 11/24/2019.
+ -->
+
+<aura:component description="marketingplanbenefitchangeslist_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Marketing_Plan_Benefit__c" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the plan benefit pairs for a given product line" access="global"/>
+    <aura:attribute name="Marketing_Plan__c" description="Context Predefined Package Record" type="Marketing_Plan__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace', 'Effective_Date__c': '', 'Termination_Date__c': ''}"/>
+    <aura:attribute name="createPlanBenefits" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the new plan benefit pairs" access="global"/>
+    <aura:attribute name="updatePlanBenefits" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the updated plan benefit pairs" access="global"/>
+    <aura:attribute name="deletePlanBenefits" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the deleted plan benefit pairs" access="global"/>
+    <aura:attribute name="deleteRecords" type="Boolean" default="false" description="Sets to true if records to be deleted are present" access="global"/>
+    <aura:attribute name="stages" type="String[]" description="Sales Stages"  access="global"/>
+    <aura:attribute name="currentstage" type="String" description="Current Stage" access="global"/>
+    <aura:attribute name="currentstagetext" type="String" description="Current Stage Text" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="planbenefitchangesparsed" type="c:strike_evt"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="planbenefitchangesparsed" event="c:strike_evt" action="{!c.loaddatatables}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="columnsinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="nochangePlanBenefits" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the plan benefit pairs with no changes" access="private"/>
+    <aura:attribute name="planBenefitNameMap" type="Map"  access="private" />
+    <aura:attribute name="planBenefitNames" type="Object"  access="private" />
+    <aura:attribute name="columns" type="List"  access="private" />
+    <aura:attribute name="createddata" type="Object" access="private"/>
+    <aura:attribute name="updateddata" type="Object" access="private"/>
+    <aura:attribute name="deleteddata" type="Object" access="private"/>
+    <aura:attribute name="nochangedata" type="Object" access="private"/>
+
+    <!--  COMPONENT BODY -->
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <c:strike_input type="text" auraId="Name" name="Marketing Plan Name" label="Marketing Plan Name" helpText="Marketing Name for the Plan" helpTextPlacement="auto top" maxlength="300" errorMessage="Invalid input" disabled="true" value="{!v.Marketing_Plan__c.Name}"/>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <c:strike_input type="text" auraId="Plan_Name__c" name="Plan_Name__c" label="Plan Name" helpText="Unique Name for the Plan" helpTextPlacement="auto top" maxlength="300" errorMessage="Invalid input" disabled="true" value="{!v.Marketing_Plan__c.Plan_Name__c}"/>
+            </div>
+        </div>
+    <aura:if isTrue="{!v.columnsinitalized}">
+        <lightning:accordion>
+            <lightning:accordionSection name="createdattributes" label="Group Benefit Details">
+                <lightning:datatable columns="{! v.columns }" data="{! v.createddata }" keyField="id"  hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:accordionSection>
+<!--                <lightning:datatable columns="{! v.columns }" data="{! v.updateddata }" keyField="id" hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:accordionSection>
+            <lightning:accordionSection name="nochangeattributes" label="Benefits With No Changes">
+                <lightning:datatable columns="{! v.columns }" data="{! v.nochangedata }" keyField="id" hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:accordionSection>-->
+        </lightning:accordion>
+    </aura:if>
+
+        </div>
+</aura:component>

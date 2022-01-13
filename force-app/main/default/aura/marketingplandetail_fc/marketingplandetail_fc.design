@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<design:component>
+   <design:attribute name="createmarketingplan" label="Create Marketing Plan" description="User Selection for whether to create or edit an existing Marketing Plan" />
+    <design:attribute name="copyfrompplanfamilyid" label="Copied Plan Family Id" description="Id of plan family for copying product component from" />
+    <design:attribute name="copyfrommarketingplanid" label="Copied Marketing Plan Id" description="Id of marketing plan selected for copying" />
+    <design:attribute name="Plan_Family__c" label="Product Line" description="Context Product Line Record" />
+    <design:attribute name="Marketing_Plan__c" label="Marketing Plan" description="Context Marketing Plan Record" />
+    <design:attribute name="editmarketingplanid" label="Edited Marketing Plan Id" description="Id of pedefined plan selected for editing" />
+</design:component>

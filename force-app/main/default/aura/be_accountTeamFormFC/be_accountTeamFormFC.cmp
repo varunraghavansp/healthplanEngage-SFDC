@@ -1,0 +1,43 @@
+<!--
+ - Created by varun on 11/5/2019.
+ -->
+
+<aura:component description="be_accountTeamFormFC" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" description="Context Account" type="Account" access="global"  default="{'Status__c': 'Pending'}" />
+    <aura:attribute name="accountteammembers" description="Account Team Members" type="AccountTeamMember[]" access="global"  />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.accountTeamByRole.accountManagerId}" action="{!c.handleAccountRoleUpdate}" />
+    <aura:handler name="change" value="{!v.accountTeamByRole.salesManagerId}" action="{!c.handleAccountRoleUpdate}" />
+    <aura:handler name="change" value="{!v.accountTeamByRole.underwriterId}" action="{!c.handleAccountRoleUpdate}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="accountTeamByRole"  type = "Object" access="private" default="{'accountManagerId': '', 'underwriterId': '', 'salesManagerId': ''}"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup disabled="{!v.disableFields}" label="Account Manager" object="User" searchField="Name" placeholder="Type to search..." iconName="standard:user" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" value="{!v.accountTeamByRole.accountManagerId}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup disabled="{!v.disableFields}" label="Sales Manager" object="User" searchField="Name" placeholder="Type to search..." iconName="standard:user" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" value="{!v.accountTeamByRole.salesManagerId}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup disabled="{!v.disableFields}" label="Underwriter" object="User" searchField="Name" placeholder="Type to search..." iconName="standard:user" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" value="{!v.accountTeamByRole.underwriterId}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+</aura:component>

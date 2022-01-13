@@ -1,0 +1,11 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="quotecensus" label="Quote Census" description="Quote Census" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+    <design:attribute name="numberofsubscribers" label="numberofsubscribers" description="Counts the Number of Subscribers" />
+    <design:attribute name="numberofmembers" label="numberofmembers" description="Counts the Number of Members - Subscribers and Dependents" />
+</design:component>

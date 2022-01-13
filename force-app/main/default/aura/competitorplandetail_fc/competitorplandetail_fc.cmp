@@ -1,0 +1,179 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+<aura:component description="competitorplandetail_fc" controller="be_genericcontroller">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="currentCompetitorPlanInfo" type="Competitor_Plan_Information__c" description="Object which holds context competitor plan information" access="public"/>
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="public"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <!--<aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Medical__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Prescription_Drug__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Incentives__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Medical_Management__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Medical__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Prescription_Drug__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Incentives__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Medical_Management__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Medical__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Prescription_Drug__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Incentives__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Medical_Management__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Family_Medical__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Family_Prescription_Drug__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Family_Incentives__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Family_Medical_Management__c}" action="{!c.strikeinputchanged}"/>
+    <aura:handler name="change" value="{!v.currentCompetitorPlanInfo.Tier__c}" action="{!c.strikeinputchanged}"/>-->
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="options_Plan_Type__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Product_Category__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_HDHP_Option__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Tier__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="disableSecondTier"  type = "Boolean" default="false" access="private"/>
+    <aura:attribute name="disableThirdTier"  type = "Boolean" default="false" access="private"/>
+    <aura:attribute name="disableFourthTier"  type = "Boolean" default="false" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+        <!-- Left Column -->
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Plan_Name__c" name="Plan_Name__c" label="Plan Name" helpText="Plan Name" helpTextPlacement="auto top" placeholder="Group Name" maxlength="80" errorMessage="Invalid input" required="true" value="{!v.currentCompetitorPlanInfo.Plan_Name__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_picklist disabled="{! v.disableFields}" label="Plan Type" required="true" placeholder="Select" value="{!v.currentCompetitorPlanInfo.Plan_Type__c}" >
+                    <aura:iteration items="{!v.options_Plan_Type__c}" var="typevalue">
+                        <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                    </aura:iteration>
+                </c:strike_picklist>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_picklist disabled="{! v.disableFields}" label="Product Category" required="true" placeholder="Select" value="{!v.currentCompetitorPlanInfo.Product_Category__c}" >
+                    <aura:iteration items="{!v.options_Product_Category__c}" var="typevalue">
+                        <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                    </aura:iteration>
+                </c:strike_picklist>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Name" name="Name" label="Package Id" helpText="Package Id"  helpTextPlacement="auto top" placeholder="Package Id"  maxlength="80" errorMessage="Invalid input" required="true" value="{!v.currentCompetitorPlanInfo.Name}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_picklist disabled="{! v.disableFields}" label="HDHP Option" required="true" placeholder="Select" value="{!v.currentCompetitorPlanInfo.HDHP_Option__c}" >
+                    <aura:iteration items="{!v.options_HDHP_Option__c}" var="typevalue">
+                        <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                    </aura:iteration>
+                </c:strike_picklist>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Deductible__c" name="Deductible__c" label="Deductible" helpText="Deductible" helpTextPlacement="auto top" placeholder="Deductible" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Deductible__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Inpatient_Copay__c" name="Inpatient_Copay__c" label="Inpatient Copay" helpText="Inpatient Copay" helpTextPlacement="auto top" placeholder="Inpatient Copay" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Inpatient_Copay__c}"/>
+            </div>
+        </div>
+        <!-- Right Column -->
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="DME__c" name="DME__c" label="DME" helpText="DME" helpTextPlacement="auto top" placeholder="DME" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.DME__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Emergency_Room_Copay__c" name="Emergency_Room_Copay__c" label="Emergency Room Copay" helpText="Emergency Room Copay" helpTextPlacement="auto top" placeholder="Group Name" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Emergency_Room_Copay__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Max_Dependent_Age__c" name="Max_Dependent_Age__c" label="Max Dependent Age" helpText="Max Dependent Age" helpTextPlacement="auto top" placeholder="Max Dependent Age" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Max_Dependent_Age__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Medical_Equipment_Rider__c" name="Medical_Equipment_Rider__c" label="Medical Equipment Rider" helpText="Medical Equipment Rider" helpTextPlacement="auto top" placeholder="Medical Equipment Rider" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Medical_Equipment_Rider__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input disabled="{! v.disableFields}" type="text" auraId="Drug_Option__c" name="Drug_Option__c" label="Drug Option" helpText="Drug Option" helpTextPlacement="auto top" placeholder="Drug Option" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Drug_Option__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_picklist disabled="{! v.disableFields}" label="Rating Tier" required="true" placeholder="Select" value="{!v.currentCompetitorPlanInfo.Tier__c}" >
+                    <aura:iteration items="{!v.options_Tier__c}" var="typevalue">
+                        <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                    </aura:iteration>
+                </c:strike_picklist>
+            </div>
+            <!--  <div class="slds-col slds-form-element slds-size_1-of-1">
+                  <c:strike_input type="Date" auraId="Rate_Effective_Date__c" name="Rate_Effective_Date__c" label="Rate Effective Date" helpText="Rate Effective Date" helpTextPlacement="auto top"  errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Rate_Effective_Date__c}"/>
+              </div>
+              <div class="slds-col slds-form-element slds-size_1-of-1">
+                  <c:strike_input type="Date" auraId="Rate_Termination_Date__c" name="Rate_Termination_Date__c" label="Rate Termination Date" helpText="Rate Termination Date" helpTextPlacement="auto top" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Rate_Termination_Date__c}"/>
+              </div> -->
+        </div>
+    </div>
+    <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Only_Medical__c" name="Subscriber_Only_Medical__c" label="Subscriber Only Medical" helpText="Subscriber Only Medical Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Medical__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Only_Prescription_Drug__c" name="Subscriber_Only_Prescription_Drug__c" label="Subscriber Only Rx" helpText="Subscriber Only Rx Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Prescription_Drug__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Only_Incentives__c" name="Subscriber_Only_Incentives__c" label="Subscriber Only Incentives" helpText="Subscriber Only Incentives Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Incentives__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Only_Medical_Management__c" name="Subscriber_Only_Medical_Management__c" label="Subscriber Only Medical Management" helpText="Subscriber Only Medical Management Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Medical_Management__c}" />
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Only_Total__c" name="Subscriber_Only_Total__c" label="Subscriber Only Total" helpText="Subscriber Only Total Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Only_Total__c}" disabled="true"/>
+            </div>
+        </div>
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableSecondTier}" type="currency" auraId="Subscriber_Spouse_Medical__c" name="Subscriber_Spouse_Medical__c" label="Subscriber Spouse Medical" helpText="Subscriber Spouse Medical Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Medical__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableSecondTier}" type="currency" auraId="Subscriber_Spouse_Prescription_Drug__c" name="Subscriber_Only_Prescription_Drug__c" label="Subscriber Spouse Rx" helpText="Subscriber Spouse Rx Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Prescription_Drug__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableSecondTier}" type="currency" auraId="Subscriber_Spouse_Incentives__c" name="Subscriber_Spouse_Incentives__c" label="Subscriber Spouse Incentives" helpText="Subscriber Spouse Incentives Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Incentives__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableSecondTier}" type="currency" auraId="Subscriber_Spouse_Medical_Management__c" name="Subscriber_Spouse_Medical_Management__c" label="Subscriber Spouse Medical Management" helpText="Subscriber Spouse Medical Management Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Medical_Management__c}" />
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Spouse_Total__c" name="Subscriber_Spouse_Total__c" label="Subscriber Only Total" helpText="Subscriber Spouse Total Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Spouse_Total__c}" disabled="true"/>
+            </div>
+        </div>
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableThirdTier}" type="currency" auraId="Subscriber_Children_Medical__c" name="Subscriber_Children_Medical__c" label="Subscriber Only Medical" helpText="Subscriber Children Medical Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Medical__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableThirdTier}" type="currency" auraId="Subscriber_Children_Prescription_Drug__c" name="Subscriber_Children_Prescription_Drug__c" label="Subscriber Only Rx" helpText="Subscriber Children Rx Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Prescription_Drug__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableThirdTier}" type="currency" auraId="Subscriber_Children_Incentives__c" name="Subscriber_Children_Incentives__c" label="Subscriber Children Incentives" helpText="Subscriber Children Incentives Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Incentives__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableThirdTier}" type="currency" auraId="Subscriber_Children_Medical_Management__c" name="Subscriber_Children_Medical_Management__c" label="Subscriber Children Medical Management" helpText="Subscriber Only Medical Management Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Medical_Management__c}" />
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Subscriber_Children_Total__c" name="Subscriber_Children_Total__c" label="Subscriber Only Total" helpText="Subscriber Children Total Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Subscriber_Children_Total__c}" disabled="true"/>
+            </div>
+        </div>
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4">
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableFourthTier}" type="currency" auraId="Family_Medical__c" name="Family_Medical__c" label="Family Medical" helpText="Family Medical Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Family_Medical__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableFourthTier}" type="currency" auraId="Family_Prescription_Drug__c" name="Family_Prescription_Drug__c" label="Family Rx" helpText="Family Rx Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Family_Prescription_Drug__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableFourthTier}" type="currency" auraId="Family_Incentives__c" name="Family_Incentives__c" label="Family Incentives" helpText="Family Incentives Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Family_Incentives__c}"/>
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" disabled="{!v.disableFourthTier}" type="currency" auraId="Family_Medical_Management__c" name="Family_Medical_Management__c" label="Family Medical Management Premium" helpText="Subscriber Only Medical Management Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Family_Medical_Management__c}" />
+            </div>
+            <div class="slds-col slds-form-element slds-size_1-of-1">
+                <c:strike_input readonly="{! v.disableFields}" type="currency" auraId="Family_Total__c" name="Family_Total__c" label="Family Total" helpText="Family Total Premium" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input"  value="{!v.currentCompetitorPlanInfo.Family_Total__c}" disabled="true"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

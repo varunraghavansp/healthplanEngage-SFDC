@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+    <design:attribute name="createplancomponent" label="Create Plan Component" description="User Selection for whether to create or edit an existing Plan Component" />
+    <design:attribute name="copyfrompplanfamilyid" label="Copied Plan Family Id" description="Id of plan family for copying product component from" />
+    <design:attribute name="copyfromplancomponentid" label="Copied Plan Component Id" description="CId of product component selected for copying" />
+    <design:attribute name="Plan_Family__c" label="Plan Family" description="Context Plan Family Record" />
+    <design:attribute name="Plan_Component__c" label="Plan Component" description="Context Plan Component Record" />
+    <design:attribute name="editplancomponentid" label="Edited Plan Component Id" description="Id of product component selected for editing" /> 
+</design:component>

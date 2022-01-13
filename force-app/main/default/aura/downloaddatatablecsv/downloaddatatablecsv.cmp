@@ -1,0 +1,20 @@
+<!--
+ - Created by varun on 8/27/2019.
+ -->
+
+<aura:component description="downloaddatatablecsv">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="columns" type="List" access="public" />
+    <aura:attribute name="data" type="Object" access="public" />
+    <aura:attribute name="downloadFileName" type="String" access="public" default="filename" />
+    <!-- HANDLERS AND EVENTS-->
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+
+    <!--  COMPONENT BODY -->
+
+</aura:component>

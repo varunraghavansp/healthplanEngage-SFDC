@@ -1,0 +1,116 @@
+<!--
+ - Created by varun on 11/11/2019.
+ -->
+
+<aura:component description="be_SubgroupClassAssociationFC" implements="lightning:availableForFlowScreens" access="global" controller="be_genericcontroller">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <aura:attribute name="account" description="Context Employer Group Record" type="Account" access="global" />
+    <aura:attribute name="subAccount" description="SubAccounts for Employer Group" type="Account[]" access="global" />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="strike_evt_addNewRecord" event="c:strike_evt" action="{!c.addNewSubAccount}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="subAccountColumns" type="Object" access="private" />
+    <aura:attribute name="subAccountData" type="Object" access="private" />
+    <aura:attribute name="selectedSubAccount" description="Selected Contact" type="Account" access="private" />
+    <aura:attribute name="newSubAccount" description="New Contact" type="Account" access="private" />
+    <aura:attribute name="selectedRecordId" description="Selected SubAccount record id" type="String" default="" access="private" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" access="private" />
+    <aura:attribute name="showAddPopupModal" type="Boolean" default="false" access="private" />
+    <aura:attribute name="addNewSubAccount" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" aura:id="agencygridcontainer">
+                <div class="slds-form-element slds-m-bottom--small">
+                    <lightning:button disabled="{!v.disableFields}" label="New" variant="brand" onclick="{! c.newSubAccountRecord }"/>
+                </div>
+                <lightning:datatable columns="{! v.subAccountColumns }" data="{! v.subAccountData }" keyField="Id" onrowaction="{! c.handleSubAccountRowAction }" hideCheckboxColumn="true"/>
+            </div>
+        </div>
+    </div>
+    <!--  MODAL POPUP FOR ADD OR EDIT RELATIONSHIP -->
+    <aura:if isTrue="{!v.showAddPopupModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-create-subaccount" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-create-subaccount" class="slds-text-heading_medium slds-hyphenate">Add Sub-Account</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <aura:if isTrue="{!v.addNewSubAccount}">
+                        <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}" recordTypeId="0126g000000gGJCAA2"  objectApiName="Account">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <lightning:inputField fieldName="ParentId" value="{!v.newSubAccount.ParentId}"  />
+                                <lightning:inputField fieldName="Name"  value="{!v.newSubAccount.Name}"  />
+                                <lightning:inputField fieldName="Sub_Account_Type__c"  value="{!v.newSubAccount.Sub_Account_Type__c}"  />
+                                <lightning:inputField fieldName="Status__c"  value="{!v.newSubAccount.Status__c}" disabled="true" />
+                                <lightning:inputField fieldName="Effective_Date__c"  value="{!v.newSubAccount.Effective_Date__c}" />
+                                <lightning:inputField fieldName="Site"  value="{!v.newSubAccount.Site}" />
+                                <lightning:inputField fieldName="TIN_EIN__c"  value="{!v.newSubAccount.TIN_EIN__c}" />
+                            </div>
+                            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <lightning:inputField fieldName="Group_Category__c"  value="{!v.newSubAccount.Group_Category__c}" />
+                                <lightning:inputField fieldName="Phone"  value="{!v.newSubAccount.Phone}" />
+                                <lightning:inputField fieldName="Rating_Zipcode__c"  value="{!v.newSubAccount.Rating_Zipcode__c}" />
+                                <lightning:inputField fieldName="Rating_City__c"  value="{!v.newSubAccount.Rating_City__c}" />
+                                <lightning:inputField fieldName="Rating_Region__c"  value="{!v.newSubAccount.Rating_Region__c}" />
+                                <lightning:inputField fieldName="Rating_State__c"  value="{!v.newSubAccount.Rating_State__c}" />
+                            </div>
+                            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                <lightning:inputAddress disabled="{!v.disableFields}"  addressLabel="Billing Address" streetLabel="Street" cityLabel="City" countryLabel="Country" provinceLabel="State" postalCodeLabel="Zipcode" street="{! v.newSubAccount.BillingStreet }" city="{! v.newSubAccount.BillingCity }" province="{! v.newSubAccount.BillingState }" country="{! v.newSubAccount.BillingCountry }" postalCode="{! v.newSubAccount.BillingPostalCode }"/>
+                            </div>
+                            <div class="slds-m-top_medium">
+                                <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                            </div>
+                        </lightning:recordEditForm>
+                        <aura:set attribute="else">
+                            <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}"  objectApiName="Account">
+                                <!-- the messages component is for error messages -->
+                                <lightning:messages />
+
+                                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                    <lightning:inputField fieldName="ParentId" value="{!v.selectedSubAccount.ParentId}"  disabled="true" />
+                                    <lightning:inputField fieldName="Name"  value="{!v.selectedSubAccount.Name}"  />
+                                    <lightning:inputField fieldName="Sub_Account_Type__c"  value="{!v.selectedSubAccount.Sub_Account_Type__c}"  />
+                                    <lightning:inputField fieldName="Status__c"  value="{!v.selectedSubAccount.Status__c}" disabled="true" />
+                                    <lightning:inputField fieldName="Effective_Date__c"  value="{!v.selectedSubAccount.Effective_Date__c}" />
+                                    <lightning:inputField fieldName="Site"  value="{!v.selectedSubAccount.Site}" />
+                                    <lightning:inputField fieldName="TIN_EIN__c"  value="{!v.selectedSubAccount.TIN_EIN__c}" />
+                                </div>
+                                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                    <lightning:inputField fieldName="Group_Category__c"  value="{!v.selectedSubAccount.Group_Category__c}" />
+                                    <lightning:inputField fieldName="Phone"  value="{!v.selectedSubAccount.Phone}" />
+                                    <lightning:inputField fieldName="Rating_Zipcode__c"  value="{!v.selectedSubAccount.Rating_Zipcode__c}" />
+                                    <lightning:inputField fieldName="Rating_City__c"  value="{!v.selectedSubAccount.Rating_City__c}" />
+                                    <lightning:inputField fieldName="Rating_Region__c"  value="{!v.selectedSubAccount.Rating_Region__c}" />
+                                    <lightning:inputField fieldName="Rating_State__c"  value="{!v.selectedSubAccount.Rating_State__c}" />
+                                </div>
+                                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                    <lightning:inputAddress disabled="{!v.disableFields}"  addressLabel="Billing Address" streetLabel="Street" cityLabel="City" countryLabel="Country" provinceLabel="State" postalCodeLabel="Zipcode" street="{! v.selectedSubAccount.BillingStreet }" city="{! v.selectedSubAccount.BillingCity }" province="{! v.selectedSubAccount.BillingState }" country="{! v.selectedSubAccount.BillingCountry }" postalCode="{! v.selectedSubAccount.BillingPostalCode }"/>
+                                </div>
+
+                                <div class="slds-m-top_medium">
+                                    <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                                </div>
+                            </lightning:recordEditForm>
+                        </aura:set>
+                    </aura:if>
+
+                </div>
+            </div>
+        </section>
+    </aura:if>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+</aura:component>

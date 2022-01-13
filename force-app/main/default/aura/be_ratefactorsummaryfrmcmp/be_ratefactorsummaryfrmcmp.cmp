@@ -1,0 +1,83 @@
+<!--
+ - Created by varun on 11/9/2019.
+ -->
+
+<aura:component description="be_ratefactorsummaryfrmcmp" implements="lightning:availableForFlowScreens" controller="tooling_controller" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="createratefactor" description="User Selection for whether to create or edit an existing Base Rate Schedule" type="Boolean" default="false" access="global" />
+    <aura:attribute name="copyfrompplanfamilyid" description="Id of plan family for copying base rate schedule from" type="String" default="" access="global" />
+    <aura:attribute name="copyfromratefactorid" description="Id of base rate schedule selected for copying" type="String" default="" access="global" />
+    <aura:attribute name="ProductLine__c" description="Context Product Line Record" type="Plan_Family__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="Rate_Factor__c" description="Context Base Rate Schedule Record" type="Rate_Factor__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="editratefactorid" description="Id of base rate schedule selected for editing" type="String" default="" access="global" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.createratefactor}" action="{!c.createorrevisechanged}" />
+    <aura:handler name="change" value="{!v.editratefactorid}" action="{!c.resetpredefinedplan}" />
+    <aura:handler name="change" value="{!v.copyfromratefactorid}" action="{!c.resetpredefinedplan}" />
+    <aura:handler name="change" value="{!v.ProductLine__c.Id}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="picklistinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="disablecreationfields" type="Boolean" default="false" access="private" />
+    <aura:attribute name="picklists"  type="Object" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:input type="toggle" label="Create New Rate Schedule" name="createoreditproductline" message-toggle-active="New" message-toggle-inactive="Revise" checked="{!v.createratefactor}"/>
+            </div>
+            <aura:if isTrue="{!v.createratefactor}">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Copy From Plan Family" object="ProductLine__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.copyfrompplanfamilyid}"/>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Copy Base Rate Schedule" object="Rate_Factor__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" filter="{!'Product_Line__c=\'' + v.copyfrompplanfamilyid + '\''}" showRecentRecords="true" value="{!v.copyfromratefactorid}"/>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <c:strike_lookup label="Select Base Rate Schedule To Edit" object="Rate_Factor__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.editratefactorid}"/>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </div>
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Plan Family" object="ProductLine__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" disabled="{!v.disablecreationfields}" value="{!v.ProductLine__c.Id}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Name" name="Name" label="Rate Schedule Name" helpText="Unique Name for the Rate Schedule" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input" required="true" value="{!v.Rate_Factor__c.Name}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Effective Date" aura:id="Effective_Date__c" value="{!v.Rate_Factor__c.Effective_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Termination Date" aura:id="Termination_Date__c" value="{!v.Rate_Factor__c.Termination_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Version__c" type="text" name="Version__c" label="Version" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.Rate_Factor__c.Version__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Status__c" type="text" name="Status__c" label="Status" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.Rate_Factor__c.Status__c}"/>
+                </div>
+                <aura:if isTrue="{!v.picklistinitalized}">
+                    <div class="slds-col slds-form-element slds-size_1-of-1">
+                        <c:strike_picklist label="Tier Code" required="true" value="{!v.Rate_Factor__c.Tier_Code__c}">
+                            <aura:iteration items="{!v.picklists.Tier_Code__c_values}" var="typevalue">
+                                <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                            </aura:iteration>
+                        </c:strike_picklist>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+</aura:component>

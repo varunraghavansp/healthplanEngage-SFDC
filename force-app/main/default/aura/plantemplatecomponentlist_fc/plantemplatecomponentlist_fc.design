@@ -1,0 +1,9 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Plan_Template__c" label="Plan Template" description="Context Plan Template" />
+    <design:attribute name="Plan_Component__c" label="Product Component" description="List Object which holds the context plan component records" />
+    <design:attribute name="Plan_Template_Component__c" label="Plan Template Components" description="List Object which holds the copied plan template components" />
+</design:component>

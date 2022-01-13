@@ -1,0 +1,15 @@
+<!--
+ - Created by varun on 9/6/2019.
+ -->
+
+<!-- Treegridwrapper -->
+<template>
+    <div>
+        <lightning-card title={title} icon-name={icon}></lightning-card>
+        <div class="slds-m-around_small">
+            <template if:true={gridColumns}>
+                <lightning-tree-grid columns={gridColumns} data={gridData} expanded-rows={gridExpandedRows} key-field="id" max-column-width="350" min-column-width="0" row-number-offset="0"></lightning-tree-grid>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,48 @@
+<!--
+ - Created by varun on 11/5/2019.
+ -->
+
+<aura:component description="be_LargeGroupCensusSummaryFC">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="quotecensus" type="Quote_Census__c[]" description="Census Object which holds current quote census information" access="public"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="bardata" type="Object" default="Object[]" access="private" />
+    <aura:attribute name="donutdata" type="Object" default="Object[]" access="private" />
+    <aura:attribute name="datainitialized" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="maxpayout" type="String" default="" access="private" />
+    <aura:attribute name="showspinner" type="Boolean" default="false" access="private"/>
+
+    <!--  COMPONENT BODY -->
+    <aura:if isTrue="{!v.datainitialized}">
+
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                <c:strike_chart
+                        type="bar"
+                        data="{!v.bardata}"
+                        title="Tiered Distribution"
+                        leftSubtitle=""
+                        rightSubtitle=""
+                        orientation="vertical"
+                        xAxisLabel="Family Tier"
+                        yAxisLabel="Count"/>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <c:strike_chart
+                        type="donut"
+                        data="{!v.donutdata}"
+                        title="Membership Distribution By Age"
+                        leftSubtitle=""
+                        rightSubtitle=""
+                />
+            </div>
+        </div>
+
+    </aura:if>
+</aura:component>

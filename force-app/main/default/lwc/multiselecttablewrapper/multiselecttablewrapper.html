@@ -1,0 +1,15 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<!-- Multiselecttablewrapper -->
+<template>
+    <div>
+        <lightning-card title={title} icon-name={icon}></lightning-card>
+        <div class="slds-m-around_small">
+        </div>
+        <template if:true={rows}>
+            <lightning-datatable key-field="Id" data={rows} columns={columns} show-row-number-column hide-checkbox-column={hidecheckbox} suppress-bottom-bar onrowselection={getselectedrecord} selected-rows={tblselectedrow}></lightning-datatable>
+        </template>
+    </div>
+</template>

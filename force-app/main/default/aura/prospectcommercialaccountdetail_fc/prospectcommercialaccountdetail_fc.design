@@ -1,0 +1,7 @@
+<!--
+ - Created by varun on 11/3/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+</design:component>

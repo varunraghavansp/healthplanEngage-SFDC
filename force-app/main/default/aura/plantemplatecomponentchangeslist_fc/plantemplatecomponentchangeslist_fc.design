@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/22/2019.
+ -->
+
+<design:component>
+   <design:attribute name="Plan_Template_Component__c" label="Plan Template Components" description="List Object which holds the plan template components" />
+    <design:attribute name="Plan_Template__c" label="Plan Template" description="Context Plan Template Record" />
+    <design:attribute name="createPlanTemplateComponents" label="New Plan Templates" description="List Object which holds the new plan template components" />
+    <design:attribute name="updatePlanTemplateComponents" label="Updated Plan Templates" description="List Object which holds the updated plan template components" />
+    <design:attribute name="deletePlanTemplateComponents" label="Deleted Plan Templates" description="List Object which holds the deleted plan template components" />
+    <design:attribute name="deleteRecords" label="Delete Records" description="Sets to True if records to be deleted are present" />
+</design:component>

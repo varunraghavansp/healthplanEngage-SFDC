@@ -1,0 +1,81 @@
+<!--
+ - Created by varun on 11/21/2019.
+ -->
+
+<aura:component description="prospectcommercialaccountdetail_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" description="Context Account" type="Account" access="global"  default="{'Status__c': 'Pending'}" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.account.Name}" action="{!c.strikeinputchanged}" />
+    <aura:handler name="change" value="{!v.account.Rating_Zipcode__c}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="options_Group_Category__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Type"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Industry"  type = "Object[]" access="private"/>
+    <aura:attribute name="loaded" type = "Boolean" default="false" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Name" name="Name" label="Account Name" helpText="Group Name" helpTextPlacement="auto top" placeholder="Group Name" maxlength="80" errorMessage="Invalid input" required="true" value="{!v.account.Name}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Legal_Entity_Name__c" name="Legal_Entity_Name__c" label="Legal Entity Name" helpText="Full Legal Name for the Employer Group used in communications" placeholder="Legal Entity Name" helpTextPlacement="auto top" maxlength="250" errorMessage="Invalid input" required="true" value="{!v.account.Legal_Entity_Name__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Rating Zipcode" object="Rating_Region__c" searchField="Name" placeholder="Type to search..." iconName="standard:address" subtitleField="County__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" value="{!v.account.Rating_Zipcode__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Rating_City__c" type="text" name="Rating_City__c" label="Rating City" helpText="Employer Group Primary Address City" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" readonly="true" value="{!v.account.Rating_City__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Rating_County__c" type="text" name="Rating_County__c" label="Rating County" helpText="Employer Group Primary Address County" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" readonly="true" value="{!v.account.Rating_County__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_picklist label="Group Category" required="true" placeholder="Select" value="{!v.account.Group_Category__c}" >
+                        <aura:iteration items="{!v.options_Group_Category__c}" var="typevalue">
+                            <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                        </aura:iteration>
+                    </c:strike_picklist>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Account_Status__c" type="text" name="Account_Status__c" label="Group Status" helpText="Employer Group Status" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.account.Status__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Effective_Date__c" type="date" name="Effective_Date__c" label="Anticipated Effective Date" helpText="Employer Group Anticipated Effective Date" helpTextPlacement="auto top" maxlength="80" pattern="tel" errorMessage="Invalid input" required="true" value="{!v.account.Effective_Date__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Phone" type="tel" name="Phone" label="Phone" helpText="Employer Group Primary Phone" helpTextPlacement="auto top" placeholder="(xxx)-xxx-xxxx" maxlength="80" pattern="tel" errorMessage="Invalid input" value="{!v.account.Phone}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Sic" type="text" name="Sic" label="SIC" helpText="Employer Group SIC Code" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" value="{!v.account.Sic}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_picklist label="Industry"  placeholder="Select" value="{!v.account.Industry}" >
+                        <aura:iteration items="{!v.options_Industry}" var="typevalue">
+                            <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                        </aura:iteration>
+                    </c:strike_picklist>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_picklist label="Type" required="true" placeholder="Select" value="{!v.account.Type}" >
+                        <aura:iteration items="{!v.options_Type}" var="typevalue">
+                            <c:strike_option label="{!typevalue.label}" value="{!typevalue.value}"/>
+                        </aura:iteration>
+                    </c:strike_picklist>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

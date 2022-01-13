@@ -1,0 +1,39 @@
+<!--
+ - Created by varun on 11/27/2019.
+ -->
+
+<aura:component description="plantemplatecomponentform" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="plantemplatecomponent" type="Plan_Template_Component__c"  access="public"/>
+    <aura:attribute name="componentIdMap" type="Object"  access="public"/>
+    <aura:attribute name="planfamilyid" type="String"  access="public"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="change" value="{!v.plantemplatecomponent.Plan_Component__c}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Plan Component" object="Plan_Component__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Product_Component_Type__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" filter="{!'Plan_Family__c=\'' + v.planfamilyid + '\''}" value="{!v.plantemplatecomponent.Plan_Component__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Is_Base_Component__c" type="checkbox" name="Is_Base_Component__c" label="Is Base Component" disabled="true" checked="{!v.plantemplatecomponent.Is_Base_Component__c}"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Component_Type__c" name="Component_Type__c" label="Component Type"  maxlength="80" errorMessage="Invalid input" disabled="true" value="{!v.plantemplatecomponent.Component_Type__c}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

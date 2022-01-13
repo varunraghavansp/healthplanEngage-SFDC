@@ -1,0 +1,11 @@
+<!--
+ - Created by varun on 11/11/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="selectedClassPlans" label="Selected Class Plans" description="Selected Group Plans" />
+    <design:attribute name="predefinedPackageBenefits" label="Predefined Package Benefits" description="Predefined Package Benefits" />
+    <design:attribute name="proposedRates" label="Proposed Rates" description="Proposed Rates" />
+</design:component>

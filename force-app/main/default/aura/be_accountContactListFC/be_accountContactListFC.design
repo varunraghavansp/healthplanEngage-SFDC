@@ -1,0 +1,9 @@
+<!--
+ - Created by varun on 11/5/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+    <design:attribute name="primaryContactId" label="primaryContactId" description="Primary Contact Id For the Customer Account" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+</design:component>

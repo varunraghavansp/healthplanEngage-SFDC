@@ -1,0 +1,70 @@
+<!--
+ - Created by varun on 1/19/2021.
+ -->
+
+<aura:component description="customcommunity_footer" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <div class="custom-footer ">
+        <div class="slds-grid slds-wrap slds-m-top--small slds-m-left_xx-large slds-m-right_xx-large">
+            <div class="slds-col slds-small-size_0-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6">
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6 slds-m-around_large">
+                <ul class="segment-links">
+                    <li class="segment-link">
+                        <a href="/">Individuals &amp; Families</a>
+                    </li>
+                    <li class="segment-link">
+                        <a href="/Employer">Employers</a>
+                    </li>
+                    <li class="segment-link">
+                        <a href="/Broker">Brokers</a>
+                    </li>
+                    <li class="segment-link">
+                        <a href="/Provider">Providers</a>
+                    </li>
+                    <li class="segment-link">
+                        <a href="/AboutIndependentHealth/AboutUs">About Us</a>
+                    </li>
+                    <li class="segment-link">
+                        <a href="/IntheCommunity">In the Community</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6 slds-m-around_large">
+                <ul class="footer-links">
+                    <li class="footer-link-title">Our Related Sites</li>
+                    <li class="footer-link"><a href="http://www.redshirttreatment.com/">redshirttreatment.com</a></li>
+                    <li class="footer-link"><a href="https://www.wnymedicare.com/">wnymedicare.com</a></li>
+                    <li class="footer-link"><a href="http://www.pbdrx.com/">pbdrx.com</a></li>
+                    <li class="footer-link"><a href="https://www.novahealthcare.com/">novahealthcare.com</a></li>
+                    <li class="footer-link"><a href="/MobileAppMyIH">MyIH Mobile App</a></li>
+                    <li class="footer-link"><a href="/alexa">Amazon Alexa Skill</a></li>
+                </ul>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6 slds-m-around_large">
+                <ul class="footer-links">
+                    <li class="footer-link-title">Helpful Links</li>
+                    <li class="footer-link"><a href="/AboutIndependentHealth/ContactUs">Contact Us</a></li>
+                    <li class="footer-link"><a href="/AboutIndependentHealth/Careers">Careers</a></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/FindAHealthPlan/UniqueBenefits/Telemedicine">Telemedicine Benefit</a></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/MyHealth/GettingCare/24-HourMedicalHelpLine">24-Hour Medical Help Line</a></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/MyHealth/GettingCare/UrgentCare">Urgent Care</a></li>
+                    <li class="footer-link"><a href="/insights">Insights</a></li>
+                </ul>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6 slds-m-around_large">
+                <ul class="footer-links">
+                    <li class="footer-link-title hidden-xs"></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/Tools,FormsMore/GlossaryofTerms">Glossary of Terms</a></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/Tools,FormsMore/FrequentlyUsedForms">Frequently Used Forms</a></li>
+                    <li class="footer-link"><a href="/IndividualsFamilies/Tools,FormsMore/SurpriseBillLaw">Surprise Bill Law</a></li>
+                    <!--<li class="footer-link"><a href="/AboutIndependentHealth/2021ProposedRatesLargeGroup">2021 Proposed Rates</a></li>-->
+                    <li class="footer-link"><a href="/IndividualsFamilies/MyHealth/GettingCare/NurseChat">Nurse Chat</a></li>
+                    <li class="footer-link"><a href="/AboutIndependentHealth/Newsroom">Newsroom</a></li>
+                    <li class="footer-link"><a href="https://healthyvisionblog.com/">Blog</a></li>
+                </ul>
+            </div>
+            <div class="slds-col slds-small-size_0-of-1 slds-medium-size_1-of-6 slds-large-size_1-of-6">
+            </div>
+        </div>
+    </div>
+</aura:component>

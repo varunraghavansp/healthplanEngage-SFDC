@@ -1,0 +1,83 @@
+<!--
+ - Created by varun on 11/24/2019.
+ -->
+
+<aura:component description="marketingplandetail_fc" implements="lightning:availableForFlowScreens" controller="be_standardComponentController" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="createmarketingplan" description="User Selection for whether to create or edit an existing Product Component" type="Boolean" default="false" access="global" />
+    <aura:attribute name="copyfrompplanfamilyid" description="Id of plan family for copying product component from" type="String" default="" access="global" />
+    <aura:attribute name="copyfrommarketingplanid" description="Id of product component selected for copying" type="String" default="" access="global" />
+    <aura:attribute name="Plan_Family__c" description="Context Product Line Record" type="Plan_Family__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="Marketing_Plan__c" description="Context Product Component Record" type="Marketing_Plan__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="editmarketingplanid" description="Id of product component selected for editing" type="String" default="" access="global" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.createmarketingplan}" action="{!c.createorrevisechanged}" />
+    <aura:handler name="change" value="{!v.editmarketingplanid}" action="{!c.resetmarketingplan}" />
+    <aura:handler name="change" value="{!v.copyfrommarketingplanid}" action="{!c.resetmarketingplan}" />
+    <aura:handler name="change" value="{!v.Marketing_Plan__c.Plan_Template__c}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="picklistinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="disablecreationfields" type="Boolean" default="false" access="private" />
+    <aura:attribute name="picklists"  type="Object" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:input type="toggle" label="Create New Plan" name="createoreditproductline" message-toggle-active="New" message-toggle-inactive="Revise" checked="{!v.createmarketingplan}"/>
+            </div>
+            <aura:if isTrue="{!v.createmarketingplan}">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Copy From Plan Family" object="Plan_Family__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.copyfrompplanfamilyid}"/>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Copy Plan" object="Marketing_Plan__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" filter="{!'Plan_Family__c=\'' + v.copyfrompplanfamilyid + '\''}" showRecentRecords="true" value="{!v.copyfrommarketingplanid}"/>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <c:strike_lookup label="Select Plan To Edit" object="Marketing_Plan__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.editmarketingplanid}"/>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </div>
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Plan Family" object="Plan_Family__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" disabled="{!v.disablecreationfields}" value="{!v.Plan_Family__c.Id}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Plan Template" object="Plan_Template__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" disabled="{!v.disablecreationfields}" filter="{!'Plan_Family__c=\'' + v.Plan_Family__c.Id + '\''}" showRecentRecords="true" value="{!v.Marketing_Plan__c.Plan_Template__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Name" name="Name" label="Marketing Plan Name" helpText="Unique Name for the Plan" helpTextPlacement="auto top" maxlength="80" errorMessage="Invalid input" required="true" value="{!v.Marketing_Plan__c.Name}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Effective Date" aura:id="Effective_Date__c" value="{!v.Marketing_Plan__c.Effective_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Termination Date" aura:id="Termination_Date__c" value="{!v.Marketing_Plan__c.Termination_Date__c}" displayDatePicker="true" format="yyyy-MM-dd"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Version__c" type="text" name="Version__c" label="Version" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.Marketing_Plan__c.Version__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="Status__c" type="text" name="Status__c" label="Status" maxlength="80" errorMessage="Invalid input" readonly="true" value="{!v.Marketing_Plan__c.Status__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Exchange_Value__c" name="Exchange_Value__c" label="Exchange Value"  maxlength="80" errorMessage="Invalid input" value="{!v.Marketing_Plan__c.Exchange_Value__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Plan_Component_Code__c" name="Plan_Component_Code__c" label="Plan Component Code" maxlength="255" disabled="true" errorMessage="Invalid input" value="{!v.Marketing_Plan__c.Plan_Component_Code__c}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

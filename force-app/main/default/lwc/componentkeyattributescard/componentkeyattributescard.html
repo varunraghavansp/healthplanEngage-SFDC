@@ -1,0 +1,17 @@
+<!--
+ - Created by varun on 3/22/2020.
+ -->
+
+<!-- Componentkeyattributescard -->
+<template>
+    <div>
+        <template if:true={data}>
+            <template for:each={data} for:item="componentkeyattribute">
+                <lightning-card  title={componentkeyattribute.Attribute_Name__c} key={componentkeyattribute.Id}>
+                    <c-componentkeybenefitselectionradio s-object="Attribute_Value__c" query-fields="Name, In_Network_Display_Value__c, Limits_And_Exceptions_Text_Area__c" search-field="Attribute__c" search-term={componentkeyattribute.Attribute__c} key={componentkeyattribute.Attribute__c} onattributevaluechange={attributevaluechanged} marketingplanbenefits={marketingplanbenefits} planfamily={planfamily}></c-componentkeybenefitselectionradio>
+                </lightning-card>
+            </template>
+        </template>
+    </div>
+
+</template>

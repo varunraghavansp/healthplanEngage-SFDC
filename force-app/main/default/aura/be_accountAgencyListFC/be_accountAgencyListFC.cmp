@@ -1,0 +1,101 @@
+<!--
+ - Created by varun on 11/4/2019.
+ -->
+
+<aura:component description="be_accountAgencyListFC" implements="lightning:availableForFlowScreens" access="global" controller="be_genericcontroller">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+
+    <aura:attribute name="account" description="Context Employer Group Record" type="Account" access="global" />
+    <aura:attribute name="primaryAgentId" description="Primary Agent Id For the Customer Account" type="String" access="global" />
+    <aura:attribute name="primaryAgencyId" description="Primary Agency Id For the Customer Account" type="String" access="global" />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="agencyColumns" type="Object" access="private" />
+    <aura:attribute name="agencyData" type="Object" access="private" />
+    <aura:attribute name="agentColumns" type="Object" access="private" />
+    <aura:attribute name="agentData" type="Object" access="private" />
+    <aura:attribute name="selectedAgency" description="Selected Agency" type="Account_Agency__c" access="private" />
+    <aura:attribute name="selectedAgent" description="Selected Agency" type="Account_Agent__c" access="private" />
+    <aura:attribute name="selectedRecordId" description="Selected Agency Relation record id" type="String" default="" access="private" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" access="private" />
+    <aura:attribute name="showAddPopupModal" type="Boolean" default="false" access="private" />
+    <aura:attribute name="editAgency" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" aura:id="agencygridcontainer">
+                <div class="slds-form-element slds-m-bottom--small">
+                    <lightning:button disabled="{!v.disableFields}"  label="New" variant="brand" onclick="{! c.newAgencyRelationRecord }"/>
+                </div>
+                <lightning:datatable columns="{! v.agencyColumns }" data="{! v.agencyData }" keyField="Id" onrowaction="{! c.handleAgencyRowAction }" hideCheckboxColumn="true"/>
+            </div>
+
+            <div class="slds-m-around--x-large"></div>
+
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1" aura:id="agentgridcontainer">
+                <div class="slds-form-element slds-m-bottom--small">
+                    <lightning:button disabled="{!v.disableFields}"  label="New" variant="brand" onclick="{! c.newAgentRelationRecord }"/>
+                </div>
+                <lightning:datatable columns="{! v.agentColumns }" data="{! v.agentData }" keyField="Id" onrowaction="{! c.handleAgentRowAction }" hideCheckboxColumn="true"/>
+            </div>
+        </div>
+    </div>
+    <!--  MODAL POPUP FOR ADD OR EDIT RELATIONSHIP -->
+    <aura:if isTrue="{!v.showAddPopupModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-create-agency" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-create-contact" class="slds-text-heading_medium slds-hyphenate">Add Agency</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <aura:if isTrue="{!v.editAgency}">
+                        <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}"  objectApiName="Account_Agency__c">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+
+                            <lightning:inputField fieldName="Customer_Account__c" value="{!v.selectedAgency.Customer_Account__c}"  disabled="true" />
+                            <lightning:inputField fieldName="Agency__c"  value="{!v.selectedAgency.Agency__c}" />
+                            <lightning:inputField fieldName="Is_Primary__c" value="{!v.selectedAgency.Is_Primary__c}"  />
+                            <lightning:inputField fieldName="Effective_Date__c" value="{!v.selectedAgency.Effective_Date__c}" />
+                            <lightning:inputField fieldName="Commission_Split__c" value="{!v.selectedAgency.Commission_Split__c}" />
+
+                            <div class="slds-m-top_medium">
+                                <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                            </div>
+                        </lightning:recordEditForm>
+                        <aura:set attribute="else">
+                            <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.selectedRecordId}"  objectApiName="Account_Agent__c">
+                                <!-- the messages component is for error messages -->
+                                <lightning:messages />
+
+                                <lightning:inputField fieldName="Customer_Account__c" value="{!v.selectedAgent.Customer_Account__c}"  disabled="true" />
+                                <c:strike_lookup label="Agency" object="Account_Agency__c" searchField="Agency_Name__c" placeholder="Type to search..." iconName="standard:account" order="Agency_Name__c" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true"  filter="{!'Customer_Account__c=\'' + v.account.Id + '\''}" value="{!v.selectedAgent.Account_Agency__c}"/>
+                                <lightning:inputField fieldName="Account_Agency__c" value="{!v.selectedAgent.Account_Agency__c}" disabled="true" />
+                                <lightning:inputField fieldName="Agent__c"  value="{!v.selectedAgent.Agent__c}" />
+                                <lightning:inputField fieldName="Is_Primary__c" value="{!v.selectedAgent.Is_Primary__c}"  />
+                                <lightning:inputField fieldName="Effective_Date__c" value="{!v.selectedAgent.Effective_Date__c}" />
+
+                                <div class="slds-m-top_medium">
+                                    <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelModalPopup}" />
+                                </div>
+                            </lightning:recordEditForm>
+                        </aura:set>
+                    </aura:if>
+
+                </div>
+            </div>
+        </section>
+    </aura:if>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+</aura:component>

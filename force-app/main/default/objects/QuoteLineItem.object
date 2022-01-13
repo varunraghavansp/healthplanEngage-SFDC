@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayouts>
+        <fullName>Quote_Line_Layout</fullName>
+        <fields>QuoteId</fields>
+        <fields>Marketing_Plan__c</fields>
+        <fields>Effective_Date__c</fields>
+        <fields>Tier_Code__c</fields>
+        <fields>Subscriber__c</fields>
+        <fields>Subscriber_And_Spouse__c</fields>
+        <fields>Subscriber_And_Child__c</fields>
+        <fields>Subscriber_And_Children__c</fields>
+        <fields>Subscriber_And_Family__c</fields>
+        <label>Quote Line Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>Effective_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Effective Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Marketing_Plan_Name__c</fullName>
+        <description>Used for Conga Document generation - Quote Template</description>
+        <externalId>false</externalId>
+        <formula>Marketing_Plan__r.Name</formula>
+        <label>Marketing Plan Name</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Marketing_Plan_Package_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Marketing_Plan__r.Plan_Component_Code__c</formula>
+        <label>Marketing Plan Package Code</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Marketing_Plan__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link between Quote Line Item and Marketing Plan - To be Depracated for Purchaser Plan in Healthcloud GA</description>
+        <externalId>false</externalId>
+        <label>Marketing Plan</label>
+        <referenceTo>Marketing_Plan__c</referenceTo>
+        <relationshipLabel>Quote Line Items</relationshipLabel>
+        <relationshipName>Quote_Line_Items</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Purchaser_Plan__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Link to Purchaser Plan - Use for Healthcloud GA</description>
+        <externalId>false</externalId>
+        <label>Purchaser Plan</label>
+        <referenceTo>PurchaserPlan</referenceTo>
+        <relationshipLabel>Quote Line Items</relationshipLabel>
+        <relationshipName>Quote_Line_Items</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Subscriber_And_Child__c</fullName>
+        <externalId>false</externalId>
+        <label>Subscriber And Child</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Subscriber_And_Children__c</fullName>
+        <externalId>false</externalId>
+        <label>Subscriber And Children</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Subscriber_And_Family__c</fullName>
+        <externalId>false</externalId>
+        <label>Subscriber And Family</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Subscriber_And_Spouse__c</fullName>
+        <externalId>false</externalId>
+        <label>Subscriber And Spouse</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Subscriber__c</fullName>
+        <externalId>false</externalId>
+        <label>Subscriber</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Termination_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Termination Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Tier_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Tier Code</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1 Tier</fullName>
+                    <default>false</default>
+                    <label>1 Tier</label>
+                </value>
+                <value>
+                    <fullName>2 Tier</fullName>
+                    <default>false</default>
+                    <label>2 Tier</label>
+                </value>
+                <value>
+                    <fullName>3 Tier</fullName>
+                    <default>false</default>
+                    <label>3 Tier</label>
+                </value>
+                <value>
+                    <fullName>4 Tier</fullName>
+                    <default>false</default>
+                    <label>4 Tier</label>
+                </value>
+                <value>
+                    <fullName>5 Tier</fullName>
+                    <default>false</default>
+                    <label>5 Tier</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

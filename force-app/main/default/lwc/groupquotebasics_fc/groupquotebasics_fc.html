@@ -1,0 +1,82 @@
+<!--
+ - Created by varun on 12/14/2020.
+ -->
+
+<!-- Groupquotebasics Fc -->
+<template>
+
+    <div class="slds-box slds-grid slds-gutters slds-m-around_small">
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+            <lightning-card>
+                <h3 slot="title">
+                    <lightning-icon icon-name="standard:account" alternative-text="location_header" title="building" size="x-small"></lightning-icon> Who is the client?
+                </h3>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning-input type="text" label="Group Name" placeholder="Group Name" value={_account_record.Name}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning-input type="number" label="Number of Employees" value={_account_record.NumberOfEmployees}></lightning-input>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+
+    <div class="slds-box slds-grid slds-gutters slds-m-around_small">
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+            <lightning-card>
+                <h3 slot="title">
+                    <lightning-icon icon-name="standard:account" alternative-text="location_header" title="building" size="x-small"></lightning-icon> Where is the client located?
+                </h3>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+                    <lightning-input-address
+                            address-label="Principal Address"
+                            street-label="Street"
+                            city-label="City"
+                            country-label="Country"
+                            province-label="State"
+                            postal-code-label="Zipcode"
+                            street={_account_record.BillingStreet}
+                            city={_account_record.BillingCity}
+                            country={_account_record.BillingCountry}
+                            province={_account_record.BillingState}
+                            postal-code={_account_record.BillingPostalCode}
+                            required
+                            show-address-lookup>
+                    </lightning-input-address>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+
+    <div class="slds-box slds-grid slds-gutters slds-m-around_small">
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+            <lightning-card>
+                <h3 slot="title">
+                    <lightning-icon icon-name="standard:contact" alternative-text="location_header" title="building" size="x-small"></lightning-icon> What is the name that goes on the quote?
+                </h3>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <c-lookup selection={initialSelection} errors={errors} onsearch={handleLookupSearch} onselectionchange={handleLookupSelectionChange} label="Search" placeholder="Search Salesforce" is-multi-entry={isMultiEntry} new-record-options={newRecordOptions} required>
+                        </c-lookup>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+    <div class="slds-box slds-grid slds-gutters slds-m-around_small">
+        <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+            <lightning-card>
+                <h3 slot="title">
+                    <lightning-icon icon-name="standard:log_event" alternative-text="date_header" title="building" size="x-small"></lightning-icon> When would you like the coverage to start
+                </h3>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 ">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <lightning-input type="date" label="Coverage Start Date" value={quote_effective_date} onchange={handleDateChange}></lightning-input>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

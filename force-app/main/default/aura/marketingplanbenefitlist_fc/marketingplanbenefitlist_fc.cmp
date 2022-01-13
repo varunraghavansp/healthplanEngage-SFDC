@@ -1,0 +1,52 @@
+<!--
+ - Created by varun on 11/24/2019.
+ -->
+
+<aura:component description="marketingplanbenefitlist_fc" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Marketing_Plan__c" description="Context Predefined Plan Record" type="Marketing_Plan__c" access="global"/>
+    <aura:attribute name="Plan_Template_Component__c" description="List Object which holds the product components for the predefined package" type="Plan_Template_Component__c[]" access="global"/>
+    <aura:attribute name="Component_Attribute__c" type="Component_Attribute__c[]" description="List Object which holds the component attributes for the plan family" access="global"/>
+    <aura:attribute name="Attribute_Value__c" type="Attribute_Value__c[]" description="List Object which holds the attribute value pairs for a given plan family" access="global"/>
+    <aura:attribute name="Marketing_Plan_Benefit__c" type="Marketing_Plan_Benefit__c[]" description="List Object which holds the plan benefits pairs for a given plan" access="global"/>
+    <aura:attribute name="Attribute__c" type="Attribute__c[]" description="List Object which holds the master list of attributes" access="global"/>
+
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="csvloadcompleted" type="c:strike_evt"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="csvloadcompleted" event="c:strike_evt" action="{!c.reloaddatatable}"/>
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="filteredComponentAttributes" type="Component_Attribute__c[]" access="private"/>
+    <aura:attribute name="attributeNameMap" type="Object"  access="private" />
+    <aura:attribute name="allowedAttributeValueByCodeMap" type="Object"  access="private" />
+    <aura:attribute name="predefinedPlanBenefits" type="Marketing_Plan_Benefit__c[]" access="private"/>
+    <aura:attribute name="columns" type="List"  access="private" />
+    <aura:attribute name="data" type="Object" access="private"/>
+    <aura:attribute name="sortedBy" type="String" access="private"/>
+    <aura:attribute name="sortedDirection" type="String" access="private"/>
+    <aura:attribute name="columnsinitalized" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.readCSV }"/>
+            </div>
+        </div>
+    </div>
+    <div class="slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <aura:if isTrue="{!v.columnsinitalized}">
+                    <lightning:datatable columns="{! v.columns }" data="{! v.data }" showRowNumberColumn="true" keyField="id" onrowaction="{! c.handleRowAction }" onsort="{! c.updateColumnSorting }" hideCheckboxColumn="true"/>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+
+</aura:component>

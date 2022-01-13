@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/20/2019.
+ -->
+
+<design:component>
+   <design:attribute name="Attribute_Value__c" label="Attribute Values" description="List Object which holds the attribute value pairs for a given product line" />
+    <design:attribute name="Plan_Family__c" label="Plan Family" description="Context Plan Family Record" />
+    <design:attribute name="createAttributeValues" label="New Attribute Values" description="List Object which holds the new attribute value pairs" />
+    <design:attribute name="updateAttributeValues" label="Updated Attribute Values" description="List Object which holds the updated attribute value pairs" />
+    <design:attribute name="deleteAttributeValues" label="Deleted Attribute Values" description="List Object which holds the delteted attribute value pairs" />
+    <design:attribute name="deleteRecords" label="Delete Records" description="Sets to True if records to be deleted are present" />
+</design:component>

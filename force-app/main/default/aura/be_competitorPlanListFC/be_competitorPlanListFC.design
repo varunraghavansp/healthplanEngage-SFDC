@@ -1,0 +1,10 @@
+<!--
+ - Created by varun on 11/6/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="competitorPlanInformation" label="Competitor Plan Information" description="Object which holds current plan information" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+</design:component>

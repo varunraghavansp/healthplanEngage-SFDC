@@ -1,0 +1,14 @@
+<!--
+ - Created by varun on 11/5/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Employer Group Record" />
+    <design:attribute name="quote" label="Quote" description="Context Quote Record" />
+    <design:attribute name="eligibility" label="Eligibility" description="Context Eligibility Record" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+
+    <design:attribute name="stages" label="stages" description="stages" />
+    <design:attribute name="currentstage" label="currentstage" description="currentstage" />
+    <design:attribute name="currentstagetext" label="currentstagetext" description="currentstagetext" />
+</design:component>

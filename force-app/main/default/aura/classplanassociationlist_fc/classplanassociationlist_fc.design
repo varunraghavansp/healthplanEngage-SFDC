@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 11/7/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="groupPlans" label="Group Plans" description="Selected Group Plans" />
+    <design:attribute name="groupClassInformation" label="Group Classes" description="Selected Group Classes" />
+    <design:attribute name="selectedClassPlans" label="Selected Class Plans" description="Output Selected Class Plans" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+</design:component>

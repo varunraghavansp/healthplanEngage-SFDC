@@ -1,0 +1,83 @@
+<!--
+ - Created by varun on 2/22/2021.
+ -->
+
+<!-- Groupbenefitscomparison -->
+<template>
+    <div class="comparison">
+
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th class="table-header-total table-header-total-bg">
+                        <div class="text-align-center">
+                            <span class="total-plan-count">Quote Line Benefits</span>
+                        </div>
+                    </th>
+                    <template if:true={quotelines} for:each={quotelines} for:item="quoteline">
+                        <th class="table-header" key={quoteline.Id}>
+                            <div class="text-align-center">
+                                In Network
+                            </div>
+                        </th>
+                        <th class="table-header" key={quoteline.Id}>
+                            <div class="text-align-center">
+                                Out of Network
+                            </div>
+                        </th>
+                        <th class="table-header" key={quoteline.Id}>
+                            <div class="text-align-center">
+                                Limits & Exception
+                            </div>
+                        </th>
+                    </template>
+                </tr>
+                </thead>
+                <tbody>
+                <template if:true={attrCatToAttrDispName} for:each={attrCatToAttrDispName} for:item="attributeCategory">
+                    <tr class="table-header-total-bg" key={attributeCategory.key}>
+                        <td colspan={tableSectionColSpan} key={attributeCategory.key}>{attributeCategory.key}</td>
+                    </tr>
+
+                    <template for:each={attributeCategory.value} for:item="attributeDisplayName">
+                        <tr key={attributeDisplayName} class="table-row">
+                            <td key={attributeDisplayName}>{attributeDisplayName}</td>
+                            <template for:each={quotelines} for:item="quoteline">
+                                <td key={quoteline.Id}>
+                                    <c-quotebenefitcompariosn key={quoteline.Id}
+                                          mktplanname={quoteline.Marketing_Plan_Name__c}
+                                          attributecategory={attributeCategory.key}
+                                          attributedisplayname={attributeDisplayName}
+                                          attrcattomktplanbenmap={quoteLineBenefits}
+                                                              displayvalue = 'InNetwork'>
+                                    </c-quotebenefitcompariosn>
+                                </td>
+                                <td key={quoteline.Id}>
+                                    <c-quotebenefitcompariosn key={quoteline.Id}
+                                                              mktplanname={quoteline.Marketing_Plan_Name__c}
+                                                              attributecategory={attributeCategory.key}
+                                                              attributedisplayname={attributeDisplayName}
+                                                              attrcattomktplanbenmap={quoteLineBenefits}
+                                                              displayvalue = 'OutNetwork'>
+                                    </c-quotebenefitcompariosn>
+                                </td>
+                                <td key={quoteline.Id}>
+                                    <c-quotebenefitcompariosn key={quoteline.Id}
+                                                              mktplanname={quoteline.Marketing_Plan_Name__c}
+                                                              attributecategory={attributeCategory.key}
+                                                              attributedisplayname={attributeDisplayName}
+                                                              attrcattomktplanbenmap={quoteLineBenefits}
+                                                              displayvalue = 'Limits'>
+                                    </c-quotebenefitcompariosn>
+                                </td>
+
+                            </template>
+                        </tr>
+                    </template>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

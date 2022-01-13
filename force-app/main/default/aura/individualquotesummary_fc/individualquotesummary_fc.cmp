@@ -1,0 +1,42 @@
+<!--
+ - Created by varun on 4/27/2020.
+ -->
+
+<aura:component description="individualquotesummary_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Lead" description="Context Lead" type="Lead" access="global"  default="{'Status': 'Open - Not Contacted', 'LeadSource': 'Web'}" />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.Lead.Address.postalCode}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="accountId" type="String" access="private"/>
+    <aura:attribute name="options_Group_Category__c"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Type"  type = "Object[]" access="private"/>
+    <aura:attribute name="options_Industry"  type = "Object[]" access="private"/>
+    <aura:attribute name="loaded" type = "Boolean" default="false" access="private"/>
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+
+            <!-- Rating Column -->
+            <div class="slds-card slds-grid slds-m-around_small">
+                <div class="slds-col slds-p-around_small slds-form-element slds-size_1-of-4">
+                    <c:strike_lookup disabled="{!v.disableFields}" label="Zipcode" object="Rating_Region__c" searchField="Name" placeholder="Type to search..." iconName="standard:address" subtitleField="County__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" required="true" showRecentRecords="true" value="{!v.Lead.Address.postalCode}"/>
+                </div>
+                <div class="slds-col slds-p-around_small slds-form-element slds-size_1-of-4">
+                    <c:strike_input disabled="{!v.disableFields}" auraId="Rating_County__c" type="text" name="County__c" label="County" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" readonly="true" value="{!v.Lead.County__c}"/>
+                </div>
+                <div class="slds-col slds-p-around_small slds-form-element slds-size_1-of-4">
+                    <c:strike_input disabled="{!v.disableFields}" auraId="Rating_City__c" type="text" name="city" label="City" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" readonly="true" value="{!v.Lead.city}"/>
+                </div>
+                <div class="slds-col slds-p-around_small slds-form-element slds-size_1-of-4">
+                    <c:strike_input disabled="{!v.disableFields}" auraId="Rating_State__c" type="text" name="state" label="State" helpTextPlacement="auto top" maxlength="25" pattern="text" errorMessage="Invalid input" readonly="true" value="{!v.Lead.state}"/>
+                </div>
+            </div>
+
+    </div>
+</aura:component>

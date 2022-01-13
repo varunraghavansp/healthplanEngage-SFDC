@@ -1,0 +1,29 @@
+<!--
+ - Created by varun on 6/14/2020.
+ -->
+
+<!-- Bootstrapstepper -->
+<template>
+    <!-- Horizontal Steppers -->
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- Stepers Wrapper -->
+            <ul class="stepper stepper-vertical">
+                <template for:each={stagestates} for:item="stagestate">
+                    <li key={stagestate.idx} class={stagestate.state}>
+                        <a href="#!">
+                        <span class="circle">{stagestate.idx}</span>
+                        <span class="label">{stagestate.label}</span>
+                        </a>
+                        <template if:true={stagestate.currenstagetext}>
+                            <div class="step-content grey lighten-3">
+                                {stagestate.currenstagetext}
+                            </div>
+                        </template>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</template>

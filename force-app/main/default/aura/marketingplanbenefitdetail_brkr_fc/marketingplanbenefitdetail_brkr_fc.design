@@ -1,0 +1,16 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Marketing_Plan__c" label="Predefined Plan" description="Context Predefined Plan Record" />
+    <design:attribute name="Plan_Template_Component__c" label="Plan Template Components" description="List of Plan Template Components for the Predefined Plans Plan Template" />
+    <design:attribute name="Component_Attribute__c" label="Product Component Attributes" description="List Object which holds the component attributes for the plan family" />
+    <design:attribute name="Attribute_Value__c" label="Attribute Values" description="List Object which holds the attribute value pairs for a given plan family" />
+    <design:attribute name="Marketing_Plan_Benefit__c" label="Predefined Plan Benefits" description="List Object which holds the plan benefits pairs for a given plan" />
+    <design:attribute name="Attribute__c" label="Attributes" description="List Object which holds the master list of attributes" />
+
+    <design:attribute name="stages" label="stages" description="stages" />
+    <design:attribute name="currentstage" label="currentstage" description="currentstage" />
+    <design:attribute name="currentstagetext" label="currentstagetext" description="currentstagetext" />
+</design:component>

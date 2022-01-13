@@ -1,0 +1,31 @@
+<!--
+ - Created by varun on 2/22/2021.
+ -->
+
+<aura:component description="Quote_Census_Record_Page_Wrapper"  implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes" controller="be_standardComponentController" access="global">
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <!-- PUBLIC METHODS -->
+    <aura:attribute name="sObjectName" type="String"  access="global" />
+    <aura:attribute name="recordId" type="String"  access="global" />
+    <aura:attribute name="quotecensus" type="Quote_Census__c[]" description="Census Object which holds current quote census information" access="public"/>
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="showspinner" type="Boolean" default="false" access="private"/>
+    <!--  COMPONENT BODY -->
+    <aura:if isTrue="{!v.showspinner}">
+        <lightning:spinner variant="brand" size="large" alternativeText="Page Loading..." />
+        <aura:set attribute="else">
+            <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-m-around--small">
+                        <lightning:button label="Download Census" iconName="utility:download" onclick="{! c.downloadCSV }"/>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <c:accountquotecensusdetailchart_fc quotecensus="{!v.quotecensus}"></c:accountquotecensusdetailchart_fc>
+                    </div>
+                </div>
+            </div>
+        </aura:set>
+    </aura:if>
+
+</aura:component>

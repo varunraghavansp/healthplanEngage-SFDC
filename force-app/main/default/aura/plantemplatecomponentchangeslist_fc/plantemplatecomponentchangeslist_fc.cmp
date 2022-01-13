@@ -1,0 +1,52 @@
+<!--
+ - Created by varun on 11/24/2019.
+ -->
+
+<aura:component description="plantemplatecomponentchangeslist_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_standardComponentController">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Plan_Template_Component__c" type="Plan_Template_Component__c[]" description="List Object which holds the copied component attributes" access="global"/>
+    <aura:attribute name="Plan_Template__c" description="Context Package Framework Record" type="Plan_Template__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="createPlanTemplateComponents" type="Plan_Template_Component__c[]" description="List Object which holds the new attribute value pairs" access="global"/>
+    <aura:attribute name="updatePlanTemplateComponents" type="Plan_Template_Component__c[]" description="List Object which holds the updated attribute value pairs" access="global"/>
+    <aura:attribute name="deletePlanTemplateComponents" type="Plan_Template_Component__c[]" description="List Object which holds the delteted attribute value pairs" access="global"/>
+    <aura:attribute name="deleteRecords" type="Boolean" default="false" description="Sets to true if records to be deleted are present" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="attributechangesparsed" type="c:strike_evt"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="attributechangesparsed" event="c:strike_evt" action="{!c.loaddatatables}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="columnsinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="planComponentMap" type="Map"  access="private" />
+    <aura:attribute name="planComponents" type="Object"  access="private" />
+    <aura:attribute name="noChangePlanTemplateComponents" type="Plan_Template_Component__c[]" description="List Object which holds the attribute value pairs with no changes" access="private"/>
+    <aura:attribute name="columns" type="List"  access="private" />
+    <aura:attribute name="createddata" type="Object" access="private"/>
+    <aura:attribute name="updateddata" type="Object" access="private"/>
+    <aura:attribute name="deleteddata" type="Object" access="private"/>
+    <aura:attribute name="nochangedata" type="Object" access="private"/>
+    <aura:attribute name="createPlanTemplateComponentsPrivate" type="Plan_Template_Component__c[]" description="List Object which holds the new attribute value pairs" access="private"/>
+    <aura:attribute name="updatePlanTemplateComponentsPrivate" type="Plan_Template_Component__c[]" description="List Object which holds the updated attribute value pairs" access="private"/>
+    <aura:attribute name="deletePlanTemplateComponentsPrivate" type="Plan_Template_Component__c[]" description="List Object which holds the delteted attribute value pairs" access="private"/>
+
+    <!--  COMPONENT BODY -->
+    <aura:if isTrue="{!v.columnsinitalized}">
+        <lightning:tabset>
+            <lightning:tab label="Template components to be created">
+                <lightning:datatable columns="{! v.columns }" data="{! v.createddata }" keyField="id"  hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:tab>
+            <lightning:tab label="Template components to be updated">
+                <lightning:datatable columns="{! v.columns }" data="{! v.updateddata }" keyField="id" hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:tab>
+            <lightning:tab label="Template components to be deleted">
+                <lightning:datatable columns="{! v.columns }" data="{! v.deleteddata }" keyField="id" hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:tab>
+            <lightning:tab label="Template components with no changes">
+                <lightning:datatable columns="{! v.columns }" data="{! v.nochangedata }" keyField="id" hideCheckboxColumn="true" showRowNumberColumn="true"/>
+            </lightning:tab>
+        </lightning:tabset>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,82 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<aura:component description="plancomponentattributelst_fc" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Attribute__c" type="Attribute__c[]" description="List Object which holds the attribute master list for a crossreferencing attribute name" access="global"/>
+    <aura:attribute name="Attribute_Value__c" type="Attribute_Value__c[]" description="List Object which holds the attribute value pairs for a given product line" access="global"/>
+    <aura:attribute name="Plan_Component__c" description="Context Plan Component Record" type="Plan_Component__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace', 'Effective_Date__c': '', 'Termination_Date__c': ''}"/>
+    <aura:attribute name="Component_Attribute__c" type="Component_Attribute__c[]" description="List Object which holds the copied component attributes" access="global"/>
+
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="csvloadcompleted" type="c:strike_evt"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="csvloadcompleted" event="c:strike_evt" action="{!c.reloaddatatable}"/>
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="filteredComponentAttributes" type="Component_Attribute__c[]" access="private"/>
+    <aura:attribute name="attributeNameToIdMap" type="Object"  access="private" />
+    <aura:attribute name="attributeIdMap" type="Object"  access="private" />
+    <aura:attribute name="allowedAttributeValueNameMap" type="Object"  access="private" />
+    <aura:attribute name="componentAttributeNameMap" type="Object"  access="private" />
+    <aura:attribute name="columns" type="List"  access="private" />
+    <aura:attribute name="data" type="Object" access="private"/>
+    <aura:attribute name="sortedBy" type="String" access="private"/>
+    <aura:attribute name="sortedDirection" type="String" access="private"/>
+    <aura:attribute name="columnsinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="showaddpopupmodal" type="Boolean" default="false" access="private" />
+    <aura:attribute name="selectedcomponentattribute" type="Plan_Component__c"  access="private"/>
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.readCSV }"/>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <!--  <c:downloaddatatablecsv/>-->
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:buttonGroup>
+                    <lightning:button iconName="utility:add" label="Add New" onclick="{!c.newRecord}" />
+                </lightning:buttonGroup>
+            </div>
+        </div>
+    </div>
+    <div class="slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <aura:if isTrue="{!v.columnsinitalized}">
+                    <lightning:datatable columns="{! v.columns }" data="{! v.data }" showRowNumberColumn="true" keyField="id" onrowaction="{! c.handleRowAction }" onsort="{! c.updateColumnSorting }" hideCheckboxColumn="true"/>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+
+    <!--  MODAL POPUP FOR ADD NEW CONTACT -->
+    <aura:if isTrue="{!v.showaddpopupmodal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-create-packageframework" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancelmodalpopup}">
+                        <lightning:icon iconName="action:close" size="xx-small" alternativeText="Close" />
+                    </button>
+                    <h2 id="modal-create-packageframework" class="slds-text-heading_medium slds-hyphenate">Attribute Value Details</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <c:plancomponentattributefrmcmp componentattribute="{!v.selectedcomponentattribute}" attributeIdMap="{!v.attributeIdMap}" />
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.cancelmodalpopup}" />
+                    <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveRecord}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

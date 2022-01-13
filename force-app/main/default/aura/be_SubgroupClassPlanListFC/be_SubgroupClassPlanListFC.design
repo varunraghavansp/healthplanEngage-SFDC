@@ -1,0 +1,14 @@
+<!--
+ - Created by varun on 11/7/2019.
+ -->
+
+<design:component>
+    <design:attribute name="account" label="Account" description="Context Account" />
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="subAccountInformation" label="Sub Accounts" description="Sub Accounts" />
+    <design:attribute name="accountClassPlans" label="accountClassPlans" description="Sub Accounts" />
+    <design:attribute name="accountClasses" label="accountClasses" description="Sub Accounts" />
+    <design:attribute name="subAccountClassPlans" label="Output subAccountClassPlans" description="Sub Accounts" />
+    <design:attribute name="subAccountClasses" label="Output subAccountClasses" description="Sub Accounts" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+</design:component>

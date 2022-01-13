@@ -1,0 +1,15 @@
+<!--
+ - Created by varun on 7/31/2019.
+ -->
+
+<!-- Censustblwrapper -->
+<template>
+    <div>
+        <lightning-card title={title} icon-name={icon}></lightning-card>
+        <div class="slds-m-around_small">
+            <template if:true={rows}>
+                <lightning-datatable key-field="Id" data={rows} columns={columns} show-row-number-column suppress-bottom-bar onrowselection={getSelectedName} selected-rows={tblselectedrow}></lightning-datatable>
+            </template>
+        </div>
+    </div>
+</template>

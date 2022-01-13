@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/18/2019.
+ -->
+
+<design:component>
+    <design:attribute name="createpredefinedplan" label="Create Predefined Plan" description="User Selection for whether to create or edit an existing Predefined Plan" />
+    <design:attribute name="copyfrompplanfamilyid" label="Copied Plan Family Id" description="Id of plan family for copying product component from" />
+    <design:attribute name="copyfrompredefinedpackageid" label="Copied Predefined Plan Id" description="Id of predefined plan selected for copying" />
+    <design:attribute name="ProductLine__c" label="Product Line" description="Context Product Line Record" />
+    <design:attribute name="PredefinedPackages__c" label="Predefined Plan" description="Context Predefined Plan Record" />
+    <design:attribute name="editpredefinedpackageid" label="Edited Predefined Plan Id" description="Id of pedefined plan selected for editing" />
+</design:component>

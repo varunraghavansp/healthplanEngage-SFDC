@@ -1,0 +1,57 @@
+<!--
+ - Created by varun on 11/5/2019.
+ -->
+
+<aura:component description="be_accountEligibilityFC" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" description="Context Employer Group Record" type="Account" access="global" />
+    <aura:attribute name="quote" description="Context Quote Record" type="Quote" access="global" />
+    <aura:attribute name="eligibility" description="Context Eligibility Record" type="Eligibility__c" access="global" />
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.eligibility.Total_Eligible_Employees__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Number_Cobra_Continuants__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Total_Employees__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Participation_Requirement_Percent__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Active_Enrolled_Employees__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Eligible_Emp_w_coverage__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Total_PartTime__c}" action="{!c.handleEligiblityUpdate}" />
+    <aura:handler name="change" value="{!v.eligibility.Number_Employees_WP__c}" action="{!c.handleEligiblityUpdate}" />
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+
+    <!--  COMPONENT BODY -->
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-wrap slds-m-around--large"></div>
+            <lightning:recordEditForm onsubmit="{!c.handleSubmit}" onsuccess="{!c.handleSuccess}" recordId="{!v.eligibility.Id}"  objectApiName="Eligibility__c">
+                <!-- the messages component is for error messages -->
+                <lightning:messages />
+                <lightning:inputField fieldName="Customer_Account__c" value="{!v.eligibility.Customer_Account__c}"  disabled="true" />
+                <lightning:inputField fieldName="Quote__c" value="{!v.eligibility.Quote__c}"  disabled="true" />
+                <lightning:inputField fieldName="Status__c" value="{!v.eligibility.Status__c}" disabled="true"/>
+                <lightning:inputField fieldName="TEFRA_DEFRA_Medicare__c" value="{!v.eligibility.TEFRA_DEFRA_Medicare__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Group_has_1099_Employees__c" value="{!v.eligibility.Group_has_1099_Employees__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Group_Employed_20_Emp__c" value="{!v.eligibility.Group_Employed_20_Emp__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Employees_First_Day__c" value="{!v.eligibility.Employees_First_Day__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Average_Total_Employees_for_prior_year__c" value="{!v.eligibility.Average_Total_Employees_for_prior_year__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Total_Employees__c" value="{!v.eligibility.Total_Employees__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Total_PartTime__c" value="{!v.eligibility.Total_PartTime__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Number_Employees_WP__c" value="{!v.eligibility.Number_Employees_WP__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Number_Cobra_Continuants__c" value="{!v.eligibility.Number_Cobra_Continuants__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Eligible_Emp_wo_coverage__c" value="{!v.eligibility.Eligible_Emp_wo_coverage__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Eligible_Emp_w_coverage__c" value="{!v.eligibility.Eligible_Emp_w_coverage__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Cobra_Type__c" value="{!v.eligibility.Cobra_Type__c}" disabled="{!v.disableFields}"/>
+                <lightning:inputField fieldName="Total_Eligible_Employees__c" value="{!v.eligibility.Total_Eligible_Employees__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Participation_Requirement_Percent__c" value="{!v.eligibility.Participation_Requirement_Percent__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Actual_Group_Participation__c" value="{!v.eligibility.Actual_Group_Participation__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Active_Enrolled_Employees__c" value="{!v.eligibility.Active_Enrolled_Employees__c}" />
+                <lightning:inputField fieldName="Participation_Requirement__c" value="{!v.eligibility.Participation_Requirement__c}" disabled="{!v.disableFields}" />
+                <lightning:inputField fieldName="Number_Employees_RT6__c" value="{!v.eligibility.Number_Employees_RT6__c}" disabled="{!v.disableFields}" />
+
+            </lightning:recordEditForm>
+    </div>
+</aura:component>

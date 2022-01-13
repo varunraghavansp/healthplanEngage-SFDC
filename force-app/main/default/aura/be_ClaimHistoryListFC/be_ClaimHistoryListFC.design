@@ -1,0 +1,11 @@
+<!--
+ - Created by varun on 11/6/2019.
+ -->
+
+<design:component>
+    <design:attribute name="quote" label="Quote" description="Context Quote Record" />
+    <design:attribute name="quoteClaimHistory" label="Claim History List" description="Claim History Records For Quote Request" />
+    <design:attribute name="medicalClaimSummary" label="Medical Claim Summary" description="Medical Claim Summary Record" />
+    <design:attribute name="rxClaimSummary" label="Rx Claim Summary" description="Rx Claim Summary Record" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+</design:component>

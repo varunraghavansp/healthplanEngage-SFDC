@@ -1,0 +1,41 @@
+<!--
+ - Created by varun on 11/27/2019.
+ -->
+
+<aura:component description="plancomponentattributefrmcmp" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="componentattribute" type="Plan_Component__c"  access="public"/>
+    <aura:attribute name="attributeIdMap" type="Object"  access="public"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="change" value="{!v.componentattribute.he__Attribute__c}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container slds-container--medium slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Attribute" object="he__Attribute__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="he__Attribute_Category__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.componentattribute.he__Attribute__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input auraId="he__Is_Key_Benefit__c" type="checkbox" name="he__Is_Key_Benefit__c" label="Is Key Benefit" checked="{!v.componentattribute.he__Is_Key_Benefit__c}"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="he__Attribute_Category__c" name="he__Attribute_Category__c" label="Attribute Category"  maxlength="80" errorMessage="Invalid input" disabled="true" value="{!v.componentattribute.he__Attribute_Category__c}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="he__Attribute_Display_Name__c" name="he__Attribute_Display_Name__c" label="Attribute Display Namey"  maxlength="80" errorMessage="Invalid input" disabled="true" value="{!v.componentattribute.he__Attribute_Display_Name__c}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

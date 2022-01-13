@@ -1,0 +1,23 @@
+<!--
+ - Created by varun on 2/28/2019.
+ -->
+
+<aura:component description="flowwrappercmp" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global">
+
+    <!-- REQUIRED RESOURCES -->
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="flowdevname" type="String" description="Flow component name to fetch corresponding lightning flow" access="global" />
+    <aura:attribute name="contextobjectId" type = "String" description="contextObjectId for taskflow initialization" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="flowcompleted" type="c:strike_evt"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="flowcompleted" event="c:strike_evt" action="{!c.closeFlowTab}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+
+    <!--  COMPONENT BODY -->
+    <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}"/>
+
+</aura:component>

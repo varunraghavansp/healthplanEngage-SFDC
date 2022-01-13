@@ -1,0 +1,61 @@
+<!--
+ - Created by varun on 11/11/2019.
+ -->
+
+<aura:component description="be_SubgroupClassPlanListFC" implements="lightning:availableForFlowScreens" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" type="Account" access="global"/>
+    <aura:attribute name="quote" type="Quote" access="global"/>
+    <aura:attribute name="subAccountInformation" type="Account[]" description="Object which holds selected classes for the Group" access="global"/>
+    <aura:attribute name="accountClassPlans" type="Proposed_Plan__c[]" description="Object which holds selected Class Plans" access="global"/>
+    <aura:attribute name="subAccountClassPlans" type="Proposed_Plan__c[]" description="Object which holds selected Class Plans" access="global"/>
+    <aura:attribute name="accountClasses" type="Group_Class__c[]" description="Object which holds selected Classes" access="global"/>
+    <aura:attribute name="subAccountClasses" type="Group_Class__c[]" description="Object which holds selected Classes" access="global"/>
+    <aura:attribute name="disableFields" type="Boolean" description="Disable fields" default="false" access="global"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="subAccountRows" type="Object" description="Competitor Plan Columns"  access="private" />
+    <aura:attribute name="subAccountColumns" type="Object" description="Competitor Plan Rows" access="private"/>
+    <aura:attribute name="rowsInitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="subAccountSelected" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="selectedSubAccount" type="Account" access="private" default="{}"/>
+    <aura:attribute name="selectedSubAccountId" type="String" access="private" default=""/>
+
+    <aura:attribute name="allSubAccountClassMap" type="Object" access="private" />
+    <aura:attribute name="selectedSubAccountClassMap" type="Object" access="private" />
+    <aura:attribute name="allSubAccountClassPlanMap" type="Object" access="private" />
+    <aura:attribute name="selectedSubAccountClassPlanMap" type="Object" access="private" />
+
+    <aura:attribute name="selectedClassPlanMap" type="Object" access="private" />
+    <aura:attribute name="subAccountPlanRows" type="Object" access="private" />
+    <aura:attribute name="subAccountPlanColumns" type="Object" access="private" />
+    <aura:attribute name="subAccountClassPlanRowSelection" type="Object" access="private" />
+    <!--  COMPONENT BODY -->
+    <div class="slds-container--center">
+        <aura:if isTrue="{!v.rowsInitialized}">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <c:censustblwrapper title="Subaccounts" icon="standard:account" rows="{!v.subAccountRows}" columns="{!v.subAccountColumns}"  onselectionchange="{!c.handleRowSelectionChange}"  />
+            </div>
+        </aura:if>
+    </div>
+    <div class="slds-container--center">
+        <aura:if isTrue="{!v.subAccountSelected}">
+            <aura:if isTrue="{!v.disableFields}">
+                <aura:set attribute="else">
+                    <div class="slds-form-element">
+                        <lightning:button label="Update Class Plan Association" variant="brand" onclick="{! c.updateClassPlanAssociation }" />
+                    </div>
+                </aura:set>
+            </aura:if>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <lightning:datatable columns="{! v.subAccountPlanColumns }" data="{! v.subAccountPlanRows }" keyField="id" onrowselection="{! c.updateSubAccountSelectedRows }" showRowNumberColumn="true" hideCheckboxColumn="{!v.disableFields}" />
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

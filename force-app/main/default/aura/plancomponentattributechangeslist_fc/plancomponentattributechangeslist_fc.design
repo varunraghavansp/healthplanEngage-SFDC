@@ -1,0 +1,12 @@
+<!--
+ - Created by varun on 8/20/2019.
+ -->
+
+<design:component>
+    <design:attribute name="Component_Attribute__c" label="Component Attributes" description="List Object which holds the component attributes" />
+    <design:attribute name="Plan_Component__c" label="Product Component" description="Context Product Component Record" />
+    <design:attribute name="createComponentAttributes" label="New Component Attributes" description="List Object which holds the new component attributes" />
+    <design:attribute name="updateComponentAttributes" label="Updated Component Attributes" description="List Object which holds the updated component attributes" />
+    <design:attribute name="deleteComponentAttributes" label="Deleted Component Attributes" description="List Object which holds the deleted component attributes" />
+    <design:attribute name="deleteRecords" label="Delete Records" description="Sets to True if records to be deleted are present" />
+</design:component>

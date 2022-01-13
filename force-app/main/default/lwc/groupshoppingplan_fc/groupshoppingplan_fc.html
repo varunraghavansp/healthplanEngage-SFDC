@@ -1,0 +1,66 @@
+<!--
+ - Created by varun on 1/4/2021.
+ -->
+
+<!-- Groupshoppingplan Fc -->
+<template>
+    <div class="slds-box slds-grid slds-gutters slds-m-around_small shopcontainer" >
+
+        <div class="slds-col slds-small-size_1-of-5 slds-medium-size_1-of-5 slds-large-size_1-of-5 ">
+            <lightning-tabset variant="scoped">
+                <lightning-tab label="Filter By" icon-name="utility:filter" >
+                    <lightning-accordion allow-multiple-sections-open>
+                        <lightning-accordion-section name="plantype" label="Plan Type">
+                            <lightning-checkbox-group name="plantypecheckboxgroup"  label="" options={plantypeoptions} value={plantypevalues} onchange={handlePlanTypeChange}></lightning-checkbox-group>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="planfamily" label="Plan Family">
+                            <lightning-checkbox-group name="planfamilycheckboxgroup"  label="" options={planfamilyoptions} value={planfamilyvalues} onchange={handlePlanFamilyChange}></lightning-checkbox-group>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="metallevel" label="Metal Level">
+                            <lightning-checkbox-group name="planfamilycheckboxgroup"  label="" options={metalleveloptions} value={metallevelvalues} onchange={handleMetalLevelChange}></lightning-checkbox-group>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="deductible" label="Deductible ($)">
+                            <lightning-slider label="Minimum Deductible" value={deductiblevel} min={mindeductible} max={maxdeductible}></lightning-slider>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </lightning-tab>
+                <lightning-tab label="Sort By" icon-name="utility:sort">
+                    <lightning-radio-group name="planfamily" label="Plan Family" options={planfamilysortoption} value={planfamilysortvalue} type="radio"></lightning-radio-group>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+        <div class="slds-col slds-small-size_4-of-5 slds-medium-size_4-of-5 slds-large-size_4-of-5 ">
+            <div class="scrollContainer" onscroll={handleScroll}>
+                <div class="scrollArea" >
+                    <table>
+                        <tbody>
+                        <template if:true={marketingplansloaded}>
+                            <template for:each={marketingPlans} for:item="marketingplan">
+                                <tr key={marketingplan.Id}>
+                                    <td>
+                                        <c-shoppingplancard key={marketingplan.Id} marketingplanrecord={marketingplan} marketingplandisplaybenefits={marketingPlanDisplayBenefits} allmarketingplanbenefits={allMarketingPlanBenefits} onplanremoved = {removeplanselection} onplanadded = {addplanselection} onaddcompare = {addplancompare} onremovecompare = {removeplancompare} allisconfigurable={isconfigurable}></c-shoppingplancard>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="slds-docked-form-footer slds-hidden lgc-id_compare-toggle">
+                <div class="slds-grid slds-m-around_small" >
+               <!--     <div class="slds-col slds-small-size_2-of-2 slds-medium-size_2-of-2 slds-large-size_2-of-2 slds-m-bottom_small">
+                       <div class="slds-text-title_bold">{compare_count} plans selected for comparison</div>
+                    </div> -->
+                    <div class="slds-col slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning-button variant="destructive-text" label="Clear" title="Clear Selection" onclick={handleClearCompare} icon-name="utility:clear" class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                    <div class="slds-col slds-small-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                        <lightning-button variant="brand" label="Compare" title="Compare Selected" onclick={handleCompare} icon-name="utility:zoomin" class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

@@ -1,0 +1,13 @@
+<!--
+ - Created by varun on 8/16/2019.
+ -->
+
+<design:component>
+    <design:attribute name="quote" label="Quote" description="Context Quote" />
+    <design:attribute name="quotecensus" label="Quote Census" description="Quote Census" />
+    <design:attribute name="disableFields" label="disableFields" description="disableFields" />
+
+    <design:attribute name="stages" label="stages" description="stages" />
+    <design:attribute name="currentstage" label="currentstage" description="currentstage" />
+    <design:attribute name="currentstagetext" label="currentstagetext" description="currentstagetext" />
+</design:component>

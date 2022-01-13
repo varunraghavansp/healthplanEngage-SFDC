@@ -1,0 +1,56 @@
+<!--
+ - Created by varun on 11/24/2019.
+ -->
+
+<aura:component description="classplanrateassociationlist_fc" implements="lightning:availableForFlowScreens" access="global" controller="be_genericcontroller">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="account" type="Account" access="global"/>
+    <aura:attribute name="quote" type="Quote" access="global"/>
+    <aura:attribute name="selectedClassPlans" type="Proposed_Plan__c[]" description="Object which holds selected Class Plans" access="global"/>
+    <aura:attribute name="marketingPlanBenefits" type="Marketing_Plan_Benefit__c[]" description="Object which holds the benefits for the selected Class Plans" access="global"/>
+    <aura:attribute name="proposedRates" type="Proposed_Rate__c[]" description="Object which holds the proposed Rates" default="[]" access="global"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false" access="private" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="classPlanRows" type="Object" description="Competitor Plan Columns"  access="private" />
+    <aura:attribute name="classPlanColumns" type="Object" description="Competitor Plan Rows" access="private"/>
+    <aura:attribute name="planBenefitsColumns" type="Object" description="Competitor Plan Columns" access="private"/>
+    <aura:attribute name="planBenefitsRows" type="Object" description="Competitor Plan Columns" access="private"/>
+    <aura:attribute name="proposedRateColumns" type="Object" description="Competitor Plan Columns" access="private"/>
+    <aura:attribute name="proposedRateRows" type="Object" description="Competitor Plan Columns" access="private"/>
+    <aura:attribute name="rowsInitialized" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="classPlanSelected" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="selectedClassPlan" type="Proposed_Plan__c" access="private" default="{}"/>
+    <aura:attribute name="selectedPlanId" type="String" access="private" default=""/>
+    <aura:attribute name="selectedClassPlanId" type="String" access="private" default=""/>
+    <aura:attribute name="planBenefitMap" type="Object" access="private" />
+    <aura:attribute name="proposedRateMap" type="Object" access="private" />
+    <aura:attribute name="draftProposedRates" type="Object" access="private" />
+    <!--  COMPONENT BODY -->
+    <div class="slds-container--center">
+        <aura:if isTrue="{!v.rowsInitialized}">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <c:censustblwrapper title="Selected Classes and Plans" icon="standard:product" rows="{!v.classPlanRows}" columns="{!v.classPlanColumns}"  onselectionchange="{!c.handleRowSelectionChange}"  />
+            </div>
+            <aura:if isTrue="{!v.classPlanSelected}">
+                <lightning:accordion>
+                    <lightning:accordionSection name="rates" label="Plan Rates">
+                        <lightning:datatable columns="{! v.proposedRateColumns }" data="{! v.proposedRateRows }" keyField="idx" onsave="{! c.handleSaveAction }" draftValues="{! v.draftProposedRates }" hideCheckboxColumn="true"/>
+                    </lightning:accordionSection>
+                    <lightning:accordionSection name="benefits" label="Plan Benefits">
+                        <lightning:datatable columns="{! v.planBenefitsColumns }" data="{! v.planBenefitsRows }" keyField="id"  hideCheckboxColumn="true" showRowNumberColumn="true"/>
+                    </lightning:accordionSection>
+                </lightning:accordion>
+            </aura:if>
+        </aura:if>
+    </div>
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+</aura:component>

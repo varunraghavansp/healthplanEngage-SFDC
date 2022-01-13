@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <description>Groupshoppingplan Fc</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Groupshoppingplan Fc</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectedMarketingPlanIds" type="String[]" label="selectedMarketingPlanIds"  description="Selected Marketing Plan Ids for Quoting" />
+            <property name="selectedMarketingPlans" type="@salesforce/schema/Marketing_Plan__c[]" label="selectedMarketingPlans"  description="Selected Marketing Plans for Quoting" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

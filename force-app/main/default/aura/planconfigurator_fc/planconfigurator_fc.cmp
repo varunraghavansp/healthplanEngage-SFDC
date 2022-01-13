@@ -1,0 +1,64 @@
+<!--
+ - Created by varun on 3/22/2020.
+ -->
+
+<aura:component description="planconfigurator_fc" implements="lightning:availableForFlowScreens" controller="tooling_controller" access="global">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="Plan_Family__c" description="Context Product Line Record" type="Plan_Family__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace'}"/>
+    <aura:attribute name="Marketing_Plan__c" description="Context Plan" type="Marketing_Plan__c" access="global" default="{'Id': '', 'Version__c' : '1', 'Status__c' : 'Workspace', 'Plan_Template__c': ''}"/>
+    <aura:attribute name="Marketing_Plan_Benefit__c" description="Context Plan" type="Marketing_Plan_Benefit__c[]" access="global" default="[]"/>
+    <aura:attribute name="Attribute_Value__c" description="Allowed Attribute Values" type="Attribute_Value__c[]" access="global" default="[]"/>
+    <!-- HANDLERS AND EVENTS-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:handler name="change" value="{!v.Marketing_Plan__c.Id}" action="{!c.strikeinputchanged}"/>
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="plantemplateselected" type="Boolean" default="false" access="private" />
+    <aura:attribute name="selectedcomponentid" type="String" default="" access="private" />
+    <aura:attribute name="componentselected" type="Boolean" default="false" access="private" />
+    <aura:attribute name="attributevalueidmap" type="Object"  access="private" />
+
+    <!--  COMPONENT BODY -->
+    <div class="slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <c:strike_lookup label="Plan Family" object="Plan_Family__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" subtitleField="Version__c" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" showRecentRecords="true" value="{!v.Plan_Family__c.Id}"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_lookup label="Marketing Plan" object="Marketing_Plan__c" searchField="Name" placeholder="Type to search..." iconName="standard:product" order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input"  filter="{!'Plan_Family__c=\'' + v.Plan_Family__c.Id + '\''}" showRecentRecords="true" value="{!v.Marketing_Plan__c.Id}"/>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="slds-col slds-form-element slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Effective Date" aura:id="Effective_Date__c" value="{!v.Marketing_Plan__c.Effective_Date__c}" displayDatePicker="true" format="yyyy-MM-dd" disabled="true"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <ui:inputDate label="Termination Date" aura:id="Termination_Date__c" value="{!v.Marketing_Plan__c.Termination_Date__c}" displayDatePicker="true" format="yyyy-MM-dd" disabled="true"/>
+                </div>
+                <div class="slds-col slds-form-element slds-size_1-of-1">
+                    <c:strike_input type="text" auraId="Plan_Component_Code__c" name="Plan_Component_Code__c" label="Plan Component Code" maxlength="255" readonly="true" errorMessage="Invalid input" value="{!v.Marketing_Plan__c.Plan_Component_Code__c}"/>
+                </div>
+            </div>
+        </div>
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <!-- Left Column -->
+            <aura:if isTrue="{!v.plantemplateselected}">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                    <c:plancomponentnavbar sObject='Plan_Template_Component__c' queryFields= 'Component_Name__c,Plan_Component__c' searchField= 'Plan_Template__c' searchTerm = "{!v.Marketing_Plan__c.Plan_Template__c}" filter="Component_Type__c = 'Rider'" onselectionchange="{!c.componentSelectionChanged}"></c:plancomponentnavbar>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.componentselected}">
+                <!-- Right Column -->
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                    <c:componentkeyattributescard sObject='Component_Attribute__c' queryFields= 'Attribute__c,Attribute_Name__c' searchField= 'Plan_Component__c' searchTerm = "{!v.selectedcomponentid}" filter="Is_Key_Benefit__c = true" planfamily="{!v.Plan_Family__c.Id}" onattributevaluechange="{!c.attributeValueChanged}" marketingplanbenefits="{!v.Marketing_Plan_Benefit__c}"></c:componentkeyattributescard>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+</aura:component>

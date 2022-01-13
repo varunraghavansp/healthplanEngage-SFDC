@@ -1,0 +1,10 @@
+<!--
+ - Created by varun on 3/22/2020.
+ -->
+
+<design:component>
+    <design:attribute name="Plan_Family__c" label="Plan Family" description="Context Plan Family" />
+    <design:attribute name="Marketing_Plan__c" label="Marketing Plan" description="Marketing Plan" />
+    <design:attribute name="Marketing_Plan_Benefit__c" label="Marketing Plan Benefits" description="Output List Object which holds the modifed plan benefits pairs for a given plan" />
+    <design:attribute name="Attribute_Value__c" label="Attribute Value" description="List of Allowed Attribute Values" />
+</design:component>

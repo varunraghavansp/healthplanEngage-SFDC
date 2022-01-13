@@ -1,0 +1,42 @@
+<!--
+ - Created by varun on 9/4/2019.
+ -->
+
+<aura:component description="datatablelstcmp">
+    <!-- REQUIRED RESOURCES -->
+
+    <!-- PUBLIC USER DEFINED ATTRIBUTES -->
+    <aura:attribute name="columns" type="List" access="public" />
+    <aura:attribute name="data" type="Object" access="public" />
+    <aura:attribute name="downloadfilename" type="String" access="public" />
+    <!-- HANDLERS AND EVENTS-->
+    <aura:registerEvent name="dataupdated" type="c:strike_evt" description="is fired when datatable is updated"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+
+    <!-- PUBLIC METHODS -->
+
+    <!-- INTERNAL ATTRIBUTES -->
+    <aura:attribute name="sortedBy" type="String" access="private" />
+    <aura:attribute name="sortedDirection" type="String" access="private" />
+    <aura:attribute name="columnsinitalized" type="Boolean" default="false" access="private" />
+    <aura:attribute name="showaddpopupmodal" type="Boolean" default="false" access="private" />
+    <!--  COMPONENT BODY -->
+
+    <div class="slds-container--center">
+        <div class="slds-box slds-grid slds-wrap slds-gutters slds-m-top--medium">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-m-around--small">
+                    <lightning:input aura:id="upload" type="file" label="" name="upload" multiple="false" accept=".csv" onchange="{! c.uploadCSV }"/>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-m-around--small">
+                    <lightning:button label="Download As CSV" iconName="utility:download" onclick="{! c.downloadCSV }"/>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                    <aura:if isTrue="{!v.columnsinitalized}">
+                        <lightning:datatable columns="{! v.columns }" data="{! v.data }" showRowNumberColumn="true" keyField="id" onrowaction="{! c.handleRowAction }" onsort="{! c.updateColumnSorting }" hideCheckboxColumn="true" />
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

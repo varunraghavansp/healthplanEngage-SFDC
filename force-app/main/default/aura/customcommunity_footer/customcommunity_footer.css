@@ -1,0 +1,32 @@
+/**
+ * Created by varun on 1/19/2021.
+ */
+
+.THIS  ul.segment-links li.segment-link{
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.THIS ul.segment-links li.segment-link a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #d31145;
+    text-decoration: none;
+}
+
+.THIS ul.footer-links li.footer-link-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #373737;
+}
+
+.THIS .footer ul.footer-links li {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.THIS .footer ul li {
+    height: 32px;
+    line-height: 32px;
+    border-bottom: 1px solid #ccc;
+}
