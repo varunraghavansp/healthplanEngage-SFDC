@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>Claim_From__c</fields>
+    <fields>Claim_Through__c</fields>
+    <fields>Physician_NPN__c</fields>
+    <fields>ICD10__c</fields>
+    <fields>Claim_Reimbursement__c</fields>
+    <label>Custom Compact Layout</label>
+</CompactLayout>

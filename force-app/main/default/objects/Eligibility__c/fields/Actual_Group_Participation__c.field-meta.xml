@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actual_Group_Participation__c</fullName>
+    <description>Percentage of Enrolled Employees against Total Employees</description>
+    <externalId>false</externalId>
+    <formula>( Active_Enrolled_Employees__c  / Total_Employees__c ) * 100</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Percentage of Enrolled Employees against Total Employees</inlineHelpText>
+    <label>Actual Group Participation (%)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

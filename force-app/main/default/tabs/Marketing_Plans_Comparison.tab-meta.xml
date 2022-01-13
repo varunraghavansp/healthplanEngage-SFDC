@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>POC to demonstrate Marketing Plans Comparison</description>
+    <label>Marketing Plans Comparison</label>
+    <lwcComponent>iHA_CompareMKTPlans</lwcComponent>
+    <motif>Custom57: Building Block</motif>
+</CustomTab>

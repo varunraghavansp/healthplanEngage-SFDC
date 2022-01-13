@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purchaser_Plan__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Link to Purchaser Plan - Use for Healthcloud GA</description>
+    <externalId>false</externalId>
+    <label>Purchaser Plan</label>
+    <referenceTo>PurchaserPlan</referenceTo>
+    <relationshipLabel>Quote Line Items</relationshipLabel>
+    <relationshipName>Quote_Line_Items</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

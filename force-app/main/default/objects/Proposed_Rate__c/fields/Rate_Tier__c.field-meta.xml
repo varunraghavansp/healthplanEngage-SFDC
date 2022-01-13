@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_Tier__c</fullName>
+    <externalId>false</externalId>
+    <label>Rate Tier</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>One Tier</fullName>
+                <default>false</default>
+                <label>One Tier</label>
+            </value>
+            <value>
+                <fullName>Two Tier</fullName>
+                <default>false</default>
+                <label>Two Tier</label>
+            </value>
+            <value>
+                <fullName>Three Tier</fullName>
+                <default>false</default>
+                <label>Three Tier</label>
+            </value>
+            <value>
+                <fullName>Four Tier</fullName>
+                <default>false</default>
+                <label>Four Tier</label>
+            </value>
+            <value>
+                <fullName>Five Tier</fullName>
+                <default>false</default>
+                <label>Five Tier</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

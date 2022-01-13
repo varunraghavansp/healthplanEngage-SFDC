@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Average_Total_Employees_for_prior_year__c</fullName>
+    <description>The average total number of all employees on business days during the preceding calendar year, per the submitted ATNE Form</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The average total number of all employees on business days during the preceding calendar year, per the submitted ATNE Form</inlineHelpText>
+    <label>Average Total Employees for prior year</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1-19</fullName>
+                <default>false</default>
+                <label>1-19</label>
+            </value>
+            <value>
+                <fullName>20-49</fullName>
+                <default>false</default>
+                <label>20-49</label>
+            </value>
+            <value>
+                <fullName>50-99</fullName>
+                <default>false</default>
+                <label>50-99</label>
+            </value>
+            <value>
+                <fullName>100-999</fullName>
+                <default>false</default>
+                <label>100-999</label>
+            </value>
+            <value>
+                <fullName>1000 or more</fullName>
+                <default>false</default>
+                <label>1000 or more</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

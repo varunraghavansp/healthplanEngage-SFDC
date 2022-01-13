@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plan_Template_Component__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Plan Template Component</label>
+    <referenceTo>Plan_Template_Component__c</referenceTo>
+    <relationshipLabel>Marketing Plan Benefits</relationshipLabel>
+    <relationshipName>Marketing_Plan_Benefit</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

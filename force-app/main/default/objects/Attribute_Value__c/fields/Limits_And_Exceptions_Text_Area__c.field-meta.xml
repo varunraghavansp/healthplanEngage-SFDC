@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limits_And_Exceptions_Text_Area__c</fullName>
+    <description>Text Area field for limits &amp; exceptions to be able to be included in formula and SOQL queries</description>
+    <externalId>false</externalId>
+    <label>Limits And Exceptions</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

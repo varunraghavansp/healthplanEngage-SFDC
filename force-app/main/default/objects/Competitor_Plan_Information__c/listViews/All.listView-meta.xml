@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Carrier_Name__c</columns>
+    <columns>Plan_Type__c</columns>
+    <columns>Plan_Name__c</columns>
+    <columns>HDHP_Option__c</columns>
+    <columns>Deductible__c</columns>
+    <columns>Inpatient_Copay__c</columns>
+    <columns>DME__c</columns>
+    <columns>Emergency_Room_Copay__c</columns>
+    <columns>Max_Dependent_Age__c</columns>
+    <columns>Medical_Equipment_Rider__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Records</label>
+</ListView>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Base_Component__c</fullName>
+    <externalId>false</externalId>
+    <formula>Plan_Component__r.Is_Base_Component__c</formula>
+    <label>Is Base Component</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

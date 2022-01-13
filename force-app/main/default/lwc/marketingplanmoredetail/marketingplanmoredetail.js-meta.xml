@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
     <apiVersion>51.0</apiVersion>
+    
     <description>Marketingplanmoredetail</description>
+    
     <isExposed>true</isExposed>
+    
     <masterLabel>Marketingplanmoredetail</masterLabel>
+    
 </LightningComponentBundle>

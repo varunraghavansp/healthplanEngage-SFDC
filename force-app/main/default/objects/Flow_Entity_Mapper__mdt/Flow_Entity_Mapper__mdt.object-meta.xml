@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Maps Objects to flows to be made available for launching the Flow List Sidebar Component</description>
+    <label>Flow Entity Mapper</label>
+    <pluralLabel>Flow Entity Mapper</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

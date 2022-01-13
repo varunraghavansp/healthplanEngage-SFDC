@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposed_Plan__c</fullName>
+    <externalId>false</externalId>
+    <label>Proposed Plan</label>
+    <referenceTo>Proposed_Plan__c</referenceTo>
+    <relationshipLabel>Proposed Rates</relationshipLabel>
+    <relationshipName>Proposed_Rates</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

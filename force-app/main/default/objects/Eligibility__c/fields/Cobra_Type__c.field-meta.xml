@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cobra_Type__c</fullName>
+    <description>If the group employed 20 or more employees, Mini Cobra rules apply, else Federal Cobra rules apply</description>
+    <externalId>false</externalId>
+    <formula>IF(TEXT( Group_Employed_20_Emp__c ) = &apos;No&apos;, &apos;Mini Cobra&apos;, &apos;Federal Cobra&apos;)</formula>
+    <inlineHelpText>If the group employed 20 or more employees, Mini Cobra rules apply, else Federal Cobra rules apply</inlineHelpText>
+    <label>Cobra Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

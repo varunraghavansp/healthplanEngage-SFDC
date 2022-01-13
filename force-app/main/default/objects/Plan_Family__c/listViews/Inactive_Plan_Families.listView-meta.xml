@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inactive_Plan_Families</fullName>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Line_Of_Business__c</columns>
+    <columns>Covered_Members__c</columns>
+    <columns>Effective_Date__c</columns>
+    <columns>Termination_Date__c</columns>
+    <columns>Closed_Date__c</columns>
+    <columns>Discontinued_Date__c</columns>
+    <columns>Age_Off_Criteria__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Workspace,Active</value>
+    </filters>
+    <filters>
+        <field>Closed_Date__c</field>
+        <operation>lessOrEqual</operation>
+        <value>12/31/2020</value>
+    </filters>
+    <label>Inactive Plan Families</label>
+</ListView>

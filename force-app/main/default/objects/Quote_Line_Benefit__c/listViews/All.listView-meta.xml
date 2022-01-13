@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Attribute_Category__c</columns>
+    <columns>Attribute_Code__c</columns>
+    <columns>Attribute_Display_Name__c</columns>
+    <columns>Attribute_Long_Code__c</columns>
+    <columns>Attribute_Value_Amount__c</columns>
+    <columns>Component_Name__c</columns>
+    <columns>Component_Type__c</columns>
+    <columns>In_Network_Display_Name__c</columns>
+    <columns>Is_Base_Component_Benefit__c</columns>
+    <columns>Is_Key_Benefit__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Records</label>
+</ListView>

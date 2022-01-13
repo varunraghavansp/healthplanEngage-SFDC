@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Marketing_Plan_Family</fullName>
+    <active>true</active>
+    <label>Marketing Plan Family</label>
+    <picklistValues>
+        <picklist>Age_Off_Criteria__c</picklist>
+        <values>
+            <fullName>End Of Month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>First Of Following Month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On_Day</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Type__c</picklist>
+        <values>
+            <fullName>Individual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Group</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medicare</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Small Group</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Covered_Members__c</picklist>
+        <values>
+            <fullName>Individual Only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Individual%2BFamily</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Financial_Category__c</picklist>
+        <values>
+            <fullName>Community Rated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Experience Rated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Self Funded</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Line_Of_Business__c</picklist>
+        <values>
+            <fullName>HMO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PPO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plan_Cycle__c</picklist>
+        <values>
+            <fullName>Calendar Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plan Year</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Workspace</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

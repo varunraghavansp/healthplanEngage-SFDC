@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    
     <apiVersion>50.0</apiVersion>
+    
     <description>Groupquotebasics Fc</description>
+    
     <isExposed>true</isExposed>
+    
     <masterLabel>Groupquotebasics Fc</masterLabel>
+    
 
     <targets>
+        
         <target>lightning__FlowScreen</target>
+        
     </targets>
+    
     <targetConfigs>
+        
         <targetConfig targets="lightning__FlowScreen">
-            <property name="account_record" type="@salesforce/schema/Account" label="account_record" required="true" description="Context Account Record" />
-            <property name="quote_effective_date" type="Date" label="quote_effective_date" description="Effective Date for the Quote" />
-            <property name="contact_record_id" type="String" label="quote_contact_id" description="Contact Id on the Quote" />
+            
+            <property name="account_record" type="@salesforce/schema/Account" label="account_record" required="true" description="Context Account Record"/>
+            
+            <property name="quote_effective_date" type="Date" label="quote_effective_date" description="Effective Date for the Quote"/>
+            
+            <property name="contact_record_id" type="String" label="quote_contact_id" description="Contact Id on the Quote"/>
+            
         </targetConfig>
+        
     </targetConfigs>
+    
 </LightningComponentBundle>
