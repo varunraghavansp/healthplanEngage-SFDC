@@ -1,7 +1,6 @@
 {
   "orgName": "healthplanEngage-SFDC - Dev Org",
   "edition": "Developer",
-  "hasSampleData" : true,
   "features" : [
     "Communities", "RecordTypes","ContactsToMultipleAccounts"
   ],
@@ -12,7 +11,7 @@
     "communitiesSettings": {
       "enableNetworksEnabled": true
    },
-    "AccountSettings": {
+    "accountSettings": {
       "enableAccountTeams": true
    },
     "chatterSettings": {

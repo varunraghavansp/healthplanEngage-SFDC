@@ -231,13 +231,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>quote_record.RecordTypeId</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>0124x000000u0DeAAI</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>quote_record.Status</assignToReference>
             <operator>Assign</operator>
             <value>
