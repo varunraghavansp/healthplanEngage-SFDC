@@ -485,7 +485,6 @@
         <queriedFields>OpportunityLineItemId</queriedFields>
         <queriedFields>Discount</queriedFields>
         <queriedFields>PricebookEntryId</queriedFields>
-        <queriedFields>Purchaser_Plan__c</queriedFields>
         <queriedFields>Quantity</queriedFields>
         <queriedFields>QuoteId</queriedFields>
         <queriedFields>ServiceDate</queriedFields>
