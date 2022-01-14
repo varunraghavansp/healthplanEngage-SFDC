@@ -1,45 +1,468 @@
-Insert Accounts:
-    sf_object: Account
-    table: Account
-    fields:
-        Name: Name
-        Description: Description
-        BillingStreet: BillingStreet
-        BillingCity: BillingCity
-        BillingState: BillingState
-        BillingPostalCode: BillingPostalCode
-        BillingCountry: BillingCountry
-        ShippingStreet: ShippingStreet
-        ShippingCity: ShippingCity
-        ShippingState: ShippingState
-        ShippingPostalCode: ShippingPostalCode
-        ShippingCountry: ShippingCountry
-        Phone: Phone
-        Fax: Fax
-        Website: Website
-        NumberOfEmployees: NumberOfEmployees
-        AccountNumber: AccountNumber
-        Site: Site
-        Type: Type
-Insert Contacts:
-    sf_object: Contact
-    table: Contact
-    fields:
-        Salutation: Salutation
-        FirstName: FirstName
-        LastName: LastName
-        Email: Email
-        Phone: Phone
-        MobilePhone: MobilePhone
-        OtherPhone: OtherPhone
-        HomePhone: HomePhone
-        Title: Title
-        Birthdate: Birthdate
-        MailingStreet: MailingStreet
-        MailingCity: MailingCity
-        MailingState: MailingState
-        MailingPostalCode: MailingPostalCode
-        MailingCountry: MailingCountry
-    lookups:
-        AccountId:
-            table: Account
+Insert Product2:
+  sf_object: Product2
+  fields:
+  - Name
+Insert Attribute__c:
+  sf_object: Attribute__c
+  fields:
+  - Attribute_Category__c
+  - Attribute_Display_Name__c
+  - Attribute_Long_Code__c
+  - Attribute_Name__c
+  - Is_Key_Display_Benefit__c
+  - Name
+  - Value_Type__c
+Insert Plan_Family__c:
+  sf_object: Plan_Family__c
+  fields:
+  - Age_Off_Criteria__c
+  - Brand__c
+  - Business_Type__c
+  - Closed_Date__c
+  - Covered_Members__c
+  - Description__c
+  - Discontinued_Date__c
+  - Effective_Date__c
+  - Financial_Category_Description__c
+  - Financial_Category__c
+  - Line_Of_Business__c
+  - Name
+  - Plan_Cycle__c
+  - Status__c
+  - Termination_Date__c
+  - Version__c
+  lookups:
+    Parent_Plan_Family__c:
+      table: Plan_Family__c
+      after: Insert Plan_Family__c
+Insert Rating_Region__c:
+  sf_object: Rating_Region__c
+  fields:
+  - City__c
+  - Country__c
+  - County__c
+  - Covered__c
+  - Name
+  - Rating_Region__c
+  - State__c
+  - Test5__c
+Insert Account:
+  sf_object: Account
+  fields:
+  - Active__c
+  - Effective_Date__c
+  - Group_Category__c
+  - Legal_Entity_Name__c
+  - Name
+  - NumberofLocations__c
+  - Status__c
+  - TIN_EIN__c
+  lookups:
+    ParentId:
+      table: Account
+      after: Insert Account
+    Rating_Zipcode__c:
+      table: Rating_Region__c
+Insert Alternate_Plan_Mapping__c:
+  sf_object: Alternate_Plan_Mapping__c
+  fields:
+  - Alternate_Package_Code__c
+  - Effective_From__c
+  - Effective_To__c
+  - Mapping_Type__c
+  - Package_Code__c
+  lookups:
+    Alternate_Plan_Family__c:
+      table: Plan_Family__c
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Attribute_Value__c:
+  sf_object: Attribute_Value__c
+  fields:
+  - Attribute_Value__c
+  - Effective_Date__c
+  - In_Network_Display_Value__c
+  - In_Network_Value__c
+  - Limits_And_Exceptions_Text_Area__c
+  - Limits_And_Exceptions__c
+  - Name
+  - Out_Of_Network_Display_Value__c
+  - Out_Of_Network_Value__c
+  lookups:
+    Attribute__c:
+      table: Attribute__c
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Base_Rate_Schedule__c:
+  sf_object: Base_Rate_Schedule__c
+  fields:
+  - Effective_Date__c
+  - Status__c
+  - Termination_Date__c
+  - Tier_Code__c
+  - Version__c
+  lookups:
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Plan_Component__c:
+  sf_object: Plan_Component__c
+  fields:
+  - Effective_Date__c
+  - Is_Base_Component__c
+  - Name
+  - Plan_Component_Code__c
+  - Product_Component_Desc__c
+  - Product_Component_Type__c
+  - Status__c
+  - Termination_Date__c
+  - Version__c
+  lookups:
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Plan_Family_Rating_Region__c:
+  sf_object: Plan_Family_Rating_Region__c
+  fields:
+  - Name
+  - Rating_Region_Code__c
+  lookups:
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Plan_Template__c:
+  sf_object: Plan_Template__c
+  fields:
+  - Description__c
+  - Effective_Date__c
+  - Name
+  - Plan_Type__c
+  - Status__c
+  - Termination_Date__c
+  - Version__c
+  lookups:
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Rate_Factor__c:
+  sf_object: Rate_Factor__c
+  fields:
+  - Effective_Date__c
+  - Factor_Application_Level__c
+  - Factor_Type__c
+  - Status__c
+  - Termination_Date__c
+  - Version__c
+  lookups:
+    Plan_Family__c:
+      table: Plan_Family__c
+Insert Account_Agency__c:
+  sf_object: Account_Agency__c
+  fields:
+  - Commission_Split__c
+  - Effective_Date__c
+  - Is_Primary__c
+  - Termination_Date__c
+  lookups:
+    Agency__c:
+      table: Account
+    Customer_Account__c:
+      table: Account
+Insert Base_Rate_Variant__c:
+  sf_object: Base_Rate_Variant__c
+  fields:
+  - Policy_Form__c
+  - Subscriber_And_Child__c
+  - Subscriber_And_Children__c
+  - Subscriber_And_Family__c
+  - Subscriber_And_Spouse__c
+  - Subscriber__c
+  - Variant_Code__c
+  - Variant_Description__c
+  lookups:
+    Base_Rate_Schedule__c:
+      table: Base_Rate_Schedule__c
+Insert Component_Attribute__c:
+  sf_object: Component_Attribute__c
+  fields:
+  - Component_Attribute_Type__c
+  - Is_Key_Benefit__c
+  - Is_Rate_Impacting__c
+  lookups:
+    Attribute__c:
+      table: Attribute__c
+    Plan_Component__c:
+      table: Plan_Component__c
+Insert Contact:
+  sf_object: Contact
+  fields:
+  - DoNotCall
+  - FirstName
+  - HasOptedOutOfEmail
+  - HasOptedOutOfFax
+  - LastName
+  lookups:
+    AccountId:
+      table: Account
+    ReportsToId:
+      table: Contact
+      after: Insert Contact
+Insert Plan_Template_Component__c:
+  sf_object: Plan_Template_Component__c
+  lookups:
+    Plan_Component__c:
+      table: Plan_Component__c
+    Plan_Template__c:
+      table: Plan_Template__c
+Insert Rate_Factor_Variant__c:
+  sf_object: Rate_Factor_Variant__c
+  fields:
+  - AdjustmentFactor__c
+  - Name
+  lookups:
+    RateFactor__c:
+      table: Rate_Factor__c
+Insert Account_Agent__c:
+  sf_object: Account_Agent__c
+  fields:
+  - Effective_Date__c
+  - Is_Primary__c
+  - Termination_Date__c
+  lookups:
+    Account_Agency__c:
+      table: Account_Agency__c
+    Agent__c:
+      table: Contact
+    Customer_Account__c:
+      table: Account
+Insert Marketing_Plan__c:
+  sf_object: Marketing_Plan__c
+  fields:
+  - Close_Date__c
+  - Discontinued_Date__c
+  - Effective_Date__c
+  - Exchange_Value__c
+  - Name
+  - Plan_Component_Code__c
+  - Plan_Name__c
+  - Status__c
+  - Termination_Date__c
+  - Version__c
+  lookups:
+    Base_Rate_Variant__c:
+      table: Base_Rate_Variant__c
+    Plan_Family__c:
+      table: Plan_Family__c
+    Plan_Template__c:
+      table: Plan_Template__c
+Insert Marketing_Plan_Benefit__c:
+  sf_object: Marketing_Plan_Benefit__c
+  fields:
+  - CPQ_Disp_Sort__c
+  lookups:
+    Attribute_Value__c:
+      table: Attribute_Value__c
+    Component_Attribute__c:
+      table: Component_Attribute__c
+    Marketing_Plan__c:
+      table: Marketing_Plan__c
+    Plan_Template_Component__c:
+      table: Plan_Template_Component__c
+Insert Competitor_Plan_Information__c:
+  sf_object: Competitor_Plan_Information__c
+  fields:
+  - Carrier_Name__c
+  - DME__c
+  - Deductible__c
+  - Drug_Option__c
+  - Emergency_Room_Copay__c
+  - Family_Incentives__c
+  - Family_Medical_Management__c
+  - Family_Medical__c
+  - Family_Prescription_Drug__c
+  - HDHP_Option__c
+  - Inpatient_Copay__c
+  - Max_Dependent_Age__c
+  - Medical_Equipment_Rider__c
+  - Name
+  - Plan_Name__c
+  - Plan_Type__c
+  - Product_Category__c
+  - Rate_Effective_Date__c
+  - Rate_Termination_Date__c
+  - Subscriber_Children_Incentives__c
+  - Subscriber_Children_Medical_Management__c
+  - Subscriber_Children_Medical__c
+  - Subscriber_Children_Prescription_Drug__c
+  - Subscriber_Only_Incentives__c
+  - Subscriber_Only_Medical_Management__c
+  - Subscriber_Only_Medical__c
+  - Subscriber_Only_Prescription_Drug__c
+  - Subscriber_Spouse_Incentives__c
+  - Subscriber_Spouse_Medical_Management__c
+  - Subscriber_Spouse_Medical__c
+  - Subscriber_Spouse_Prescription_Drug__c
+  - Tier__c
+  lookups:
+    Customer_Account__c:
+      table: Account
+    Quote__c:
+      table: Quote
+      after: Insert Quote
+Insert Eligibility__c:
+  sf_object: Eligibility__c
+  fields:
+  - Average_Total_Employees_for_prior_year__c
+  - Eligible_Emp_w_coverage__c
+  - Eligible_Emp_wo_coverage__c
+  - Employees_First_Day__c
+  - Group_Employed_20_Emp__c
+  - Group_has_1099_Employees__c
+  - Number_Cobra_Continuants__c
+  - Number_Employees_WP__c
+  - Participation_Requirement_Percent__c
+  - Response_Channel__c
+  - Status__c
+  - TEFRA_DEFRA_Medicare__c
+  - Total_Employees__c
+  - Total_PartTime__c
+  lookups:
+    Customer_Account__c:
+      table: Account
+    Quote__c:
+      table: Quote
+      after: Insert Quote
+Insert Group_Class__c:
+  sf_object: Group_Class__c
+  fields:
+  - Class_Description__c
+  - Class_Type__c
+  - Name
+  lookups:
+    Customer_Account__c:
+      table: Account
+    Quote__c:
+      table: Quote
+      after: Insert Quote
+Insert Opportunity:
+  sf_object: Opportunity
+  fields:
+  - CloseDate
+  - DeliveryInstallationStatus__c
+  - Financial_Arrangement__c
+  - IsPrivate
+  - Name
+  - StageName
+  lookups:
+    AccountId:
+      table: Account
+    ContactId:
+      table: Contact
+    SyncedQuoteId:
+      table: Quote
+      after: Insert Quote
+Insert Quote:
+  sf_object: Quote
+  fields:
+  - CanCreateQuoteLineItems
+  - Name
+  lookups:
+    ContactId:
+      table: Contact
+    OpportunityId:
+      table: Opportunity
+Insert Proposed_Plan__c:
+  sf_object: Proposed_Plan__c
+  fields:
+  - Effective_Date__c
+  - RecordTypeId
+  lookups:
+    Group_Class__c:
+      table: Group_Class__c
+    Installed_Account__c:
+      table: Account
+    Marketing_Plan__c:
+      table: Marketing_Plan__c
+    Quote_Request__c:
+      table: Quote
+Insert QuoteLineItem:
+  sf_object: QuoteLineItem
+  fields:
+  - Quantity
+  - UnitPrice
+  - Product2Id
+  lookups:
+    QuoteId:
+      table: Quote
+    Product2Id:
+      table: Product2
+Insert Quote_Census__c:
+  sf_object: Quote_Census__c
+  fields:
+  - Date_Of_Birth__c
+  - Employee_Number__c
+  - Gender__c
+  - Last_Name__c
+  - Name
+  - Relation__c
+  - Status__c
+  - Tobacco_Use__c
+  lookups:
+    Quote__c:
+      table: Quote
+Insert Quote_Request_Claim_History__c:
+  sf_object: Quote_Request_Claim_History__c
+  fields:
+  - Claim_From__c
+  - Claim_Reimbursement__c
+  - Claim_Through__c
+  - ICD10__c
+  - Name
+  - Physician_NPN__c
+  - Type__c
+  lookups:
+    Quote__c:
+      table: Quote
+Insert Quote_Request_Claim_Summary__c:
+  sf_object: Quote_Request_Claim_Summary__c
+  fields:
+  - Average_Enrolled_Members__c
+  - Average_Enrolled_Subscribers__c
+  - Billed_Premium__c
+  - Capitation__c
+  - Claims__c
+  - Experience_Period_From__c
+  - Experience_Period_Through__c
+  - High_Level_Claims__c
+  - Type__c
+  lookups:
+    Quote__c:
+      table: Quote
+Insert Proposed_Rate__c:
+  sf_object: Proposed_Rate__c
+  fields:
+  - Family__c
+  - Rate_Tier__c
+  - Subscriber_And_Child__c
+  - Subscriber_And_Spouse__c
+  - Subscriber__c
+  - Subscriber_and_Children__c
+  lookups:
+    Proposed_Plan__c:
+      table: Proposed_Plan__c
+Insert Quote_Line_Benefit__c:
+  sf_object: Quote_Line_Benefit__c
+  fields:
+  - Attribute_Category__c
+  - Attribute_Code__c
+  - Attribute_Display_Name__c
+  - Attribute_Long_Code__c
+  - Attribute_Value_Amount__c
+  - CPQ_Disp_Sort__c
+  - Component_Name__c
+  - Component_Type__c
+  - In_Network_Display_Name__c
+  - Is_Base_Component_Benefit__c
+  - Is_Key_Benefit__c
+  - Is_Rate_Impacting__c
+  - Limits_and_Exceptions__c
+  - Out_of_Network_Display_Value__c
+  lookups:
+    Parent_Quote_Line__c:
+      table: QuoteLineItem
