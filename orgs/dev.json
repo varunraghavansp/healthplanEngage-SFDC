@@ -1,10 +1,20 @@
 {
   "orgName": "healthplanEngage-SFDC - Dev Org",
   "edition": "Developer",
+  "hasSampleData" : true,
+  "features" : [
+    "Communities", "RecordTypes","ContactsToMultipleAccounts"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+   },
+    "AccountSettings": {
+      "enableAccountTeams": true
+   },
     "chatterSettings": {
       "enableChatter": true
     },
@@ -19,6 +29,10 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "quoteSettings": {
+      "enableQuote" : true
     }
   }
+  
 }

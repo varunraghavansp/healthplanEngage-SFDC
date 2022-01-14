@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customObject>true</customObject>
-    <description>Maintain base templates for your final go-to market plans</description>
-    <motif>Custom13: Box</motif>
-</CustomTab>
