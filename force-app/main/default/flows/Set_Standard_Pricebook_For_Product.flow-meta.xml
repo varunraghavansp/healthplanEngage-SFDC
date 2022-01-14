@@ -34,6 +34,9 @@
                 <numberValue>100.0</numberValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Create_Standard_Pricebook_Entry</targetReference>
+        </connector>
     </assignments>
     <interviewLabel>Set Standard Pricebook For Product {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Set Standard Pricebook For Product</label>
@@ -56,6 +59,13 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Standard_Pricebook_Entry</name>
+        <label>Create Standard Pricebook Entry</label>
+        <locationX>176</locationX>
+        <locationY>575</locationY>
+        <inputReference>StandardPricebookEntry</inputReference>
+    </recordCreates>
     <recordLookups>
         <name>Fetch_Standard_Pricebook</name>
         <label>Fetch Standard Pricebook</label>

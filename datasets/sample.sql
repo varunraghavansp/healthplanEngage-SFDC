@@ -1809,5 +1809,4 @@ INSERT INTO "Rating_Region__c" VALUES(2,'Rochester','USA','Monroe','True','14652
 INSERT INTO "Rating_Region__c" VALUES(3,'Niagara Falls','USA','Niagara','True','14301','Niagara','NY','');
 INSERT INTO "Rating_Region__c" VALUES(4,'Newfane','USA','Niagara','True','14108','Niagara','NY','');
 INSERT INTO "Rating_Region__c" VALUES(5,'Marilla','USA','Erie','True','14102','Erie','NY','');
-INSERT INTO "Rating_Region__c" VALUES(6,'','','','False','87110','','','');
 COMMIT;
