@@ -1,0 +1,160 @@
+Attribute,Attribute Category,Attribute Value,In Network Value,Out Of Network Value,Variant Code,In Network Display Value,Out Of Network Display Value,Limits And Exceptions
+ACV,Additional Services,20/50,20,50,ACV20/50,20% coinsurance,Deductible then 50% coinsurance,"See Medications Administered
+in an Office or Outpatient
+Hospital Setting for additional
+member liability"
+ACV,Additional Services,N/N,N,N,ACVN/N,Not Covered,Not Covered,
+ADME,Additional Services,50/50,50,50,ADME50/50,50% coinsurance,Deductible then 50% coinsurance,
+ADME,Additional Services,N/N,N,N,ADMEN/N,Not Covered,Not Covered,
+AHHC,Additional Services,20/50,20,50,AHHC20/50,20% coinsurance,Deductible then 50% coinsurance,Up to 40 visits per plan year
+AHHC,Additional Services,N/N,N,N,AHHCN/N,Not Covered,Not Covered,
+AMA,Additional Services,20/50,20,50,AMA20/50,20% coinsurance,Deductible then 50% coinsurance,Excludes Allergy Injections
+AMA,Additional Services,N/N,N,N,AMAN/N,Not Covered,Not Covered,
+APA,Additional Services,50/50,50,50,APA50/50,50% coinsurance,Deductible then 50% coinsurance,
+APA,Additional Services,N/N,N,N,APAN/N,Not Covered,Not Covered,
+AUB,Additional Services,250/0,250,0,AUB250/0,"Option 1: $250 gym/wellness
+services allowance.
+Option 2: Up to $500 per
+individual/$1,000 per family
+earned from the purchase of
+fresh produce.",Not Covered,"After your effective date you
+must choose either Option 1 or
+Option 2."
+COBRA-DIRECT,Additional Services,Y/Y,Y,Y,COBRA-DIRECTY/Y,COBRA - Direct Bill,COBRA - Direct Bill,
+COBRA-DIRECT,Additional Services,N/N,N,N,COBRA-DIRECTN/N,COBRA - Bill To Group,COBRA - Bill To Group,
+COEX,Additional Services,Y/Y,Y,Y,COEXY/Y,Contraception Excluded,Contraception Excluded,
+COEX,Additional Services,N/N,N,N,COEXN/N,Contraception Not Excluded,Contraception Not Excluded,
+DOMPAR,Additional Services,Y/Y,Y,Y,DOMPARY/Y,Domestic Partner Covered,Domestic Partner Covered,
+DOMPAR,Additional Services,N/N,N,N,DOMPARN/N,Domestic Partner Not Covered,Domestic Partner Not Covered,
+FIT-WORK,Additional Services,Y/Y,Y,Y,FIT-WORKY/Y,FitWorks With Incentive Dual Network,FitWorks With Incentive Dual Network,
+FIT-WORK,Additional Services,N/N,N,N,FIT-WORKN/N,No FitWorks With Incentive Dual Network,No FitWorks With Incentive Dual Network,
+PTOTST,Additional Services,30/30,30,30,PTOTST30/30,PT/OT/ST Combined Visit Limit: 30 Visits,PT/OT/ST Combined Visit Limit: 30 Visits,
+PTOTST,Additional Services,45/45,45,45,PTOTST45/45,PT/OT/ST Combined Visit Limit: 45 Visits,PT/OT/ST Combined Visit Limit: 45 Visits,
+PTOTST,Additional Services,N/N,N,N,PTOTSTN/N,Not Covered,Not Covered,
+PTOTST,Additional Services,N/N,N,N,PTOTSTN/N,Not Covered,Not Covered,
+RTL,Additional Services,Y/Y,Y,Y,RTLY/Y,Right To Life,Right To Life,
+RTL,Additional Services,N/N,N,N,RTLN/N,Right To Life Not Covered,Right To Life Not Covered,
+STC,Additional Services,Y/Y,Y,Y,STCY/Y,Sterilization Procedures Covered,Sterilization Procedures Covered,
+STC,Additional Services,N/N,N,N,STCN/N,Sterilization Procedures Not Covered,Sterilization Procedures Not Covered,
+AV-C,Adult Vision Services,15/0,15,0,AV-C15/0,15% off retail price,Not Covered,
+AV-F,Adult Vision Services,40/0,40,0,AV-F40/0,40% off most retail frames,Not Covered,
+AV-LV,Adult Vision Services,15/0,15,0,AV-LV15/0,"15% off retail price or 5% off
+promotional price",Not Covered,
+AV-ME,Adult Vision Services,20/50,20,50,AV-ME20/50,20% coinsurance,Deductible then 50% coinsurance,
+AV-RE,Adult Vision Services,40/0,40,0,AV-RE40/0,$40 copay / visit,Not Covered,Once every 12 months
+AV-SPL,Adult Vision Services,50/0,50,0,AV-SPL50/0,"Single: $50
+Bifocal: $70",Not Covered,"Contact EyeMed for additional
+options at 1-877-842-3348"
+DS-AD,Dental Services,0/0,0,0,DS-AD0/0,Based on services rendered,Based on services rendered,"Must be deemed medically
+necessary"
+DS-PR,Dental Services,0/0,0,0,DS-PR0/0,Not Covered,Not Covered,
+DEP,Dependent Coverage,29/26,29,26,DEP29/26,26,29,"Up to the end of the birthday
+month"
+DE,Diabetic Supplies and Services,20/50,20,50,DE20/50,20% coinsurance,Deductible then 50% coinsurance,
+DIO,Diabetic Supplies and Services,20/50,20,50,DIO20/50,20% coinsurance,Deductible then 50% coinsurance,"Office visit liability or pharmacy
+rider liability (if applicable),
+whichever is less"
+DMS,Diabetic Supplies and Services,20/50,20,50,DMS20/50,20% coinsurance,Deductible then 50% coinsurance,
+AR,Diagnostic Testing Services,20/50,20,50,AR20/50,20% coinsurance,Deductible then 50% coinsurance,"Radiology services, other than
+X-rays, including but not
+limited to MRI, MRA, CT
+Scans, myocardial perfusion
+imaging and PET Scans."
+DT,Diagnostic Testing Services,20/50,20,50,DT20/50,20% coinsurance,Deductible then 50% coinsurance,
+EKG,Diagnostic Testing Services,20/50,20,50,EKG20/50,20% coinsurance,Deductible then 50% coinsurance,
+RR,Diagnostic Testing Services,20/50,20,50,RR20/50,20% coinsurance,Deductible then 50% coinsurance,
+ER,Emergency & Urgent Care Services,20/20,20,20,ER20/20,20% coinsurance,20% coinsurance,Copay waived if admitted
+ERT,Emergency & Urgent Care Services,20/20,20,20,ERT20/20,20% coinsurance,20% coinsurance,"Must be deemed medically
+necessary"
+UC,Emergency & Urgent Care Services,20/20,20,20,UC20/20,20% coinsurance,20% coinsurance,
+APL,General Information,0/0,0,0,APL0/0,Not Applicable,Not Applicable,
+COINS,General Information,20/50,20,50,COINS20/50,20%,50%,
+COINS,General Information,25/75,25,75,COINS25/75,25%,75%,
+COINS,General Information,30/60,30,60,COINS30/60,30%,60%,
+DED,General Information,0/1000,0,1000,DED0/1000,$0/$0 Network A,$1000/$2000 Network B,
+DED,General Information,100/1000,100,1000,DED100/1000,$100/$2000 Network A,$2000/$4000 Network B,
+LMA,General Information,0/0,0,0,LMA0/0,Not Applicable,Not Applicable,
+MOOP,General Information,7350/10000,7350,10000,MOOP7350/10000,"$7,350 / $14,700","$10,000 / $20,000","Where the out of pocket max
+applies it accumulates as
+embedded.
+*See Important Notes section
+for more detail."
+H-OPP,Hospital and Other Facility Services,20/50,20,50,H-OPP20/50,20% coinsurance,Deductible then 50% coinsurance,
+INHSPS,Hospital and Other Facility Services,0/50,0,50,INHSPS0/50,$0 copay / visit,"Deductible then 50%
+coinsurance",Up to 210 days per plan year
+INP,Hospital and Other Facility Services,20/50,20,50,INP20/50,20% coinsurance,Deductible then 50% coinsurance,"Semi-private room, per
+admission"
+INP,Hospital and Other Facility Services,1000/0,1000,0,INP1000/0,Inpatient Hospital Copay: $1000.00 & SNF $500.00 Per Admission Dual Network,Deductible then 50% coinsurance,
+INP,Hospital and Other Facility Services,250/0,250,0,INP250/0,Inpatient Hospital Copay: $250.00 & SNF $250.00 Per Admission Dual Network,Deductible then 50% coinsurance,
+INP,Hospital and Other Facility Services,650/0,650,0,INP650/0,Inpatient Hospital Copay: $750.00 & SNF $500.00 Per Admission Dual Network,Deductible then 50% coinsurance,
+INPP,Hospital and Other Facility Services,20/50,20,50,INPP20/50,20% coinsurance,Deductible then 50% coinsurance,
+OSP-A,Hospital and Other Facility Services,20/50,20,50,OSP-A20/50,20% coinsurance,Deductible then 50% coinsurance,
+OSP-H,Hospital and Other Facility Services,20/50,20,50,OSP-H20/50,20% coinsurance,Deductible then 50% coinsurance,
+SNF,Hospital and Other Facility Services,20/50,20,50,SNF20/50,20% coinsurance,Deductible then 50% coinsurance,"Semi-private room, per
+admission
+Unlimited days per plan year"
+PPS-F,Maternity Services,20/50,20,50,PPS-F20/50,"Delivery 20% coinsurance
+Physician: 20% coinsurance","Deductible then 50%
+coinsurance","Semi-private room, per
+admission"
+PPS-OV,Maternity Services,0/50,0,50,PPS-OV0/50,$0 copay / visit,"Deductible then 50%
+coinsurance","No charge after the initial
+diagnosis"
+MBHI,Mental Health & Substance Abuse,20/50,20,50,MBHI20/50,20% coinsurance,Deductible then 50% coinsurance,"Semi-private room, per
+admission"
+MBHO,Mental Health & Substance Abuse,20/50,20,50,MBHO20/50,20% coinsurance,Deductible then 50% coinsurance,
+MISD,Mental Health & Substance Abuse,20/50,20,50,MISD20/50,20% coinsurance,Deductible then 50% coinsurance,"Semi-private room, per
+admission"
+MISR,Mental Health & Substance Abuse,20/50,20,50,MISR20/50,20% coinsurance,Deductible then 50% coinsurance,"Semi-private room, per
+admission"
+MOSA,Mental Health & Substance Abuse,20/50,20,50,MOSA20/50,20% coinsurance,Deductible then 50% coinsurance,
+PV-C,Pediatric Vision Services,30/0,30,0,PV-C30/0,30% coinsurance,Not Covered,"Once every 12 months.
+In lieu of frames/lenses.
+Materials only."
+PV-F,Pediatric Vision Services,30/0,30,0,PV-F30/0,30% coinsurance,Not Covered,Once every 12 months
+PV-LV,Pediatric Vision Services,15/0,15,0,PV-LV15/0,"15% off retail price or 5% off
+promotional price",Not Covered,
+PV-ME,Pediatric Vision Services,20/50,20,50,PV-ME20/50,20% coinsurance,Deductible then 50% coinsurance,
+PV-RE,Pediatric Vision Services,20/0,20,0,PV-RE20/0,$20 copay / visit,Not Covered,Once every 12 months
+PV-SPL,Pediatric Vision Services,30/0,30,0,PV-SPL30/0,30% coinsurance,Not Covered,"Once every 12 months.
+Contact EyeMed for additional
+options at 1-877-842-3348"
+ATT,Physician and Other Services,20/50,20,50,ATT20/50,20% coinsurance,Deductible then 50% coinsurance,
+BHI,Physician and Other Services,20/NA,20,NA,BHI20/NA,20% coinsurance,Not Covered,
+OPP,Physician and Other Services,20/50,20,50,OPP20/50,20% coinsurance,Deductible then 50% coinsurance,
+PCP,Physician and Other Services,20/50,20,50,PCP20/50,20% coinsurance,Deductible then 50% coinsurance,PCP Required
+SPC,Physician and Other Services,20/50,20,50,SPC20/50,20% coinsurance,Deductible then 50% coinsurance,
+TMH,Physician and Other Services,0/0,0,0,TMH0/0,$0 copay / consultation,Not Covered,
+RX10,Prescription Drug Coverage,10/100,10,100,RX1010/100,10$ Copay 100% Coinsurance,100 Coinsurance Dual Network,
+RX10,Prescription Drug Coverage,20/35,20,35,RX1020/35,20$ Copay,35$ Copay,
+RX10,Prescription Drug Coverage,30/100,30,100,RX1030/100,30$ Copay,100$ Copay Dual Network,
+RX10,Prescription Drug Coverage,30/50,30,50,RX1030/50,30$ Copay 50% Coinsurance With,Minimum Of 45$ Copay Dual Network,
+RX10,Prescription Drug Coverage,30/50,30,50,RX1030/50,30$ Copay,50$ Copay Dual Network,
+RX10,Prescription Drug Coverage,30/75,30,75,RX1030/75,RX 10 Copay 30 Copay 75 Copay Dual Network,,
+RX10,Prescription Drug Coverage,50/100,50,100,RX1050/100,RX 10 Copay 50 Copay 100 Copay Dual Network,,
+RX-MD,Prescription Drug Coverage,0/0,0,0,RX-MD0/0,Creditable,Not Applicable,"For those who are Medicare
+eligible, this plan meets the
+standard level of prescription
+drug coverage determined by
+Medicare, therefore this plan
+provides you with
+CREDITABLE COVERAGE"
+RX-MM,Prescription Drug Coverage,May-00,5,0,RX-MM5/0,$5/20%/20%,Not Covered,"Mail Order: Must be obtained
+from ProAct or Wegmans.
+Retail Pharmacy: Must be filled
+at a participating Pharmacy."
+RX-PP,Prescription Drug Coverage,May-00,5,0,RX-PP5/0,$5/20%/20%,Not Covered,"Must be filled at a participating
+Pharmacy.
+This plan utilizes Prescription
+Drug Formulary III."
+PREV,Preventive Services,0/50,0,50,PREV0/50,0$,Deductible then 50% coinsurance,"All preventive services are
+covered in full with $0 member
+liability when performed by a
+participating provider. See
+independenthealth.com for
+additional information."
+RCR,Rehabilitation Services,20/50,20,50,RCR20/50,20% coinsurance,Deductible then 50% coinsurance,Up to 36 visits per event
+RCS,Rehabilitation Services,20/50,20,50,RCS20/50,20% coinsurance,Deductible then 50% coinsurance,
+RPO,Rehabilitation Services,20/50,20,50,RPO20/50,20% coinsurance,Deductible then 50% coinsurance,"Up to 60 visits per condition
+per plan year"
+RPR,Rehabilitation Services,20/50,20,50,RPR20/50,20% coinsurance,Deductible then 50% coinsurance,Up to 24 visits per plan year

@@ -1,0 +1,73 @@
+Attribute Code,Attribute Category,Attribute Name,Is Key Benefit,Is Rate Impacting
+AV-C,Adult Vision Services,Conventional Contact Lenses,N,N
+AV-F,Adult Vision Services,Frames,N,N
+AV-LV,Adult Vision Services,Laser Vision Correction,N,N
+AV-ME,Adult Vision Services,Medical Eye Exam,N,N
+AV-RE,Adult Vision Services,Routine/ Refractive Exam,N,N
+AV-SPL,Adult Vision Services,Standard Plastic Lenses,N,N
+DS-AD,Dental Services,Accidental Dental,N,N
+DS-PR,Dental Services,Preventive and Routine,N,N
+DEP,Dependent Coverage,Dependent Eligibility,N,N
+DE,Diabetic Supplies and Services,"Diabetic Equipment (e.g. Blood glucose monitor,
+etc.)",N,N
+DIO,Diabetic Supplies and Services,Insulin and Other Oral Agents,N,N
+DMS,Diabetic Supplies and Services,"Diabetic Medical Supplies (Test Strips, Syringes,
+etc.)",N,N
+AR,Diagnostic Testing Services,Advanced Radiology,N,N
+DT,Diagnostic Testing Services,Laboratory Testing,N,N
+EKG,Diagnostic Testing Services,EKG,N,N
+RR,Diagnostic Testing Services,Routine Radiology,N,N
+ER,Emergency & Urgent Care Services,Emergency Room,N,N
+ERT,Emergency & Urgent Care Services,Ambulance,N,N
+UC,Emergency & Urgent Care Services,Urgent Care Center,N,N
+APL,General Information,Annual Maximum,N,N
+COINS,General Information,Coinsurance,Y,Y
+DED,General Information,Deductible,Y,Y
+LMA,General Information,Lifetime Maximum,N,N
+MOOP,General Information,Out-of-Pocket Maximum,N,N
+H-OPP,Hospital and Other Facility Services,"Outpatient Surgical Procedures:
+Physician/Surgeon Fees",N,N
+INHSPS,Hospital and Other Facility Services,Inpatient Hospice,N,N
+INP,Hospital and Other Facility Services,Inpatient Hospital,N,N
+INPP,Hospital and Other Facility Services,Inpatient Hospital: Physician/Surgeon Fees,N,N
+OSP-A,Hospital and Other Facility Services,"Outpatient Surgical Procedures (Ambulatory
+Surgery Center)",N,N
+OSP-H,Hospital and Other Facility Services,Outpatient Surgical Procedures (Hospital Facility),N,N
+SNF,Hospital and Other Facility Services,Skilled Nursing Facility,N,N
+PPS-F,Maternity Services,Inpatient Maternity,N,N
+PPS-OV,Maternity Services,Physician Services: Prenatal and Postnatal Care,N,N
+MBHI,Mental Health & Substance Abuse,Inpatient Mental Health,N,N
+MBHO,Mental Health & Substance Abuse,Outpatient Mental Health,N,N
+MISD,Mental Health & Substance Abuse,Inpatient Substance Abuse - Detox,N,N
+MISR,Mental Health & Substance Abuse,Inpatient Substance Abuse - Rehab,N,N
+MOSA,Mental Health & Substance Abuse,Outpatient Substance Abuse,N,N
+PV-C,Pediatric Vision Services,Conventional Contact Lenses,N,N
+PV-F,Pediatric Vision Services,Frames,N,N
+PV-LV,Pediatric Vision Services,Laser Vision Correction,N,N
+PV-ME,Pediatric Vision Services,Medical Eye Exam,N,N
+PV-RE,Pediatric Vision Services,Routine/ Refractive Exam,N,N
+PV-SPL,Pediatric Vision Services,Standard Plastic Lenses,N,N
+ATT,Physician and Other Services,Allergy Testing & Treatment,N,N
+BHI,Physician and Other Services,Health and Substance Use Disorder,N,N
+OPP,Physician and Other Services,"Outpatient Surgical Procedures (in physician's
+office)",N,N
+PCP,Physician and Other Services,Primary Office Visit,N,N
+SPC,Physician and Other Services,Specialist Office Visit,N,N
+TMH,Physician and Other Services,"Telemedicine Including Mental Health, Behavioral",N,N
+RX10,Prescription Drug Coverage,Prescription Plan 10,N,N
+RX-MD,Prescription Drug Coverage,Medicare Part D Creditable Coverage Status,N,N
+RX-MM,Prescription Drug Coverage,Maintenance Medications,N,N
+RX-PP,Prescription Drug Coverage,Prescription Plan,N,N
+PREV,Preventive Services,"Bone mineral density measurements or tests
+Cholesterol test (lipid panel) Colonoscopy and Sigmoidoscopy Contraceptive Drugs, Devices and Counseling Immunizations
+Mammogram
+Pap smear
+Physical exam
+Prenatal and Post-partum Visits
+Prostate test (Prostate Specific Antigen ""PSA"")
+Well child visit
+Well Woman Visit",N,N
+RCR,Rehabilitation Services,Cardiac Rehabilitation,N,N
+RCS,Rehabilitation Services,Chiropractic Services,N,N
+RPO,Rehabilitation Services,Physical - Occupational - Speech Therapies,N,N
+RPR,Rehabilitation Services,Pulmonary Rehabilitation,N,N
