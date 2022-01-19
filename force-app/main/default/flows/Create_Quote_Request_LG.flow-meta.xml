@@ -4,7 +4,7 @@
         <name>Navigate_to_Quote_Request</name>
         <label>Navigate to Quote Request</label>
         <locationX>182</locationX>
-        <locationY>3134</locationY>
+        <locationY>3494</locationY>
         <actionName>c:navigatetorecord_fa</actionName>
         <actionType>component</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -24,10 +24,26 @@
     </actionCalls>
     <apiVersion>51.0</apiVersion>
     <assignments>
+        <name>Assign_recordId_to_Context_Record_Id</name>
+        <label>Assign recordId to Context Record Id</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Stage_to_1</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_Default_Opportunity</name>
         <label>Set Default Opportunity</label>
         <locationX>50</locationX>
-        <locationY>878</locationY>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>opportunity_record.AccountId</assignToReference>
             <operator>Assign</operator>
@@ -63,15 +79,38 @@
                 <stringValue>{!account_record.Name} NewBusiness  {!quote_effective_date}</stringValue>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>opportunity_record.Pricebook2Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>pricebookid</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Create_Opportunity_Record</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Default_Pricebook_Id</name>
+        <label>Set Default Pricebook Id</label>
+        <locationX>182</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>pricebookid</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Fetch_Default_Pricebook_Id.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_an_Opportunity_Present</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_Number_of_Subscribers_and_Members</name>
         <label>Set Number of Subscribers and Members</label>
         <locationX>182</locationX>
-        <locationY>2054</locationY>
+        <locationY>2414</locationY>
         <assignmentItems>
             <assignToReference>medical_claim_summary.Average_Enrolled_Subscribers__c</assignToReference>
             <operator>Assign</operator>
@@ -108,7 +147,7 @@
         <name>Set_Quote_Values</name>
         <label>Set Quote Values</label>
         <locationX>182</locationX>
-        <locationY>1334</locationY>
+        <locationY>1694</locationY>
         <assignmentItems>
             <assignToReference>quote_record.Effective_Date__c</assignToReference>
             <operator>Assign</operator>
@@ -201,7 +240,7 @@
         <name>Set_Stage_to_1</name>
         <label>Set Stage to 1</label>
         <locationX>182</locationX>
-        <locationY>158</locationY>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -217,7 +256,7 @@
         <name>Set_to_Stage_2</name>
         <label>Set to Stage 2</label>
         <locationX>182</locationX>
-        <locationY>518</locationY>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -233,7 +272,7 @@
         <name>Update_Quote_Id_on_Eligiblity_Record</name>
         <label>Update Quote Id on Eligiblity Record</label>
         <locationX>182</locationX>
-        <locationY>1814</locationY>
+        <locationY>2174</locationY>
         <assignmentItems>
             <assignToReference>eligiblity_record.Quote__c</assignToReference>
             <operator>Assign</operator>
@@ -260,7 +299,7 @@
         <name>Is_an_Opportunity_Present</name>
         <label>Is an Opportunity Present</label>
         <locationX>182</locationX>
-        <locationY>758</locationY>
+        <locationY>1118</locationY>
         <defaultConnector>
             <targetReference>Fetch_Quote_Contact_Details</targetReference>
         </defaultConnector>
@@ -307,7 +346,7 @@
         <name>Create_Eligiblity_Record</name>
         <label>Create Eligiblity Record</label>
         <locationX>182</locationX>
-        <locationY>3014</locationY>
+        <locationY>3374</locationY>
         <connector>
             <targetReference>Navigate_to_Quote_Request</targetReference>
         </connector>
@@ -317,7 +356,7 @@
         <name>Create_Opportunity_Record</name>
         <label>Create Opportunity Record</label>
         <locationX>50</locationX>
-        <locationY>998</locationY>
+        <locationY>1358</locationY>
         <connector>
             <targetReference>Fetch_Quote_Contact_Details</targetReference>
         </connector>
@@ -327,7 +366,7 @@
         <name>Create_Quote_Request_Record</name>
         <label>Create Quote Request Record</label>
         <locationX>182</locationX>
-        <locationY>1454</locationY>
+        <locationY>1814</locationY>
         <connector>
             <targetReference>quote_census_screen</targetReference>
         </connector>
@@ -337,7 +376,7 @@
         <name>Insert_Claims_History</name>
         <label>Insert Claims History</label>
         <locationX>182</locationX>
-        <locationY>2654</locationY>
+        <locationY>3014</locationY>
         <connector>
             <targetReference>Insert_Medical_Claim_Summary</targetReference>
         </connector>
@@ -347,7 +386,7 @@
         <name>Insert_Competitor_Plans</name>
         <label>Insert Competitor Plans</label>
         <locationX>182</locationX>
-        <locationY>2534</locationY>
+        <locationY>2894</locationY>
         <connector>
             <targetReference>Insert_Claims_History</targetReference>
         </connector>
@@ -357,7 +396,7 @@
         <name>Insert_Medical_Claim_Summary</name>
         <label>Insert Medical Claim Summary</label>
         <locationX>182</locationX>
-        <locationY>2774</locationY>
+        <locationY>3134</locationY>
         <connector>
             <targetReference>Insert_RX_Claim_Summary</targetReference>
         </connector>
@@ -367,7 +406,7 @@
         <name>Insert_Quote_Census</name>
         <label>Insert Quote Census</label>
         <locationX>182</locationX>
-        <locationY>2414</locationY>
+        <locationY>2774</locationY>
         <connector>
             <targetReference>Insert_Competitor_Plans</targetReference>
         </connector>
@@ -377,7 +416,7 @@
         <name>Insert_RX_Claim_Summary</name>
         <label>Insert RX Claim Summary</label>
         <locationX>182</locationX>
-        <locationY>2894</locationY>
+        <locationY>3254</locationY>
         <connector>
             <targetReference>Create_Eligiblity_Record</targetReference>
         </connector>
@@ -387,7 +426,7 @@
         <name>Fetch_Context_Account_Record</name>
         <label>Fetch Context Account Record</label>
         <locationX>182</locationX>
-        <locationY>278</locationY>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>basics_screen</targetReference>
@@ -415,10 +454,23 @@
         <queriedFields>Type</queriedFields>
     </recordLookups>
     <recordLookups>
+        <name>Fetch_Default_Pricebook_Id</name>
+        <label>Fetch Default Pricebook Id</label>
+        <locationX>182</locationX>
+        <locationY>878</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Default_Pricebook_Id</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Pricebook2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Fetch_Eligiblity_Records</name>
         <label>Fetch Eligiblity Records</label>
         <locationX>182</locationX>
-        <locationY>1694</locationY>
+        <locationY>2054</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Update_Quote_Id_on_Eligiblity_Record</targetReference>
@@ -471,10 +523,10 @@
         <name>Fetch_Opportunity_If_Present</name>
         <label>Fetch Opportunity If Present</label>
         <locationX>182</locationX>
-        <locationY>638</locationY>
+        <locationY>758</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Is_an_Opportunity_Present</targetReference>
+            <targetReference>Fetch_Default_Pricebook_Id</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -499,7 +551,7 @@
         <name>Fetch_Quote_Contact_Details</name>
         <label>Fetch Quote Contact Details</label>
         <locationX>182</locationX>
-        <locationY>1214</locationY>
+        <locationY>1574</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Quote_Values</targetReference>
@@ -524,7 +576,7 @@
         <name>basics_screen</name>
         <label>Basics</label>
         <locationX>182</locationX>
-        <locationY>398</locationY>
+        <locationY>518</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -595,7 +647,7 @@
         <name>claim_summary</name>
         <label>Claim Summary</label>
         <locationX>182</locationX>
-        <locationY>2174</locationY>
+        <locationY>2534</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -676,7 +728,7 @@
         <name>Current_Plan_Information_Screen</name>
         <label>Current Plan Information</label>
         <locationX>182</locationX>
-        <locationY>2294</locationY>
+        <locationY>2654</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -745,7 +797,7 @@
         <name>Eligiblity_Screen</name>
         <label>Eligiblity_Screen</label>
         <locationX>182</locationX>
-        <locationY>1934</locationY>
+        <locationY>2294</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -808,7 +860,7 @@
         <name>quote_census_screen</name>
         <label>Quote Census</label>
         <locationX>182</locationX>
-        <locationY>1574</locationY>
+        <locationY>1934</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -895,7 +947,7 @@
         <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Set_Stage_to_1</targetReference>
+            <targetReference>Assign_recordId_to_Context_Record_Id</targetReference>
         </connector>
     </start>
     <status>Active</status>
@@ -1018,6 +1070,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Quote_Request_Claim_History__c</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>rx_claim_summary</name>

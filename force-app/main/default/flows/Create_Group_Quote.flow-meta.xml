@@ -4,7 +4,7 @@
         <name>Copy_Quote_Line_Benefits</name>
         <label>Copy Quote Line Benefits</label>
         <locationX>182</locationX>
-        <locationY>2630</locationY>
+        <locationY>3110</locationY>
         <actionName>flow_controller</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -22,7 +22,7 @@
         <name>Navigate_To_Quote</name>
         <label>Navigate To Quote</label>
         <locationX>182</locationX>
-        <locationY>2750</locationY>
+        <locationY>3230</locationY>
         <actionName>c:be_navigateToRecordFC</actionName>
         <actionType>component</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -46,7 +46,7 @@
         <name>Append_Last_Quote_Line_to_Record_Set</name>
         <label>Append Last Quote Line to Record Set</label>
         <locationX>182</locationX>
-        <locationY>2390</locationY>
+        <locationY>2870</locationY>
         <assignmentItems>
             <assignToReference>quote_line_recordset</assignToReference>
             <operator>Add</operator>
@@ -62,7 +62,7 @@
         <name>Append_to_Quote_Line_Record_Set</name>
         <label>Append to Quote Line Record Set</label>
         <locationX>270</locationX>
-        <locationY>2054</locationY>
+        <locationY>2534</locationY>
         <assignmentItems>
             <assignToReference>quote_line_recordset</assignToReference>
             <operator>Add</operator>
@@ -75,22 +75,38 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Record_Id_to_Context_Record_Id</name>
+        <label>Assign Record Id to Context Record Id</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Stage_to_1</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Map_Marketing_Plan_to_Quote_Line_Item</name>
         <label>Map Marketing Plan to Quote Line Item</label>
         <locationX>270</locationX>
-        <locationY>2174</locationY>
+        <locationY>2654</locationY>
         <assignmentItems>
             <assignToReference>quote_line.Product2Id</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>productid</elementReference>
+                <elementReference>Fetch_Default_Product_Id.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>quote_line.PricebookEntryId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>pricebookentryid</elementReference>
+                <elementReference>Fetch_Default_Pricebook_Entry_Id.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -101,17 +117,17 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>quote_line.Effective_Date__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>quote_effective_date</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>quote_line.QuoteId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>quote_record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>quote_line.UnitPrice</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>1.0</numberValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -122,10 +138,10 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>quote_line.UnitPrice</assignToReference>
+            <assignToReference>quote_line.Effective_Date__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <numberValue>1.0</numberValue>
+                <elementReference>quote_effective_date</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -136,7 +152,7 @@
         <name>Set_Default_Opporunity</name>
         <label>Set Default Opporunity</label>
         <locationX>50</locationX>
-        <locationY>1238</locationY>
+        <locationY>1718</locationY>
         <assignmentItems>
             <assignToReference>opportunity_record.AccountId</assignToReference>
             <operator>Assign</operator>
@@ -172,6 +188,13 @@
                 <stringValue>{!account_record.Name} NewBusiness  {!quote_effective_date}</stringValue>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>opportunity_record.Pricebook2Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Fetch_Default_Pricebook_Id.Id</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Create_Opportunity</targetReference>
         </connector>
@@ -180,14 +203,7 @@
         <name>Set_Quote_Values</name>
         <label>Set Quote Values</label>
         <locationX>182</locationX>
-        <locationY>1694</locationY>
-        <assignmentItems>
-            <assignToReference>quote_record.Effective_Date__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>quote_effective_date</elementReference>
-            </value>
-        </assignmentItems>
+        <locationY>2174</locationY>
         <assignmentItems>
             <assignToReference>quote_record.OpportunityId</assignToReference>
             <operator>Assign</operator>
@@ -206,7 +222,7 @@
             <assignToReference>quote_record.Pricebook2Id</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>pricebookid</elementReference>
+                <elementReference>Fetch_Default_Pricebook_Id.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -280,7 +296,7 @@
         <name>Set_Stage_to_1</name>
         <label>Set Stage to 1</label>
         <locationX>182</locationX>
-        <locationY>158</locationY>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -296,7 +312,7 @@
         <name>Set_Stage_to_2</name>
         <label>Set Stage to 2</label>
         <locationX>182</locationX>
-        <locationY>518</locationY>
+        <locationY>638</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -312,7 +328,7 @@
         <name>Set_Stage_to_3</name>
         <label>Set Stage to 3</label>
         <locationX>182</locationX>
-        <locationY>878</locationY>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -351,7 +367,7 @@
         <name>Is_an_Opportunity_Present</name>
         <label>Is an Opportunity Present?</label>
         <locationX>182</locationX>
-        <locationY>1118</locationY>
+        <locationY>1598</locationY>
         <defaultConnector>
             <targetReference>Fetch_Contact_Details</targetReference>
         </defaultConnector>
@@ -380,7 +396,7 @@
         <name>For_Each_Marketing_Plan</name>
         <label>For Each Marketing Plan</label>
         <locationX>182</locationX>
-        <locationY>1934</locationY>
+        <locationY>2414</locationY>
         <collectionReference>selected_marketing_plan_records</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -413,7 +429,7 @@
         <name>Create_Opportunity</name>
         <label>Create Opportunity</label>
         <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationY>1838</locationY>
         <connector>
             <targetReference>Fetch_Contact_Details</targetReference>
         </connector>
@@ -423,7 +439,7 @@
         <name>Create_Quote_Lines</name>
         <label>Create Quote Lines</label>
         <locationX>182</locationX>
-        <locationY>2510</locationY>
+        <locationY>2990</locationY>
         <connector>
             <targetReference>Copy_Quote_Line_Benefits</targetReference>
         </connector>
@@ -433,7 +449,7 @@
         <name>Create_Quote_Record</name>
         <label>Create Quote Record</label>
         <locationX>182</locationX>
-        <locationY>1814</locationY>
+        <locationY>2294</locationY>
         <connector>
             <targetReference>For_Each_Marketing_Plan</targetReference>
         </connector>
@@ -443,7 +459,7 @@
         <name>Fetch_Allowed_Attribute_Values</name>
         <label>Fetch Allowed Attribute Values</label>
         <locationX>182</locationX>
-        <locationY>638</locationY>
+        <locationY>758</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>select_plans_screen</targetReference>
@@ -465,7 +481,7 @@
         <name>Fetch_Contact_Details</name>
         <label>Fetch Contact Details</label>
         <locationX>182</locationX>
-        <locationY>1574</locationY>
+        <locationY>2054</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Set_Quote_Values</targetReference>
@@ -489,7 +505,7 @@
         <name>Fetch_Context_Account_Record</name>
         <label>Fetch Context Account Record</label>
         <locationX>182</locationX>
-        <locationY>278</locationY>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>basics_screen</targetReference>
@@ -517,14 +533,68 @@
         <queriedFields>Type</queriedFields>
     </recordLookups>
     <recordLookups>
+        <name>Fetch_Default_Pricebook_Entry_Id</name>
+        <label>Fetch Default Pricebook Entry Id</label>
+        <locationX>182</locationX>
+        <locationY>1478</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_an_Opportunity_Present</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product2Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Fetch_Default_Product_Id.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Pricebook2Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Fetch_Default_Pricebook_Id.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>PricebookEntry</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Fetch_Default_Pricebook_Id</name>
+        <label>Fetch Default Pricebook Id</label>
+        <locationX>182</locationX>
+        <locationY>1358</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Fetch_Default_Pricebook_Entry_Id</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Pricebook2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Fetch_Default_Product_Id</name>
+        <label>Fetch Default Product Id</label>
+        <locationX>182</locationX>
+        <locationY>1238</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Fetch_Default_Pricebook_Id</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <description>Check if an open opportunity exists for the Effective Date</description>
         <name>Fetch_Opportunity_If_Present</name>
         <label>Fetch Opportunity If Present</label>
         <locationX>182</locationX>
-        <locationY>998</locationY>
+        <locationY>1118</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Is_an_Opportunity_Present</targetReference>
+            <targetReference>Fetch_Default_Product_Id</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -551,7 +621,7 @@
         <name>basics_screen</name>
         <label>Basics</label>
         <locationX>182</locationX>
-        <locationY>398</locationY>
+        <locationY>518</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -622,7 +692,7 @@
         <name>select_plans_screen</name>
         <label>Select Plans</label>
         <locationX>182</locationX>
-        <locationY>758</locationY>
+        <locationY>878</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -692,10 +762,10 @@
         <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Set_Stage_to_1</targetReference>
+            <targetReference>Assign_Record_Id_to_Context_Record_Id</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>Context Business Account for Quote</description>
         <name>account_record</name>
@@ -795,6 +865,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Quote</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <description>List of selected marketing plan records</description>

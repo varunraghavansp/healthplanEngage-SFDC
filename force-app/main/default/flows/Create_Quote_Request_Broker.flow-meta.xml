@@ -7,6 +7,7 @@
         <locationY>932</locationY>
         <actionName>c:be_navigateToRecordFC</actionName>
         <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>sObject</name>
             <value>
@@ -1432,7 +1433,7 @@
             <targetReference>Fetch_Account_Information</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Obsolete</status>
     <subflows>
         <name>Create_Custom_Plan</name>
         <label>Create Custom Plan</label>

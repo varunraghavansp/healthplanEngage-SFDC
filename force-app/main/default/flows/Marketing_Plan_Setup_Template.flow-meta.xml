@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Navigate_to_Flow_Component</name>
+        <label>Navigate to Flow Component</label>
+        <locationX>50</locationX>
+        <locationY>2438</locationY>
+        <actionName>c:navigatetorecord_fa</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Assign_Parent_Plan_Id_for_Component_Search</name>
         <label>Assign Parent Plan Id for Component Search</label>
-        <locationX>1460</locationX>
-        <locationY>52</locationY>
+        <locationX>314</locationX>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>predefinedbenefit_searchid</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +36,8 @@
     <assignments>
         <name>Assign_Plan_Family</name>
         <label>Assign Plan Family</label>
-        <locationX>1015</locationX>
-        <locationY>49</locationY>
+        <locationX>182</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>new_marketingplan.Plan_Family__c</assignToReference>
             <operator>Assign</operator>
@@ -34,10 +50,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_record_id_to_context_record_id</name>
+        <label>Assign record id to context record id</label>
+        <locationX>380</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Stage_to_Start</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Search_Id_for_Predefined_Plan_Benefits</name>
         <label>Assign Search Id for Predefined Plan Benefits</label>
-        <locationX>1037</locationX>
-        <locationY>208</locationY>
+        <locationX>578</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>predefinedbenefit_searchid</assignToReference>
             <operator>Assign</operator>
@@ -52,8 +84,8 @@
     <assignments>
         <name>Change_Stage_To_Attribute_Values</name>
         <label>Change Stage to Attribute Values</label>
-        <locationX>846</locationX>
-        <locationY>369</locationY>
+        <locationX>50</locationX>
+        <locationY>1598</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -68,8 +100,8 @@
     <assignments>
         <name>Change_Stage_to_Confirmation</name>
         <label>Change Stage to Confirmation</label>
-        <locationX>430</locationX>
-        <locationY>370</locationY>
+        <locationX>50</locationX>
+        <locationY>1838</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -84,8 +116,8 @@
     <assignments>
         <name>Set_Stage_to_Start</name>
         <label>Set Stage to Start</label>
-        <locationX>190</locationX>
-        <locationY>50</locationY>
+        <locationX>380</locationX>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -100,8 +132,8 @@
     <decisions>
         <name>Create_New_Plan</name>
         <label>Create New Plan</label>
-        <locationX>856</locationX>
-        <locationY>52</locationY>
+        <locationX>380</locationX>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Update_Predefined_Plan</targetReference>
         </defaultConnector>
@@ -125,8 +157,8 @@
     <decisions>
         <name>Is_Plan_Copied</name>
         <label>Is Plan Copied</label>
-        <locationX>1307</locationX>
-        <locationY>51</locationY>
+        <locationX>182</locationX>
+        <locationY>1118</locationY>
         <defaultConnector>
             <targetReference>Assign_Parent_Plan_Id_for_Component_Search</targetReference>
         </defaultConnector>
@@ -138,7 +170,7 @@
                 <leftValueReference>parent_predefinedplanid</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue/>
+                    <stringValue></stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -159,7 +191,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -172,8 +204,8 @@
     <recordCreates>
         <name>Create_Plan_Benefits</name>
         <label>Create Plan Benefits</label>
-        <locationX>210</locationX>
-        <locationY>563</locationY>
+        <locationX>50</locationX>
+        <locationY>2078</locationY>
         <connector>
             <targetReference>Update_Plan_Benefits</targetReference>
         </connector>
@@ -182,8 +214,8 @@
     <recordCreates>
         <name>Create_Predefined_Plan</name>
         <label>Create Predefined Plan</label>
-        <locationX>1163</locationX>
-        <locationY>49</locationY>
+        <locationX>182</locationX>
+        <locationY>998</locationY>
         <connector>
             <targetReference>Is_Plan_Copied</targetReference>
         </connector>
@@ -192,8 +224,8 @@
     <recordLookups>
         <name>Fetch_Allowed_Attribute_Values</name>
         <label>Fetch Allowed Attribute Values</label>
-        <locationX>1027</locationX>
-        <locationY>369</locationY>
+        <locationX>50</locationX>
+        <locationY>1478</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Change_Stage_To_Attribute_Values</targetReference>
@@ -222,8 +254,8 @@
     <recordLookups>
         <name>Fetch_Attributes</name>
         <label>Fetch Attributes</label>
-        <locationX>515</locationX>
-        <locationY>50</locationY>
+        <locationX>380</locationX>
+        <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>predefined_package_summary</targetReference>
@@ -240,8 +272,8 @@
     <recordLookups>
         <name>Fetch_Framework_Components</name>
         <label>Fetch Framework Components</label>
-        <locationX>1325</locationX>
-        <locationY>369</locationY>
+        <locationX>50</locationX>
+        <locationY>1238</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Product_Component_Attributes</targetReference>
@@ -266,8 +298,8 @@
     <recordLookups>
         <name>Fetch_Plan_Benefits</name>
         <label>Fetch Plan Benefits</label>
-        <locationX>1460</locationX>
-        <locationY>216</locationY>
+        <locationX>314</locationX>
+        <locationY>1358</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Framework_Components</targetReference>
@@ -303,8 +335,8 @@
     <recordLookups>
         <name>Fetch_Product_Component_Attributes</name>
         <label>Fetch Product Component Attributes</label>
-        <locationX>1192</locationX>
-        <locationY>369</locationY>
+        <locationX>50</locationX>
+        <locationY>1358</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Allowed_Attribute_Values</targetReference>
@@ -338,8 +370,8 @@
     <recordLookups>
         <name>Fetch_Product_Line</name>
         <label>Fetch Product Line</label>
-        <locationX>343</locationX>
-        <locationY>50</locationY>
+        <locationX>380</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Attributes</targetReference>
@@ -360,8 +392,8 @@
     <recordUpdates>
         <name>Update_Plan_Benefits</name>
         <label>Update Plan Benefits</label>
-        <locationX>417</locationX>
-        <locationY>563</locationY>
+        <locationX>50</locationX>
+        <locationY>2198</locationY>
         <connector>
             <targetReference>Update_Plan_Name</targetReference>
         </connector>
@@ -370,15 +402,18 @@
     <recordUpdates>
         <name>Update_Plan_Name</name>
         <label>Update Plan Name</label>
-        <locationX>616</locationX>
-        <locationY>563</locationY>
+        <locationX>50</locationX>
+        <locationY>2318</locationY>
+        <connector>
+            <targetReference>Navigate_to_Flow_Component</targetReference>
+        </connector>
         <inputReference>new_marketingplan</inputReference>
     </recordUpdates>
     <recordUpdates>
         <name>Update_Predefined_Plan</name>
         <label>Update Predefined Plan</label>
-        <locationX>864</locationX>
-        <locationY>208</locationY>
+        <locationX>578</locationX>
+        <locationY>878</locationY>
         <connector>
             <targetReference>Assign_Search_Id_for_Predefined_Plan_Benefits</targetReference>
         </connector>
@@ -397,8 +432,8 @@ Outputs:
 {!updated_planbenefits}</description>
         <name>plan_changes_confirmation_screen</name>
         <label>Plan Changes Confirmation Screen</label>
-        <locationX>210</locationX>
-        <locationY>370</locationY>
+        <locationX>50</locationX>
+        <locationY>1958</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -421,6 +456,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -439,6 +475,7 @@ Outputs:
                     <elementReference>new_marketingplan</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>delete_planbenefit</assignToReference>
@@ -482,8 +519,8 @@ Output:
 {!PlanFamily_Record}</description>
         <name>predefined_package_summary</name>
         <label>Predefined Package Summary</label>
-        <locationX>686</locationX>
-        <locationY>50</locationY>
+        <locationX>380</locationX>
+        <locationY>638</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -506,6 +543,7 @@ Output:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -548,6 +586,7 @@ Output:
                     <elementReference>PlanFamily_Record</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>parent_predefinedplanid</assignToReference>
@@ -590,8 +629,8 @@ Outputs:
 {!marketingplanbenefits}</description>
         <name>select_plan_benefits</name>
         <label>Select Plan Benefits</label>
-        <locationX>620</locationX>
-        <locationY>370</locationY>
+        <locationX>50</locationX>
+        <locationY>1718</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -614,6 +653,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -656,6 +696,7 @@ Outputs:
                     <elementReference>plancomponentattributes</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>marketingplanbenefits</assignToReference>
@@ -684,13 +725,13 @@ Outputs:
         <stageOrder>2</stageOrder>
     </stages>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Set_Stage_to_Start</targetReference>
+            <targetReference>Assign_record_id_to_context_record_id</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>attribute</name>
         <dataType>SObject</dataType>
@@ -857,6 +898,13 @@ Outputs:
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>

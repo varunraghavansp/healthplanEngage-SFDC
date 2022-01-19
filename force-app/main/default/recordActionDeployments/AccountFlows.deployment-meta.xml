@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordActionDeployment xmlns="http://soap.sforce.com/2006/04/metadata">
+    <channelConfigurations>
+        <channel>Chat</channel>
+        <isAutopopEnabled>false</isAutopopEnabled>
+    </channelConfigurations>
+    <channelConfigurations>
+        <channel>Phone</channel>
+        <isAutopopEnabled>false</isAutopopEnabled>
+    </channelConfigurations>
+    <channelConfigurations>
+        <channel>Other</channel>
+        <channelItems>
+            <action>Create_Quote_Request_LG</action>
+            <isMandatory>false</isMandatory>
+            <isUiRemoveHidden>true</isUiRemoveHidden>
+            <pinned>Top</pinned>
+            <position>0</position>
+            <type>Flow</type>
+        </channelItems>
+        <channelItems>
+            <action>Create_Group_Quote</action>
+            <isMandatory>false</isMandatory>
+            <isUiRemoveHidden>true</isUiRemoveHidden>
+            <pinned>Top</pinned>
+            <position>1</position>
+            <type>Flow</type>
+        </channelItems>
+        <isAutopopEnabled>false</isAutopopEnabled>
+    </channelConfigurations>
+    <deploymentContexts>
+        <entityName>Account</entityName>
+    </deploymentContexts>
+    <hasGuidedActions>true</hasGuidedActions>
+    <hasRecommendations>false</hasRecommendations>
+    <masterLabel>Account Flows</masterLabel>
+</RecordActionDeployment>

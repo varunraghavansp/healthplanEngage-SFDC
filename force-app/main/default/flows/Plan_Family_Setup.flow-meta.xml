@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Navigate_to_Plan_Family</name>
+        <label>Navigate to Plan Family</label>
+        <locationX>248</locationX>
+        <locationY>2606</locationY>
+        <actionName>c:navigatetorecord_fa</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>new_planfamily.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <assignments>
         <name>assign_plan_family_edit_assignment</name>
         <label>Assign Plan Family Id For Update</label>
-        <locationX>980</locationX>
-        <locationY>945</locationY>
+        <locationX>314</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>new_planfamily.Id</assignToReference>
             <operator>Assign</operator>
@@ -18,10 +34,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assing_Record_Id_to_Context_Record_Id</name>
+        <label>Assing Record Id to Context Record Id</label>
+        <locationX>248</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>get_all_attributes_get_records</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>change_stage_to_attribute_values_edit_assignment</name>
         <label>Assign Current Stage To Edit Attribute Values</label>
-        <locationX>1077</locationX>
-        <locationY>1251</locationY>
+        <locationX>248</locationX>
+        <locationY>1430</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +68,8 @@
     <assignments>
         <name>Change_Stage_to_Confirmation</name>
         <label>Change Stage to Confirmation</label>
-        <locationX>1083</locationX>
-        <locationY>1679</locationY>
+        <locationX>248</locationX>
+        <locationY>1790</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -52,8 +84,8 @@
     <assignments>
         <name>context_record_id_edit_assignment</name>
         <label>Assign Context Record Id</label>
-        <locationX>1080</locationX>
-        <locationY>1399</locationY>
+        <locationX>248</locationX>
+        <locationY>1550</locationY>
         <assignmentItems>
             <assignToReference>context_record_id</assignToReference>
             <operator>Assign</operator>
@@ -68,8 +100,8 @@
     <decisions>
         <name>current_status_is_workspace_decision</name>
         <label>Current Status is Workspace</label>
-        <locationX>976</locationX>
-        <locationY>761</locationY>
+        <locationX>446</locationX>
+        <locationY>878</locationY>
         <defaultConnector>
             <targetReference>create_plan_family_record</targetReference>
         </defaultConnector>
@@ -93,8 +125,11 @@
     <decisions>
         <name>Deleted_Records_Present</name>
         <label>Deleted Records Present</label>
-        <locationX>1075</locationX>
-        <locationY>2253</locationY>
+        <locationX>248</locationX>
+        <locationY>2270</locationY>
+        <defaultConnector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Yes_Deleted_Records_Present</name>
@@ -116,8 +151,8 @@
         <description>Checks if user requested creation of a new plan family</description>
         <name>new_plan_family_decision</name>
         <label>New Plan Family</label>
-        <locationX>968</locationX>
-        <locationY>491</locationY>
+        <locationX>248</locationX>
+        <locationY>518</locationY>
         <defaultConnector>
             <targetReference>attribute_values_for_plan_family_get_records</targetReference>
         </defaultConnector>
@@ -151,7 +186,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -164,8 +199,8 @@
     <recordCreates>
         <name>Create_Attribute_Value_Pairs</name>
         <label>Create Attribute Value Pairs</label>
-        <locationX>1086</locationX>
-        <locationY>1953</locationY>
+        <locationX>248</locationX>
+        <locationY>2030</locationY>
         <connector>
             <targetReference>Update_Attribute_Value_Pairs</targetReference>
         </connector>
@@ -174,8 +209,8 @@
     <recordCreates>
         <name>create_plan_family_record</name>
         <label>Create Plan Family</label>
-        <locationX>1180</locationX>
-        <locationY>760</locationY>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
         <connector>
             <targetReference>change_stage_to_attribute_values_edit_assignment</targetReference>
         </connector>
@@ -184,15 +219,18 @@
     <recordDeletes>
         <name>Delete_Attribute_Values</name>
         <label>Delete Attribute Values</label>
-        <locationX>1081</locationX>
-        <locationY>2391</locationY>
+        <locationX>116</locationX>
+        <locationY>2390</locationY>
+        <connector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </connector>
         <inputReference>deleted_attributevalues</inputReference>
     </recordDeletes>
     <recordLookups>
         <name>attribute_values_for_plan_family_get_records</name>
         <label>Get Attribute Values For Plan Family</label>
-        <locationX>816</locationX>
-        <locationY>630</locationY>
+        <locationX>446</locationX>
+        <locationY>638</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>plan_family_status_get_record</targetReference>
@@ -225,8 +263,8 @@
     <recordLookups>
         <name>get_all_attributes_get_records</name>
         <label>Get All Attributes</label>
-        <locationX>978</locationX>
-        <locationY>202</locationY>
+        <locationX>248</locationX>
+        <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>plan_family_summary_screen</targetReference>
@@ -244,8 +282,8 @@
     <recordLookups>
         <name>plan_family_status_get_record</name>
         <label>Get Current Plan Family Status</label>
-        <locationX>817</locationX>
-        <locationY>759</locationY>
+        <locationX>446</locationX>
+        <locationY>758</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>current_status_is_workspace_decision</targetReference>
@@ -266,8 +304,8 @@
     <recordUpdates>
         <name>plan_family_update_record</name>
         <label>Update Plan Family</label>
-        <locationX>980</locationX>
-        <locationY>1103</locationY>
+        <locationX>314</locationX>
+        <locationY>1118</locationY>
         <connector>
             <targetReference>change_stage_to_attribute_values_edit_assignment</targetReference>
         </connector>
@@ -276,8 +314,8 @@
     <recordUpdates>
         <name>Update_Attribute_Value_Pairs</name>
         <label>Update Attribute Value Pairs</label>
-        <locationX>1084</locationX>
-        <locationY>2107</locationY>
+        <locationX>248</locationX>
+        <locationY>2150</locationY>
         <connector>
             <targetReference>Deleted_Records_Present</targetReference>
         </connector>
@@ -286,8 +324,8 @@
     <screens>
         <name>edit_plan_family_attributes_screen</name>
         <label>Edit Plan Family Attributes</label>
-        <locationX>1083</locationX>
-        <locationY>1543</locationY>
+        <locationX>248</locationX>
+        <locationY>1670</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -310,6 +348,7 @@
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -334,6 +373,7 @@
                     <elementReference>new_planfamily</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>existing_attributevalues</assignToReference>
@@ -354,8 +394,8 @@
     <screens>
         <name>plan_family_change_confirmation_screen</name>
         <label>Plan Family Changes Confirmation</label>
-        <locationX>1085</locationX>
-        <locationY>1820</locationY>
+        <locationX>248</locationX>
+        <locationY>1910</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -378,6 +418,7 @@
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -407,6 +448,7 @@
                     <elementReference>new_planfamily</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>existing_attributevalues</assignToReference>
@@ -439,8 +481,8 @@
     <screens>
         <name>plan_family_summary_screen</name>
         <label>Plan Family Summary</label>
-        <locationX>978</locationX>
-        <locationY>343</locationY>
+        <locationX>248</locationX>
+        <locationY>398</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -463,6 +505,7 @@
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -487,6 +530,7 @@
                     <elementReference>context_record_id</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>create_new_plan_family</assignToReference>
@@ -523,13 +567,13 @@
         <stageOrder>1</stageOrder>
     </stages>
     <start>
-        <locationX>852</locationX>
-        <locationY>50</locationY>
+        <locationX>122</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>get_all_attributes_get_records</targetReference>
+            <targetReference>Assing_Record_Id_to_Context_Record_Id</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>attributes</name>
         <dataType>SObject</dataType>
@@ -605,6 +649,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Plan_Family__c</objectType>
+    </variables>
+    <variables>
+        <description>Input Record Id from Guided Action</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>updated_attributevalues</name>

@@ -479,41 +479,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>flowlstcmp</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-896e10dd-cddd-4664-9d07-080f46b330ea</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
-                    <name>active</name>
-                    <value>true</value>
+                    <name>recordActionDeployment</name>
+                    <value>ProductConfigurationFlows</value>
                 </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-896e10dd-cddd-4664-9d07-080f46b330ea</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Flows</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-095a1bce-6e95-4f27-8a24-ff69609dd909</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>tabs</name>
-                    <value>Facet-095a1bce-6e95-4f27-8a24-ff69609dd909</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tabset</componentName>
+                <componentName>lbpm:actionList</componentName>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>

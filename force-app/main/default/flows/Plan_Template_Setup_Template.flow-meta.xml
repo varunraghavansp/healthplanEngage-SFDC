@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Navigate_to_Plan_Family</name>
+        <label>Navigate to Plan Family</label>
+        <locationX>182</locationX>
+        <locationY>2174</locationY>
+        <actionName>c:be_navigateToRecordFC</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Assign_Parent_Template_Id_for_Component_Search</name>
         <label>Assign Parent Template Id for Component Search</label>
-        <locationX>1384</locationX>
-        <locationY>44</locationY>
+        <locationX>490</locationX>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>plantemplatecomponent_searchid</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +36,8 @@
     <assignments>
         <name>Assign_Product_Line_Id</name>
         <label>Assign Product Line Id</label>
-        <locationX>911</locationX>
-        <locationY>52</locationY>
+        <locationX>336</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>new_plantemplate.Plan_Family__c</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +52,8 @@
     <assignments>
         <name>Assign_Template_Id_for_Component_Search</name>
         <label>Assign Template Id for Component Search</label>
-        <locationX>910</locationX>
-        <locationY>186</locationY>
+        <locationX>754</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>plantemplatecomponent_searchid</assignToReference>
             <operator>Assign</operator>
@@ -52,8 +68,8 @@
     <assignments>
         <name>Change_Stage_to_Confirmation</name>
         <label>Change Stage to Confirmation</label>
-        <locationX>893</locationX>
-        <locationY>377</locationY>
+        <locationX>182</locationX>
+        <locationY>1478</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -68,8 +84,8 @@
     <assignments>
         <name>Change_State_To_Package_Framework_Components</name>
         <label>Change Stage to Product Framework Components</label>
-        <locationX>1241</locationX>
-        <locationY>377</locationY>
+        <locationX>182</locationX>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -82,10 +98,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Set_Record_Id_to_Context_Record_Id</name>
+        <label>Set Record Id to Context Record Id</label>
+        <locationX>545</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Start_Stage</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_Start_Stage</name>
         <label>Set Start Stage</label>
-        <locationX>164</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -100,8 +132,11 @@
     <decisions>
         <name>Delete_Plan_Template_Components</name>
         <label>Delete Plan Template Components</label>
-        <locationX>380</locationX>
-        <locationY>381</locationY>
+        <locationX>182</locationX>
+        <locationY>1838</locationY>
+        <defaultConnector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>Yes_Delete_Plan_Template_Components</name>
@@ -122,8 +157,8 @@
     <decisions>
         <name>Is_Plan_Template_Copied</name>
         <label>Is Plan Template Copied</label>
-        <locationX>1222</locationX>
-        <locationY>54</locationY>
+        <locationX>336</locationX>
+        <locationY>1118</locationY>
         <defaultConnector>
             <targetReference>Assign_Parent_Template_Id_for_Component_Search</targetReference>
         </defaultConnector>
@@ -135,7 +170,7 @@
                 <leftValueReference>parent_plantemplateid</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue/>
+                    <stringValue></stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -147,8 +182,8 @@
     <decisions>
         <name>New_Plan_Template</name>
         <label>New Plan Template</label>
-        <locationX>712</locationX>
-        <locationY>52</locationY>
+        <locationX>545</locationX>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Update_Plan_Template</targetReference>
         </defaultConnector>
@@ -181,7 +216,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -194,8 +229,8 @@
     <recordCreates>
         <name>Create_Plan_Components</name>
         <label>Create Plan Components</label>
-        <locationX>545</locationX>
-        <locationY>378</locationY>
+        <locationX>182</locationX>
+        <locationY>1718</locationY>
         <connector>
             <targetReference>Delete_Plan_Template_Components</targetReference>
         </connector>
@@ -204,8 +239,8 @@
     <recordCreates>
         <name>Create_Plan_Template</name>
         <label>Create Plan Template</label>
-        <locationX>1075</locationX>
-        <locationY>52</locationY>
+        <locationX>336</locationX>
+        <locationY>998</locationY>
         <connector>
             <targetReference>Is_Plan_Template_Copied</targetReference>
         </connector>
@@ -214,15 +249,18 @@
     <recordDeletes>
         <name>Delete_Plan_Template_Component_Records</name>
         <label>Delete Plan Template Component Records</label>
-        <locationX>201</locationX>
-        <locationY>379</locationY>
+        <locationX>50</locationX>
+        <locationY>1958</locationY>
+        <connector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </connector>
         <inputReference>deleted_plantemplatecomponents</inputReference>
     </recordDeletes>
     <recordLookups>
         <name>Fetch_Applicable_Product_Components</name>
         <label>Fetch Applicable Product Components</label>
-        <locationX>415</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>plan_template_detail_screen</targetReference>
@@ -245,8 +283,8 @@
     <recordLookups>
         <name>Fetch_Context_Product_Line_Record</name>
         <label>Fetch Context Product Line Record</label>
-        <locationX>293</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Applicable_Product_Components</targetReference>
@@ -271,8 +309,8 @@
     <recordLookups>
         <name>Fetch_Existing_Plan_Template_Components</name>
         <label>Fetch Existing Plan Template Components</label>
-        <locationX>1384</locationX>
-        <locationY>186</locationY>
+        <locationX>490</locationX>
+        <locationY>1358</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Change_State_To_Package_Framework_Components</targetReference>
@@ -297,8 +335,8 @@
     <recordUpdates>
         <name>Update_Plan_Template</name>
         <label>Update Plan Template</label>
-        <locationX>719</locationX>
-        <locationY>186</locationY>
+        <locationX>754</locationX>
+        <locationY>878</locationY>
         <connector>
             <targetReference>Assign_Template_Id_for_Component_Search</targetReference>
         </connector>
@@ -314,8 +352,8 @@ Outputs:
 {!all_packageframeworkcomponents}</description>
         <name>add_package_framework_components</name>
         <label>Add Package Framework Components</label>
-        <locationX>1056</locationX>
-        <locationY>377</locationY>
+        <locationX>182</locationX>
+        <locationY>1358</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -338,6 +376,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -362,6 +401,7 @@ Outputs:
                     <elementReference>productcomponents</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>all_packageframeworkcomponents</assignToReference>
@@ -383,8 +423,8 @@ Outputs:
 {!updated_plantemplatecomponents}</description>
         <name>confirm_package_framework_components</name>
         <label>Confirm Package Framework Components</label>
-        <locationX>722</locationX>
-        <locationY>377</locationY>
+        <locationX>182</locationX>
+        <locationY>1598</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -407,6 +447,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -430,6 +471,7 @@ Outputs:
                     <elementReference>all_packageframeworkcomponents</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>delete_plantemplatecomponent</assignToReference>
@@ -469,8 +511,8 @@ Outputs:
 {!new_plantemplate}</description>
         <name>plan_template_detail_screen</name>
         <label>Plan Template Detail Screen</label>
-        <locationX>557</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>638</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -493,6 +535,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -535,6 +578,7 @@ Outputs:
                     <elementReference>new_plantemplate</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>parent_planfamilyid</assignToReference>
@@ -583,13 +627,13 @@ Outputs:
         <stageOrder>1</stageOrder>
     </stages>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>419</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Set_Start_Stage</targetReference>
+            <targetReference>Set_Record_Id_to_Context_Record_Id</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>all_packageframeworkcomponents</name>
         <dataType>SObject</dataType>
@@ -693,6 +737,13 @@ Outputs:
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>Plan_Family__c</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>updated_plantemplatecomponents</name>

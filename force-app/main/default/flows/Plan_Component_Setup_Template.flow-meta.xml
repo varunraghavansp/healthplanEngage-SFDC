@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Navigate_to_Plan_Family</name>
+        <label>Navigate to Plan Family</label>
+        <locationX>182</locationX>
+        <locationY>2294</locationY>
+        <actionName>c:navigatetorecord_fa</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>PlanFamily_Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <assignments>
         <name>Assign_Component_Id_for_Component_Attribute_Search</name>
         <label>Assign Component Id for Component Attribute Search</label>
-        <locationX>1052</locationX>
-        <locationY>200</locationY>
+        <locationX>754</locationX>
+        <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>componentattribute_searchid</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +36,8 @@
     <assignments>
         <name>Assign_Parent_Component_Id_for_Component_Attribute_Search</name>
         <label>Assign Parent Component Id for Component Attribute Search</label>
-        <locationX>1463</locationX>
-        <locationY>50</locationY>
+        <locationX>490</locationX>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>componentattribute_searchid</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +52,8 @@
     <assignments>
         <name>Assign_Product_Line_To_Component</name>
         <label>Assign Product Line To Component</label>
-        <locationX>1001</locationX>
-        <locationY>50</locationY>
+        <locationX>336</locationX>
+        <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>new_productcomponent.Plan_Family__c</assignToReference>
             <operator>Assign</operator>
@@ -50,10 +66,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Record_Id_to_Context_record_id</name>
+        <label>Assign Record Id to Context record id</label>
+        <locationX>545</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>context_record_id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Start_Stage</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Change_Stage_to_Confirmation</name>
         <label>Change Stage to Confirmation</label>
-        <locationX>1134</locationX>
-        <locationY>507</locationY>
+        <locationX>182</locationX>
+        <locationY>1478</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -68,8 +100,8 @@
     <assignments>
         <name>Change_State_To_Product_Component_Attributes</name>
         <label>Change Stage to Product Component Attributes</label>
-        <locationX>1335</locationX>
-        <locationY>368</locationY>
+        <locationX>182</locationX>
+        <locationY>1238</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -84,8 +116,8 @@
     <assignments>
         <name>Set_Start_Stage</name>
         <label>Set Start Stage</label>
-        <locationX>224</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -107,8 +139,11 @@
     <decisions>
         <name>Delete_Component_Attributes</name>
         <label>Delete Component Attributes</label>
-        <locationX>369</locationX>
-        <locationY>511</locationY>
+        <locationX>182</locationX>
+        <locationY>1958</locationY>
+        <defaultConnector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>Yes_Delete_Component_Attributes</name>
@@ -129,8 +164,8 @@
     <decisions>
         <name>Is_Product_Component_Copied</name>
         <label>Is Product Component Copied</label>
-        <locationX>1314</locationX>
-        <locationY>50</locationY>
+        <locationX>336</locationX>
+        <locationY>1118</locationY>
         <defaultConnector>
             <targetReference>Assign_Parent_Component_Id_for_Component_Attribute_Search</targetReference>
         </defaultConnector>
@@ -142,7 +177,7 @@
                 <leftValueReference>parent_plancomponentid</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue/>
+                    <stringValue></stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -154,8 +189,8 @@
     <decisions>
         <name>New_Plan_Component</name>
         <label>New Plan Component</label>
-        <locationX>849</locationX>
-        <locationY>52</locationY>
+        <locationX>545</locationX>
+        <locationY>758</locationY>
         <defaultConnector>
             <targetReference>Update_Product_Component</targetReference>
         </defaultConnector>
@@ -188,7 +223,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -201,8 +236,8 @@
     <recordCreates>
         <name>Create_Component_Attributes</name>
         <label>Create Component Attributes</label>
-        <locationX>721</locationX>
-        <locationY>508</locationY>
+        <locationX>182</locationX>
+        <locationY>1718</locationY>
         <connector>
             <targetReference>Update_Component_Attributes</targetReference>
         </connector>
@@ -211,8 +246,8 @@
     <recordCreates>
         <name>Create_Product_Component</name>
         <label>Create Product Component</label>
-        <locationX>1139</locationX>
-        <locationY>50</locationY>
+        <locationX>336</locationX>
+        <locationY>998</locationY>
         <connector>
             <targetReference>Is_Product_Component_Copied</targetReference>
         </connector>
@@ -221,15 +256,18 @@
     <recordDeletes>
         <name>Delete_Component_Attribute_Records</name>
         <label>Delete Component Attribute Records</label>
-        <locationX>189</locationX>
-        <locationY>511</locationY>
+        <locationX>50</locationX>
+        <locationY>2078</locationY>
+        <connector>
+            <targetReference>Navigate_to_Plan_Family</targetReference>
+        </connector>
         <inputReference>deleted_componentattributes</inputReference>
     </recordDeletes>
     <recordLookups>
         <name>Fetch_Attributes</name>
         <label>Fetch Attributes</label>
-        <locationX>518</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>product_components_screen</targetReference>
@@ -247,8 +285,8 @@
     <recordLookups>
         <name>Fetch_Existing_Product_Component_Attributes</name>
         <label>Fetch Existing Product Component Attributes</label>
-        <locationX>1463</locationX>
-        <locationY>201</locationY>
+        <locationX>490</locationX>
+        <locationY>1358</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Change_State_To_Product_Component_Attributes</targetReference>
@@ -277,8 +315,8 @@
     <recordLookups>
         <name>Fetch_Product_Line_Attribute_Value_Pairs</name>
         <label>Fetch Product Line Attribute Value Pairs</label>
-        <locationX>363</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Fetch_Attributes</targetReference>
@@ -304,8 +342,8 @@
     <recordUpdates>
         <name>Update_Component_Attributes</name>
         <label>Update Component Attributes</label>
-        <locationX>552</locationX>
-        <locationY>509</locationY>
+        <locationX>182</locationX>
+        <locationY>1838</locationY>
         <connector>
             <targetReference>Delete_Component_Attributes</targetReference>
         </connector>
@@ -314,8 +352,8 @@
     <recordUpdates>
         <name>Update_Product_Component</name>
         <label>Update Product Component</label>
-        <locationX>860</locationX>
-        <locationY>200</locationY>
+        <locationX>754</locationX>
+        <locationY>878</locationY>
         <connector>
             <targetReference>Assign_Component_Id_for_Component_Attribute_Search</targetReference>
         </connector>
@@ -332,8 +370,8 @@ Outputs:
 {!all_productcomponentattributes}</description>
         <name>add_product_component_attributes</name>
         <label>Add Product Component Attributes</label>
-        <locationX>1335</locationX>
-        <locationY>507</locationY>
+        <locationX>182</locationX>
+        <locationY>1358</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -356,6 +394,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -386,6 +425,7 @@ Outputs:
                     <elementReference>all_productcomponentattributes</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>all_productcomponentattributes</assignToReference>
@@ -407,8 +447,8 @@ Outputs:
 {!updated_componentattributes}</description>
         <name>confirm_product_component_attributes_screen</name>
         <label>Confirm Product Component Attributes Screen</label>
-        <locationX>920</locationX>
-        <locationY>507</locationY>
+        <locationX>182</locationX>
+        <locationY>1598</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -431,6 +471,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -460,6 +501,7 @@ Outputs:
                     <elementReference>new_productcomponent</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>delete_componentattribute</assignToReference>
@@ -499,8 +541,8 @@ Outputs:
 {!PlanFamily_Record}</description>
         <name>product_components_screen</name>
         <label>Product Components Screen</label>
-        <locationX>694</locationX>
-        <locationY>50</locationY>
+        <locationX>545</locationX>
+        <locationY>638</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -523,6 +565,7 @@ Outputs:
                     <elementReference>$Flow.ActiveStages</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
         </fields>
         <fields>
@@ -565,6 +608,7 @@ Outputs:
                     <elementReference>PlanFamily_Record</elementReference>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>parent_planfamilyid</assignToReference>
@@ -613,13 +657,13 @@ Outputs:
         <stageOrder>2</stageOrder>
     </stages>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>419</locationX>
+        <locationY>0</locationY>
         <connector>
-            <targetReference>Set_Start_Stage</targetReference>
+            <targetReference>Assign_Record_Id_to_Context_record_id</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>all_productcomponentattributes</name>
         <dataType>SObject</dataType>
@@ -739,6 +783,14 @@ Outputs:
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>Plan_Family__c</objectType>
+    </variables>
+    <variables>
+        <description>Input Record Id Variable from Actions &amp; Recommendations</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>updated_componentattributes</name>
