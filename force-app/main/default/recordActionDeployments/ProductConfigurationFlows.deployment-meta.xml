@@ -10,38 +10,6 @@
     </channelConfigurations>
     <channelConfigurations>
         <channel>Other</channel>
-        <channelItems>
-            <action>Plan_Family_Setup</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>0</position>
-            <type>Flow</type>
-        </channelItems>
-        <channelItems>
-            <action>Plan_Component_Setup_Template</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>1</position>
-            <type>Flow</type>
-        </channelItems>
-        <channelItems>
-            <action>Plan_Template_Setup_Template</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>2</position>
-            <type>Flow</type>
-        </channelItems>
-        <channelItems>
-            <action>Marketing_Plan_Setup_Template</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>3</position>
-            <type>Flow</type>
-        </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
     </channelConfigurations>
     <deploymentContexts>

@@ -10,22 +10,6 @@
     </channelConfigurations>
     <channelConfigurations>
         <channel>Other</channel>
-        <channelItems>
-            <action>Create_Quote_Request_LG</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>0</position>
-            <type>Flow</type>
-        </channelItems>
-        <channelItems>
-            <action>Create_Group_Quote</action>
-            <isMandatory>false</isMandatory>
-            <isUiRemoveHidden>true</isUiRemoveHidden>
-            <pinned>Top</pinned>
-            <position>1</position>
-            <type>Flow</type>
-        </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
     </channelConfigurations>
     <deploymentContexts>
